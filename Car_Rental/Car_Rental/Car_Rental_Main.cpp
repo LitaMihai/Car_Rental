@@ -4,7 +4,7 @@ int main() {
 
 	DbConnection dataBase("localhost","root","","car_rental",3306,NULL,0);
 	dataBase.initConnection();
-
+	dataBase.closeConnection(dataBase.getConn());
 
 	
 	/*

@@ -6,24 +6,27 @@
 class DbConnection
 {
 private:
-	const char* host = "localhost";
-	const char* user = "root";
-	const char* pass = "";
-	const char* db = "car_rental";
-	int port = 3306;
-	char* sck = NULL;
-	int flags = 0;
+	const char* host;
+	const char* user;
+	const char* pass;
+	const char* db;
+	int port;
+	char* sck;
+	int flags;
 	MYSQL* conn;
 	MYSQL* connection;
 
 public:
+
+	//Constructor
 	DbConnection(
 		const char* host, const char* user, const char* pass, const char* db,
 		int port, char* sck, int flags
 	);
-	~DbConnection();
-
+	
+	//Functions
 	void initConnection();
-
+	void closeConnection(MYSQL * conn);
+	MYSQL* getConn();
 };
 

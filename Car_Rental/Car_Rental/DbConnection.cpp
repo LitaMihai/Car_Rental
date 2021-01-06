@@ -1,5 +1,6 @@
 #include "DbConnection.h"
 
+//Constructor
 DbConnection::DbConnection(const char* host, const char* user, const char* pass, const char* db, int port, char* sck, int flags)
 {
 	this->host = host;
@@ -13,23 +14,29 @@ DbConnection::DbConnection(const char* host, const char* user, const char* pass,
 	this->connection = nullptr;
 }
 
-DbConnection::~DbConnection()
+//Functions
+void DbConnection::initConnection()
+{
+	std::string stats;
+	this->conn = mysql_init(NULL);
+	if (this->conn == NULL) {
+		std::cout << "Error!!\n";
+		exit(1);
+	}
+	this->connection = mysql_real_connect(conn, host, user, pass, db, port, sck, flags);
+	if (this->connection == NULL)
+		stats = "Connection Failed";
+	else
+		stats = "MYSQL Connected";
+	std::cout << "Status: " << stats << "\n\n";
+}
+
+void DbConnection::closeConnection(MYSQL* conn)
 {
 	mysql_close(conn);
 }
 
-void DbConnection::initConnection()
+MYSQL* DbConnection::getConn()
 {
-	std::string stats;
-	conn = mysql_init(NULL);
-	if (conn == NULL) {
-		std::cout << "Error!!\n";
-		exit(1);
-	}
-	connection = mysql_real_connect(conn, host, user, pass, db, port, sck, flags);
-	if (connection == NULL)
-		stats = "Connection MYSQL None Exist";
-	else
-		stats = "MYSQL Connected";
-	std::cout << "Status: " << stats << "\n\n";
+	return this->conn;
 }
