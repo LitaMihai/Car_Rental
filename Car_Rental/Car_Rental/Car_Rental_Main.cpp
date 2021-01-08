@@ -1,4 +1,16 @@
 #include "DbConnection.h"
+#include "AccountUI.h"
+
+/*
+To do:
+	-make an interface
+	-implement the user accounts
+	-implement the profile of an user
+	-implement the profile of a dealership
+	-implement much more...
+*/
+
+wxIMPLEMENT_APP(AccountUI);
 
 int main() {
 
@@ -7,6 +19,7 @@ int main() {
 	dataBase.closeConnection(dataBase.getConn());
 
 	
+
 	/*
 	MYSQL_RES* result;
 	MYSQL_ROW row;
@@ -22,6 +35,5 @@ int main() {
 	*/
 
 	system("pause");
-	
 	return EXIT_SUCCESS;
 }

@@ -16,6 +16,12 @@
     <Filter Include="DataBase">
       <UniqueIdentifier>{e6c3839b-b317-434d-b810-8e92221a32b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AccountsUi">
+      <UniqueIdentifier>{daf9fcb0-d064-4835-8dd9-b95826ba82b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame">
+      <UniqueIdentifier>{2fe114f1-4108-44a2-8b00-882e6b205d8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -24,13 +30,22 @@
     <ClCompile Include="DbConnection.cpp">
       <Filter>DataBase</Filter>
     </ClCompile>
+    <ClCompile Include="AccountUI.cpp">
+      <Filter>AccountsUi</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountFrame.cpp">
+      <Filter>AccountsUi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
       <Filter>DataBase</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Source.xaml" />
+    <ClInclude Include="AccountUI.h">
+      <Filter>AccountsUi</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountFrame.h">
+      <Filter>AccountsUi</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
