@@ -1,6 +1,5 @@
 #include "DbConnection.h"
 #include "AccountUI.h"
-
 /*
 To do:
 	-make an interface
@@ -10,17 +9,18 @@ To do:
 	-implement much more...
 */
 
-wxIMPLEMENT_APP(AccountUI);
-
 int main() {
+	/*
+	Connection to the database;
 
 	DbConnection dataBase("localhost","root","","car_rental",3306,NULL,0);
 	dataBase.initConnection();
 	dataBase.closeConnection(dataBase.getConn());
-
-	
+	*/
 
 	/*
+	Read from database and write on console;
+
 	MYSQL_RES* result;
 	MYSQL_ROW row;
 	int query_rez;
@@ -33,6 +33,8 @@ int main() {
 
 	//cout << result << "\n";
 	*/
+
+	AccountUI auth(800, 600);
 
 	system("pause");
 	return EXIT_SUCCESS;

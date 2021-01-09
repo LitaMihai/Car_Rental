@@ -1,8 +1,11 @@
+//#include <SFML/Window.hpp>
 #include "AccountUI.h"
 
-bool AccountUI::OnInit()
+AccountUI::AccountUI(unsigned int width, unsigned int height)
 {
-	AccountFrame* frame = new AccountFrame();
-	frame->Show(true);
-	return true;
+	this->width = width;
+	this->height = height;
+	(this->window).create(sf::VideoMode(width, height), "Auth");
+	(this->window).setFramerateLimit(30);
+	(this->window).setVerticalSyncEnabled(true);
 }

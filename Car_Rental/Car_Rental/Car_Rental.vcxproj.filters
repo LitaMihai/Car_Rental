@@ -33,18 +33,12 @@
     <ClCompile Include="AccountUI.cpp">
       <Filter>AccountsUi</Filter>
     </ClCompile>
-    <ClCompile Include="AccountFrame.cpp">
-      <Filter>AccountsUi</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
       <Filter>DataBase</Filter>
     </ClInclude>
     <ClInclude Include="AccountUI.h">
-      <Filter>AccountsUi</Filter>
-    </ClInclude>
-    <ClInclude Include="AccountFrame.h">
       <Filter>AccountsUi</Filter>
     </ClInclude>
   </ItemGroup>

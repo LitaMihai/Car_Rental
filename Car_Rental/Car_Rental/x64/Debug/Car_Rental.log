@@ -1,7 +1,4 @@
-﻿  AccountFrame.cpp
-D:\Programare\Proiecte Visual studio\Car_Rental\Car_Rental\AccountFrame.cpp(23,23): error C2653: 'AccoutFrame': is not a class or namespace name
-D:\Programare\Proiecte Visual studio\Car_Rental\Car_Rental\AccountFrame.cpp(23,43): error C2276: '&': illegal operation on bound member function expression
-D:\Programare\Proiecte Visual studio\Car_Rental\Car_Rental\AccountFrame.cpp(24,23): error C2653: 'AccoutFrame': is not a class or namespace name
-D:\Programare\Proiecte Visual studio\Car_Rental\Car_Rental\AccountFrame.cpp(24,43): error C2276: '&': illegal operation on bound member function expression
-D:\Programare\Proiecte Visual studio\Car_Rental\Car_Rental\AccountFrame.cpp(25,23): error C2653: 'AccoutFrame': is not a class or namespace name
-D:\Programare\Proiecte Visual studio\Car_Rental\Car_Rental\AccountFrame.cpp(25,42): error C2276: '&': illegal operation on bound member function expression
+﻿  AccountUI.cpp
+  Car_Rental_Main.cpp
+  Generating Code...
+  Car_Rental.vcxproj -> D:\Programare\Proiecte Visual studio\Car_Rental\x64\Debug\Car_Rental.exe
