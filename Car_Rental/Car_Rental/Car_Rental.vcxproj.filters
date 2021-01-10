@@ -22,6 +22,15 @@
     <Filter Include="Frame">
       <UniqueIdentifier>{2fe114f1-4108-44a2-8b00-882e6b205d8f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{a5c0f249-6e3e-4048-a024-461eba62fad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{c7232e8e-7fae-4507-b85f-100accccd4c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Button">
+      <UniqueIdentifier>{0a6fe075-473e-455f-8fbd-f9f297f71e3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -30,16 +39,34 @@
     <ClCompile Include="DbConnection.cpp">
       <Filter>DataBase</Filter>
     </ClCompile>
-    <ClCompile Include="AccountUI.cpp">
+    <ClCompile Include="AccountState.cpp">
       <Filter>AccountsUi</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Button</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
       <Filter>DataBase</Filter>
     </ClInclude>
-    <ClInclude Include="AccountUI.h">
+    <ClInclude Include="AccountState.h">
       <Filter>AccountsUi</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Button</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

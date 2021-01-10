@@ -1,15 +1,13 @@
-#include "DbConnection.h"
-#include "AccountUI.h"
-/*
-To do:
-	-make an interface
-	-implement the user accounts
-	-implement the profile of an user
-	-implement the profile of a dealership
-	-implement much more...
-*/
+#include "Application.h"
 
 int main() {
+
+	Application app;
+
+	app.run();
+
+	return 0;
+
 	/*
 	Connection to the database;
 
@@ -33,9 +31,4 @@ int main() {
 
 	//cout << result << "\n";
 	*/
-
-	AccountUI auth(800, 600);
-
-	system("pause");
-	return EXIT_SUCCESS;
 }
