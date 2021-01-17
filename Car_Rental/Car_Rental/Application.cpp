@@ -9,7 +9,6 @@ void Application::initVariables()
 
 void Application::initWindow()
 {
-    std::ifstream ifs("Config/window.ini");
     this->videoModes = sf::VideoMode::getFullscreenModes();
 
     std::string title = "None";
@@ -18,6 +17,9 @@ void Application::initWindow()
     unsigned framerate_limit = 60;
     bool vertical_sync_enabled = false;
     unsigned antialiasing_level = 0;
+    
+
+    std::ifstream ifs("Config/window.ini");
 
     if (ifs.is_open()) {
         std::getline(ifs, title);
@@ -27,20 +29,21 @@ void Application::initWindow()
         ifs >> vertical_sync_enabled;
         ifs >> antialiasing_level;
     }
+    else
+        std::cout<<"Cannot open 'window.ini' file!";
 
     ifs.close();
 
     this->fullscreen = fullscreen;
     this->windowSettings.antialiasingLevel = antialiasing_level;
-
+    
     if (this->fullscreen)
         this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Fullscreen, windowSettings);
     else
         this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSettings);
-
+    
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
-
 }
 
 void Application::initStates()
@@ -49,7 +52,7 @@ void Application::initStates()
 }
 
 Application::Application()
-{
+{   
     this->initVariables();
     this->initWindow();
     this->initStates();
@@ -86,7 +89,7 @@ void Application::updateSFMLEvents()
 void Application::update()
 {
     this->updateSFMLEvents();
-
+    
     if (!this->states.empty()) {
         this->states.top()->update(this->dt);
 

@@ -37,7 +37,7 @@ Button::~Button() {
 const bool Button::isPressed() const {
 	if (this->buttonState == BTN_ACTIVE)
 		return true;
-	else return false;
+	return false;
 }
 
 void Button::update(const sf::Vector2f mousePos) {

@@ -6,6 +6,7 @@
 class Application
 {
 private:
+	//Variables
 	sf::RenderWindow* window;
 	sf::Event sfEvent;
 	std::vector<sf::VideoMode> videoModes;
@@ -22,22 +23,23 @@ private:
 	void initWindow();
 	void initStates();
 
-
 public:
 	//Constructor - Destructor
-
 	Application();
 	virtual ~Application();
 
 	//Functions
 	void endApplication();
 
+	//Update
 	void updateDt();
 	void updateSFMLEvents();
 	void update();
 
+	//Render
 	void render();
 
+	//Core
 	void run();
 };
 
