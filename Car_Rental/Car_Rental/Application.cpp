@@ -78,18 +78,8 @@ void Application::updateDt()
     this->dt = this->dtClock.restart().asSeconds();
 }
 
-void Application::updateSFMLEvents()
-{
-    while (this->window->pollEvent(this->sfEvent)) {
-        if (this->sfEvent.type == sf::Event::Closed)
-            this->window->close();
-    }
-}
-
 void Application::update()
 {
-    this->updateSFMLEvents();
-    
     if (!this->states.empty()) {
         this->states.top()->update(this->dt);
 

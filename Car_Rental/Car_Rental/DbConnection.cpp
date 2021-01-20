@@ -1,18 +1,25 @@
 #include "DbConnection.h"
 
-//Constructor
-DbConnection::DbConnection(const char* host, const char* user, const char* pass, const char* db, int port, char* sck, int flags)
+void DbConnection::initVariables()
 {
-	this->host = host;
-	this->user = user;
-	this->pass = pass;
-	this->db = db;
-	this->port = port;
-	this->sck = sck;
-	this->flags = flags;
+	this->host = nullptr;
+	this->user = nullptr;
+	this->pass = nullptr;
+	this->db = nullptr;
+	this->port = 0;
+	this->sck = nullptr;
+	this->flags = 0;
 	this->conn = nullptr;
 	this->connection = nullptr;
 }
+
+//Constructor
+DbConnection::DbConnection()
+{
+	this->initVariables();
+}
+
+DbConnection::~DbConnection() {}
 
 //Functions
 void DbConnection::initConnection()
@@ -31,6 +38,17 @@ void DbConnection::initConnection()
 	std::cout << "Status: " << stats << "\n\n";
 }
 
+void DbConnection::declareConnection(const char* host, const char* user, const char* pass, const char* db, int port, char* sck, int flags)
+{
+	this->host = host;
+	this->user = user;
+	this->pass = pass;
+	this->db = db;
+	this->port = port;
+	this->sck = sck;
+	this->flags = flags;
+}
+
 void DbConnection::closeConnection(MYSQL* conn)
 {
 	mysql_close(conn);
@@ -39,4 +57,16 @@ void DbConnection::closeConnection(MYSQL* conn)
 MYSQL* DbConnection::getConn()
 {
 	return this->conn;
+}
+
+bool DbConnection::isConnected()
+{
+	if (this->connection == NULL)
+		return false;
+	else return true;
+}
+
+MYSQL* DbConnection::getConnection()
+{
+	return this->connection;
 }
