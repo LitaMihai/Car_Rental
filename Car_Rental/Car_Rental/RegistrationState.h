@@ -3,9 +3,8 @@
 #include "State.h"
 #include "Button.h"
 #include "DbConnection.h"
-#include "RegistrationState.h"
 
-class AccountState : public State
+class RegistrationState : public State
 {
 private:
 	//Variables
@@ -14,12 +13,18 @@ private:
 	std::string passwordInput;
 	sf::Text passwordText;
 	std::string passwordAsterisk;
-	sf::Text wrongAccount;
-	std::string wrongAccountString;
-	bool write_on_emailText;
-	bool accountConnected;
+	std::string confirmPasswordInput;
+	sf::Text confirmPasswordText;
+	std::string confirmPasswordAsterisk;
+	sf::Text failedConfirmation;
+	std::string failedConfirmationString;
 
-	int numberOfFailedEntries;
+	bool writeOnEmailText;
+	bool writeOnPasswordText;
+	bool writeOnConfirmPasswordText;
+	bool samePasswords;
+
+	int numberOfFailedPasswordConfirmations;
 
 	sf::Clock clock;
 	sf::Time text_effect_time;
@@ -28,6 +33,7 @@ private:
 	sf::Text title;
 	sf::Text emailLabel;
 	sf::Text passwordLabel;
+	sf::Text confirmPasswordLabel;
 
 	sf::Event event;
 
@@ -46,12 +52,11 @@ private:
 	void initText();
 	void initButtons();
 
-	bool verifAccount(std::string email, std::string password);
-
+	bool verifPasswords(std::string pass1, std::string pass2);
 public:
-	//Constructor - Destructor
-	AccountState(sf::RenderWindow* window, std::stack<State*>* states);
-	virtual ~AccountState();
+	//Constructor-Destructor
+	RegistrationState(sf::RenderWindow* window, std::stack<State*>* states);
+	virtual ~RegistrationState();
 
 	//Functions
 	void updateSFMLEvents();
@@ -59,8 +64,8 @@ public:
 	void updateButtons();
 	void update(const float& dt);
 
-	void renderText(sf::RenderTarget* target = NULL);
-	void renderButtons(sf::RenderTarget* target = NULL);
+	void renderText(sf::RenderTarget* target);
+	void renderButtons(sf::RenderTarget* target);
 	void render(sf::RenderTarget* target = NULL);
 };
 

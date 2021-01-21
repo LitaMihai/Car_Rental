@@ -2,6 +2,7 @@
 
 #include "State.h"
 #include "AccountState.h"
+#include "RegistrationState.h"
 
 class Application
 {

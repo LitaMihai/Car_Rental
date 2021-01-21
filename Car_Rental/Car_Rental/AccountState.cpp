@@ -6,6 +6,7 @@ void AccountState::initVariables()
 	this->emailText.setString("");
 	this->passwordInput = "";
 	this->passwordText.setString("");
+	this->passwordAsterisk = "";
 	
 	this->wrongAccount.setString("");
 	this->numberOfFailedEntries = 1;
@@ -93,7 +94,7 @@ void AccountState::initButtons()
 	);
 
 	this->buttons["EXIT"] = new Button(
-		620.f, 490.f, 100.f, 65.f,
+		620.f, 490.f, 100.f, 70.f,
 		&this->font,
 		"Exit", 50,
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
@@ -114,6 +115,14 @@ void AccountState::initButtons()
 		"", 50,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255)
+	);
+
+	this->buttons["REGISTER"] = new Button(
+		600.f, 20.f, 175.f, 35.f,
+		&this->font,
+		"Sign Up", 35,
+		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 }
 
@@ -173,23 +182,26 @@ void AccountState::updateSFMLEvents()
 
 bool AccountState::verifAccount(std::string email, std::string password)
 {
-	MYSQL_RES* result;
-	MYSQL_ROW row = NULL;
-	int query_rez;
-	bool ok = false;
+	if (this->accountDataBase.isConnected()) {
+		MYSQL_RES* result;
+		MYSQL_ROW row = NULL;
+		int query_rez;
+		bool ok = false;
 
-	std::string query = "SELECT `Email`,`Password` FROM `users` WHERE `Email` = '" + email + "' AND `Password` = '" + password + "'";//the query
+		std::string query = "SELECT `Email`,`Password` FROM `users` WHERE `Email` = '" + email + "' AND `Password` = '" + password + "'";//the query
 
-	query_rez = mysql_query(this->accountDataBase.getConnection(), query.c_str());//send the query
+		query_rez = mysql_query(this->accountDataBase.getConnection(), query.c_str());//send the query
 
-	result = mysql_store_result(this->accountDataBase.getConnection());//store the result
+		result = mysql_store_result(this->accountDataBase.getConnection());//store the result
 
-	if (result != NULL)
-		row = mysql_fetch_row(result);
-	if (row)
-		ok = true;
+		if (result)
+			row = mysql_fetch_row(result);
+		if (row)
+			ok = true;
 
-	return ok;
+		return ok;
+	}
+	return false;
 }
 
 void AccountState::updateCursor() {
@@ -213,16 +225,16 @@ void AccountState::updateButtons()
 	for (auto& it : this->buttons)
 		it.second->update(this->mousePosView);
 	
-	//Connection to the data base -> Next state
+	//Connection to the database -> Next state
 	if (this->buttons["CONNECT"]->isPressed()) {
-		if (!accountDataBase.isConnected()) {
+		if (!this->accountDataBase.isConnected()) {
 			this->accountDataBase.declareConnection("localhost", "root", "", "car_rental", 3306, NULL, 0);
-			accountDataBase.initConnection();
+			this->accountDataBase.initConnection();
 		}
 		if (this->verifAccount(emailInput, passwordInput)) {
 			std::cout << "\nAccount connected!";
 			this->wrongAccount.setString("");
-			numberOfFailedEntries = 0;
+			this->numberOfFailedEntries = 0;
 			//Next state
 		}
 		else {
@@ -230,21 +242,26 @@ void AccountState::updateButtons()
 			this->accountConnected = false;
 			this->wrongAccount.setString(wrongAccountString + std::to_string(numberOfFailedEntries));
 			numberOfFailedEntries++;
-		}
-			
+		}	
 	}
 	
+	//Register an account
+	if (this->buttons["REGISTER"]->isPressed()) {
+		//Register state
+		this->states->push(new RegistrationState(this->window, this->states));
+	}
+
 	//Quit the app
 	if (this->buttons["EXIT"]->isPressed()) {
 		accountDataBase.closeConnection(accountDataBase.getConn());
 		this->endState();
 	}
 		
-	//Select the text box and delete the cursor if needed
+	//Select the email box
 	if (this->buttons["EMAIL"]->isPressed()) 
 		this->write_on_emailText = true;
 	
-	//Select the text box and delete the cursor if needed
+	//Select the password box
 	if (this->buttons["PASSWORD"]->isPressed()) 
 		this->write_on_emailText = false;
 }

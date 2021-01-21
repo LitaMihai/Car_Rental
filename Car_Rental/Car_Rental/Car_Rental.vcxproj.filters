@@ -16,9 +16,6 @@
     <Filter Include="DataBase">
       <UniqueIdentifier>{e6c3839b-b317-434d-b810-8e92221a32b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AccountsUi">
-      <UniqueIdentifier>{daf9fcb0-d064-4835-8dd9-b95826ba82b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Frame">
       <UniqueIdentifier>{2fe114f1-4108-44a2-8b00-882e6b205d8f}</UniqueIdentifier>
     </Filter>
@@ -31,6 +28,12 @@
     <Filter Include="Button">
       <UniqueIdentifier>{0a6fe075-473e-455f-8fbd-f9f297f71e3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RegistrationState">
+      <UniqueIdentifier>{371e1dcb-0214-4df6-97d3-f47c465ef4ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AccountState">
+      <UniqueIdentifier>{daf9fcb0-d064-4835-8dd9-b95826ba82b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -40,7 +43,7 @@
       <Filter>DataBase</Filter>
     </ClCompile>
     <ClCompile Include="AccountState.cpp">
-      <Filter>AccountsUi</Filter>
+      <Filter>AccountState</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Application</Filter>
@@ -51,13 +54,16 @@
     <ClCompile Include="Button.cpp">
       <Filter>Button</Filter>
     </ClCompile>
+    <ClCompile Include="RegistrationState.cpp">
+      <Filter>RegistrationState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
       <Filter>DataBase</Filter>
     </ClInclude>
     <ClInclude Include="AccountState.h">
-      <Filter>AccountsUi</Filter>
+      <Filter>AccountState</Filter>
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Application</Filter>
@@ -67,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Button</Filter>
+    </ClInclude>
+    <ClInclude Include="RegistrationState.h">
+      <Filter>RegistrationState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
