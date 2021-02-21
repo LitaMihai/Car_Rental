@@ -19,6 +19,7 @@ private:
 	std::string failedConfirmationString;
 	sf::Text pleaseEnterAPassword;
 	sf::Text accountAlreadyRegisteredString;
+	sf::Text pleaseEnterAnEmail;
 
 	bool writeOnEmailText;
 	bool writeOnPasswordText;
@@ -26,6 +27,7 @@ private:
 	bool samePasswords;
 	bool emptyPassword;
 	bool accountAlreadyRegistered;
+	bool emptyEmail;
 
 	int numberOfFailedPasswordConfirmations;
 

@@ -19,8 +19,9 @@ void RegistrationState::initVariables()
 	this->writeOnPasswordText = false;
 	this->writeOnConfirmPasswordText = false;
 	this->samePasswords = true;
-	this->emptyPassword = false;
+	this->emptyPassword = true;
 	this->accountAlreadyRegistered = true;
+	this->emptyEmail = true;
 
 	this->title.setString("");
 	this->emailLabel.setString("");
@@ -109,6 +110,12 @@ void RegistrationState::initText()
 	this->pleaseEnterAPassword.setCharacterSize(32);
 	this->pleaseEnterAPassword.setPosition(sf::Vector2f(230, 450));
 
+	//Please enter an email
+	this->pleaseEnterAnEmail.setFont(this->font);
+	this->pleaseEnterAnEmail.setFillColor(sf::Color::Red);
+	this->pleaseEnterAnEmail.setCharacterSize(32);
+	this->pleaseEnterAnEmail.setPosition(sf::Vector2f(230, 450));
+
 	//Account already registered string
 	this->accountAlreadyRegisteredString.setFont(this->font);
 	this->accountAlreadyRegisteredString.setFillColor(sf::Color::Red);
@@ -183,7 +190,7 @@ bool RegistrationState::addAccount(std::string email, std::string password)
 			row = mysql_fetch_row(result);
 		mysql_free_result(result);
 
-		if (row)
+		if (!row)
 			return true;
 		else
 			return false;
@@ -336,53 +343,58 @@ void RegistrationState::updateButtons()
 
 	//Confirm button(register) -> create the account
 	if (this->buttons["CONNECT"]->isPressed()) {
-		if (!passwordInput.empty()) {
+		if (!emailInput.empty()) {
+			if (!passwordInput.empty()) {
 
-			if (!this->isRegistrated(this->emailInput)) {
+				if (!this->isRegistrated(this->emailInput)) {
 
-				if (this->verifPasswords(passwordInput, confirmPasswordInput)) {
-					std::cout << "\nPasswords are the same!";
-					this->failedConfirmation.setString("");
-					this->numberOfFailedPasswordConfirmations = 0;
+					if (this->verifPasswords(passwordInput, confirmPasswordInput)) {
+						std::cout << "\nPasswords are the same!";
+						this->failedConfirmation.setString("");
+						this->numberOfFailedPasswordConfirmations = 0;
 
-					//Adding the account in the database.
-					if (this->addAccount(this->emailInput, this->passwordInput))
-						std::cout << "Account registrated!";
-					else
-						std::cout << "Account isn't registrared!";
+						//Adding the account in the database.
+						if (this->addAccount(this->emailInput, this->passwordInput))
+							std::cout << "Account registrated!";
+						else
+							std::cout << "Account isn't registrared!";
 
-					//Previous state
-					this->states->top()->endState();
+						//Previous state
+						this->states->top()->endState();
+					}
+					else {
+						std::cout << "\nPasswords mismatch!";
+						this->samePasswords = false;
+						this->failedConfirmation.setString(failedConfirmationString + std::to_string(numberOfFailedPasswordConfirmations));
+						this->accountAlreadyRegisteredString.setString("");
+						numberOfFailedPasswordConfirmations++;
+					}
 				}
 				else {
-					std::cout << "\nPasswords mismatch!";
-					this->samePasswords = false;
-					this->failedConfirmation.setString(failedConfirmationString + std::to_string(numberOfFailedPasswordConfirmations));
-					this->accountAlreadyRegisteredString.setString("");
-					numberOfFailedPasswordConfirmations++;
+					this->accountAlreadyRegistered = true;
+					this->accountAlreadyRegisteredString.setString("Email Used!!!");
+					this->failedConfirmation.setString("");
 				}
 			}
 			else {
-				this->accountAlreadyRegistered = true;
-				this->accountAlreadyRegisteredString.setString("Email Used!!!");
+				std::cout << "Please enter a password and confirm it!";
 				this->failedConfirmation.setString("");
+				this->pleaseEnterAPassword.setString("Please enter a password!");
+				this->emptyPassword = true;
 			}
 		}
 		else {
-			std::cout << "Please enter a password and confirm it!";
 			this->failedConfirmation.setString("");
-			this->pleaseEnterAPassword.setString("Please enter a password!");
-			this->emptyPassword = true;
+			this->pleaseEnterAnEmail.setString("Please enter an email!");
+			this->emptyEmail = true;
 		}
 	}
-
 	//Previous state
 	if (this->buttons["BACK"]->isPressed()) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		this->states->top()->endState();
 	}
 		
-
 	//Select the email box
 	if (this->buttons["EMAIL"]->isPressed()) {
 		this->writeOnEmailText = true;
@@ -441,8 +453,10 @@ void RegistrationState::render(sf::RenderTarget* target)
 	target->draw(this->confirmPasswordText);
 	if (!this->samePasswords)
 		target->draw(this->failedConfirmation);
-	if (this->samePasswords)
+	if (!this->emptyPassword)
 		target->draw(this->pleaseEnterAPassword);
 	if (this->accountAlreadyRegistered)
 		target->draw(this->accountAlreadyRegisteredString);
+	if (!this->emptyEmail)
+		target->draw(this->pleaseEnterAnEmail);
 }
