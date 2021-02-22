@@ -54,7 +54,7 @@ void Button::update(const sf::Vector2f mousePos) {
 		//Pressed
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->coolDown < 0) {
 			this->buttonState = BTN_ACTIVE;
-			this->coolDown = 10.f;
+			this->coolDown = 20.f;
 		}
 	}
 

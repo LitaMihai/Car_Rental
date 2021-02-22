@@ -234,6 +234,7 @@ void AccountState::updateButtons()
 			this->wrongAccount.setString("");
 			this->numberOfFailedEntries = 0;
 			//Next state
+			this->states->push(new SearchState(this->window, this->states, this->accountDataBase));
 		}
 		else {
 			std::cout << "\nWrong email or password!";
@@ -264,7 +265,7 @@ void AccountState::updateButtons()
 		this->write_on_emailText = false;
 }
 
-void AccountState::update(const float& dt)
+void AccountState::update()
 {
 	this->updateSFMLEvents();
 	this->updateCursor();

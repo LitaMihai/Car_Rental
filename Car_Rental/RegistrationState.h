@@ -69,7 +69,7 @@ public:
 	void updateSFMLEvents();
 	void updateCursor();
 	void updateButtons();
-	void update(const float& dt);
+	void update();
 
 	void renderText(sf::RenderTarget* target);
 	void renderButtons(sf::RenderTarget* target);

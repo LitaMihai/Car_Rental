@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Button.h"
 #include "RegistrationState.h"
+#include "SearchState.h"
 
 class AccountState : public State
 {
@@ -56,7 +57,7 @@ public:
 	void updateSFMLEvents();
 	void updateCursor();
 	void updateButtons();
-	void update(const float& dt);
+	void update();
 
 	void renderText(sf::RenderTarget* target = NULL);
 	void renderButtons(sf::RenderTarget* target = NULL);

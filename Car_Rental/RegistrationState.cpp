@@ -344,10 +344,9 @@ void RegistrationState::updateButtons()
 	//Confirm button(register) -> create the account
 	if (this->buttons["CONNECT"]->isPressed()) {
 		if (!emailInput.empty()) {
+			this->emptyEmail = false;
 			if (!passwordInput.empty()) {
-
 				if (!this->isRegistrated(this->emailInput)) {
-
 					if (this->verifPasswords(passwordInput, confirmPasswordInput)) {
 						std::cout << "\nPasswords are the same!";
 						this->failedConfirmation.setString("");
@@ -417,7 +416,7 @@ void RegistrationState::updateButtons()
 	}
 }
 
-void RegistrationState::update(const float& dt)
+void RegistrationState::update()
 {
 	this->updateSFMLEvents();
 	this->updateCursor();

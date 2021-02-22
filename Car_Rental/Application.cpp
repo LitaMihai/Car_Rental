@@ -4,20 +4,16 @@ void Application::initVariables()
 {
 	this->window = NULL;
 	this->fullscreen = false;
-	this->dt = 0.f;
 }
 
 void Application::initWindow()
 {
-    this->videoModes = sf::VideoMode::getFullscreenModes();
-
     std::string title = "None";
     sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
     bool fullscreen = false;
     unsigned framerate_limit = 60;
     bool vertical_sync_enabled = false;
     unsigned antialiasing_level = 0;
-    
 
     std::ifstream ifs("Config/window.ini");
 
@@ -85,7 +81,7 @@ void Application::endApplication()
 void Application::update()
 {
     if (!this->states.empty()) {
-        this->states.top()->update(this->dt);
+        this->states.top()->update();
 
         if (this->states.top()->getQuit()) {
             delete this->states.top();
