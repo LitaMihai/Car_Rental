@@ -269,7 +269,7 @@ void AccountState::update()
 {
 	this->updateSFMLEvents();
 	this->updateCursor();
-	this->updateMousePositions();
+	this->updateMousePositions(this->window);
 	this->updateButtons();
 }
 
@@ -299,4 +299,5 @@ void AccountState::render(sf::RenderTarget* target)
 	target->draw(this->passwordText);
 	if (!this->accountConnected)
 		target->draw(this->wrongAccount);
+	this->window->display();
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "State.h"
+#include "Button.h"
 
 class SearchState : public State
 {
@@ -11,8 +12,28 @@ private:
 	std::vector<sf::VideoMode> videoModes;
 	sf::ContextSettings windowSettings;
 
+	std::map<std::string, Button*> buttons;
+	std::map<std::string, Button*> make;
+	std::map<std::string, Button*> model;
+
+	sf::Event event;
+
+	sf::Texture backgroundTexture;
+	sf::RectangleShape background;
+	sf::Font font;
+	//sf::RectangleShape linie[4];
+
+	sf::Image icon;
+
 	//Functions
-	void InitWindow(sf::RenderWindow* window);
+	void initWindow(sf::RenderWindow* window);
+	void initBackground();
+	void initLines();
+	void initFonts();
+	void initText();
+	void initButtons();
+	void initMake();
+	void initModel();
 
 public:
 	//Constructor-Destructor
@@ -21,11 +42,11 @@ public:
 
 	//Functions
 	void updateSFMLEvents();
-	void updateCursor();
 	void updateButtons();
 	void update();
 
 	void renderText(sf::RenderTarget* target = NULL);
+	void renderLines(sf::RenderTarget* target = NULL);
 	void renderButtons(sf::RenderTarget* target = NULL);
 	void render(sf::RenderTarget* target = NULL);
 };

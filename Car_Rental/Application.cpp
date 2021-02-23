@@ -40,6 +40,10 @@ void Application::initWindow()
     
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
+
+    if (!this->icon.loadFromFile("Resources/Images/Icon/icon.png"))
+        throw "ERROR::SEARCHSTATE::FAILED_TO_LOAD_ICON_IMAGE";
+    this->window->setIcon(this->icon.getSize().x, this->icon.getSize().y, this->icon.getPixelsPtr());
 }
 
 void Application::initStates()
@@ -101,7 +105,7 @@ void Application::render()
     if (!this->states.empty())
         this->states.top()->render(this->window);
 
-    this->window->display();
+    //this->window->display();
 }
 
 void Application::run()

@@ -21,8 +21,8 @@ void State::endState()
 	this->quit = true;
 }
 
-void State::updateMousePositions()
+void State::updateMousePositions(sf::RenderWindow* target)
 {
 	this->mousePosWindow = sf::Mouse::getPosition(*this->window);
-	this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*this->window));
+	this->mousePosView = this->window->mapPixelToCoords(sf::Mouse::getPosition(*target));
 }

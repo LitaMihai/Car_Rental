@@ -36,7 +36,7 @@ public:
 	const bool& getQuit() const;
 	void endState();
 
-	virtual void updateMousePositions();
+	virtual void updateMousePositions(sf::RenderWindow* target);
 	virtual void update() = 0;
 	virtual void render(sf::RenderTarget* target = NULL) = 0;
 };

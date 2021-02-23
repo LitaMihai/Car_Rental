@@ -420,7 +420,7 @@ void RegistrationState::update()
 {
 	this->updateSFMLEvents();
 	this->updateCursor();
-	this->updateMousePositions();
+	this->updateMousePositions(this->window);
 	this->updateButtons();
 }
 
@@ -440,11 +440,7 @@ void RegistrationState::renderButtons(sf::RenderTarget* target)
 
 void RegistrationState::render(sf::RenderTarget* target)
 {
-	if (!target)
-		target = this->window;
-
 	target->draw(this->background);
-
 	this->renderButtons(target);
 	this->renderText(target);
 	target->draw(this->emailText);
@@ -458,4 +454,5 @@ void RegistrationState::render(sf::RenderTarget* target)
 		target->draw(this->accountAlreadyRegisteredString);
 	if (!this->emptyEmail)
 		target->draw(this->pleaseEnterAnEmail);
+	this->window->display();
 }

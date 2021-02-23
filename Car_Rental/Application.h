@@ -18,6 +18,8 @@ private:
 
 	std::stack<State*> states;
 
+	sf::Image icon;
+
 	//Initializations
 	void initVariables();
 	void initWindow();
@@ -33,7 +35,6 @@ public:
 	void endApplication();
 
 	//Update
-	void updateDt();
 	void update();
 
 	//Render
