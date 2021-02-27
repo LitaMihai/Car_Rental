@@ -21,12 +21,16 @@ private:
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;
-	//sf::RectangleShape linie[4];
+	sf::RectangleShape linie[4];
 
 	sf::Image icon;
 
+	sf::View makeView;
+	sf::View principalView;
+
 	//Functions
 	void initWindow(sf::RenderWindow* window);
+	void initView();
 	void initBackground();
 	void initLines();
 	void initFonts();
