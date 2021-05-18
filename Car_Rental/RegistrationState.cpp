@@ -180,7 +180,12 @@ bool RegistrationState::addAccount(std::string email, std::string password)
 		MYSQL_RES* result;
 		MYSQL_ROW row = NULL;
 
-		std::string query = "INSERT INTO `users`(`ID`, `Email`, `Password`) VALUES (0, '" + email + "'," + password + ")"; //the query
+		Hash_t hashedPassword(password);
+		std::cout << password<< "\n";
+		password = hashedPassword.ReturnHash();
+		std::cout <<"\n"<< password << "\n";
+
+		std::string query = "INSERT INTO `users`(`ID`, `Email`, `Password`) VALUES (0, '" + email + "', '" + password + "')"; //the query
 
 		mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
 

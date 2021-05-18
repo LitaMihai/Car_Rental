@@ -188,6 +188,11 @@ bool AccountState::verifAccount(std::string email, std::string password)
 		int query_rez;
 		bool ok = false;
 
+		Hash_t hashedPassword(password);
+		std::cout << password << "\n";
+		password = hashedPassword.ReturnHash();
+		std::cout << "\n" << password << "\n";
+
 		std::string query = "SELECT `Email`,`Password` FROM `users` WHERE `Email` = '" + email + "' AND `Password` = '" + password + "'"; //the query
 
 		query_rez = mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query

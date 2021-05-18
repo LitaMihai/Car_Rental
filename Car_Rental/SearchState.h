@@ -25,12 +25,8 @@ private:
 
 	sf::Image icon;
 
-	sf::View makeView;
-	sf::View principalView;
-
 	//Functions
 	void initWindow(sf::RenderWindow* window);
-	void initView();
 	void initBackground();
 	void initLines();
 	void initFonts();

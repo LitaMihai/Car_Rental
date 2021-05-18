@@ -18,8 +18,8 @@ Button::Button(
 	this->text.setFillColor(text_idle_color);
 	this->text.setCharacterSize(character_size);
 	this->text.setPosition(
-		(int)(this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f),
-		(int)(this->shape.getPosition().y + (this->shape.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f)
+		static_cast<int>(this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f),
+		static_cast<int>(this->shape.getPosition().y + (this->shape.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f)
 	);
 	this->textIdleColor = text_idle_color;
 	this->textHoverColor = text_hover_color;

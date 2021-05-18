@@ -2,6 +2,7 @@
 
 #include "State.h"
 #include "Button.h"
+#include "SimpleHash.h"
 
 class RegistrationState : public State
 {
