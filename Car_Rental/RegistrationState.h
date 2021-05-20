@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Button.h"
 #include "SimpleHash.h"
+#include "EmailValidation.h"
 
 class RegistrationState : public State
 {
@@ -10,17 +11,22 @@ private:
 	//Variables
 	std::string emailInput;
 	sf::Text emailText;
+
 	std::string passwordInput;
 	sf::Text passwordText;
+
 	std::string passwordAsterisk;
 	std::string confirmPasswordInput;
 	sf::Text confirmPasswordText;
 	std::string confirmPasswordAsterisk;
+
 	sf::Text failedConfirmation;
 	std::string failedConfirmationString;
+
+	sf::Text failedValidation;
 	sf::Text pleaseEnterAPassword;
-	sf::Text accountAlreadyRegisteredString;
-	sf::Text pleaseEnterAnEmail;
+	sf::Text accountAlreadyRegisteredText;
+	sf::Text emailIsNotValid;
 
 	bool writeOnEmailText;
 	bool writeOnPasswordText;
@@ -28,7 +34,11 @@ private:
 	bool samePasswords;
 	bool emptyPassword;
 	bool accountAlreadyRegistered;
-	bool emptyEmail;
+	bool validEmail;
+
+	bool showPassword;
+	sf::Texture showButtonTexture;
+	sf::Sprite showButtonSprite;
 
 	int numberOfFailedPasswordConfirmations;
 
@@ -61,6 +71,7 @@ private:
 	bool verifPasswords(std::string pass1, std::string pass2);
 	bool addAccount(std::string email, std::string password);
 	bool isRegistrated(std::string email);
+	bool emailValid(std::string email);
 public:
 	//Constructor-Destructor
 	RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase);

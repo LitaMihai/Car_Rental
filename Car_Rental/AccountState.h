@@ -16,6 +16,7 @@ private:
 	std::string passwordAsterisk;
 	sf::Text wrongAccount;
 	std::string wrongAccountString;
+
 	bool write_on_emailText;
 	bool accountConnected;
 
@@ -23,7 +24,12 @@ private:
 
 	sf::Clock clock;
 	sf::Time text_effect_time;
+
 	bool show_cursor;
+
+	bool showPassword;
+	sf::Texture showButtonTexture;
+	sf::Sprite showButtonSprite;
 
 	sf::Text title;
 	sf::Text emailLabel;

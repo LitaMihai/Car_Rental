@@ -18,6 +18,8 @@ void AccountState::initVariables()
 	this->title.setString("");
 	this->emailLabel.setString("");
 	this->passwordLabel.setString("");
+
+	this->showPassword = false;
 }
 
 void AccountState::initBackground()
@@ -124,6 +126,21 @@ void AccountState::initButtons()
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
+
+	this->buttons["SHOWPASSWORD"] = new Button(
+		752.f, 352.f, 45.f, 40.f,
+		&this->font,
+		"", 50,
+		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 250)
+	);
+
+	// Init the hide password button
+	this->showButtonTexture.loadFromFile("Resources/Images/Show_Hide_Buttons/Hide button.png");
+	this->showButtonTexture.setSmooth(true);
+	this->showButtonSprite.setTexture(showButtonTexture);
+	this->showButtonSprite.setPosition(sf::Vector2f(758.f, 362.f));
+	this->showButtonSprite.setScale(0.3f, 0.3f);
 }
 
 AccountState::AccountState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase) : State(window, states), accountDataBase(accountDataBase)
@@ -189,9 +206,7 @@ bool AccountState::verifAccount(std::string email, std::string password)
 		bool ok = false;
 
 		Hash_t hashedPassword(password);
-		std::cout << password << "\n";
 		password = hashedPassword.ReturnHash();
-		std::cout << "\n" << password << "\n";
 
 		std::string query = "SELECT `Email`,`Password` FROM `users` WHERE `Email` = '" + email + "' AND `Password` = '" + password + "'"; //the query
 
@@ -218,12 +233,18 @@ void AccountState::updateCursor() {
 		this->text_effect_time = sf::Time::Zero;
 	}
 	if (write_on_emailText) {
-		this->emailText.setString(emailInput + (show_cursor ? '|' : ' '));
-		this->passwordText.setString(passwordAsterisk);
+		this->emailText.setString(this->emailInput + (show_cursor ? '|' : ' '));
+		if (this->showPassword) 
+			this->passwordText.setString(this->passwordInput);
+		else
+			this->passwordText.setString(this->passwordAsterisk);
 	}
 	else {
-		this->emailText.setString(emailInput);
-		this->passwordText.setString(passwordAsterisk + (show_cursor ? '|' : ' '));
+		this->emailText.setString(this->emailInput);
+		if (this->showPassword)
+			this->passwordText.setString(this->passwordInput + (show_cursor ? '|' : ' '));
+		else
+			this->passwordText.setString(this->passwordAsterisk + (show_cursor ? '|' : ' '));
 	}
 }
 
@@ -268,6 +289,23 @@ void AccountState::updateButtons()
 	//Select the password box
 	if (this->buttons["PASSWORD"]->isPressed()) 
 		this->write_on_emailText = false;
+
+	// Show/Hide password button
+	if (this->buttons["SHOWPASSWORD"]->isPressed()) {
+		this->showPassword = !this->showPassword;
+
+		if (this->showPassword == false) {
+			this->showButtonTexture.loadFromFile("Resources/Images/Show_Hide_Buttons/Hide button.png");
+			this->showButtonTexture.setSmooth(true);
+		}
+
+		else {
+			this->showButtonTexture.loadFromFile("Resources/Images/Show_Hide_Buttons/Show button.png");
+			this->showButtonTexture.setSmooth(true);
+		}
+
+		this->showButtonSprite.setTexture(this->showButtonTexture);
+	}
 }
 
 void AccountState::update()
@@ -302,6 +340,7 @@ void AccountState::render(sf::RenderTarget* target)
 	this->renderText(target);
 	target->draw(this->emailText);
 	target->draw(this->passwordText);
+	target->draw(this->showButtonSprite);
 	if (!this->accountConnected)
 		target->draw(this->wrongAccount);
 	this->window->display();

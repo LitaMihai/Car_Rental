@@ -10,6 +10,10 @@ void RegistrationState::initVariables()
 	this->confirmPasswordInput = "";
 	this->confirmPasswordText.setString("");
 	this->confirmPasswordAsterisk = "";
+	this->failedConfirmation.setString("");
+	this->failedConfirmationString = "";
+	this->failedValidation.setString("");
+	this->pleaseEnterAPassword.setString("");
 
 	this->failedConfirmation.setString("");
 	this->numberOfFailedPasswordConfirmations = 1;
@@ -21,7 +25,9 @@ void RegistrationState::initVariables()
 	this->samePasswords = true;
 	this->emptyPassword = true;
 	this->accountAlreadyRegistered = true;
-	this->emptyEmail = true;
+	this->validEmail = false;
+
+	this->showPassword = false;
 
 	this->title.setString("");
 	this->emailLabel.setString("");
@@ -108,19 +114,19 @@ void RegistrationState::initText()
 	this->pleaseEnterAPassword.setFont(this->font);
 	this->pleaseEnterAPassword.setFillColor(sf::Color::Red);
 	this->pleaseEnterAPassword.setCharacterSize(32);
-	this->pleaseEnterAPassword.setPosition(sf::Vector2f(230, 450));
+	this->pleaseEnterAPassword.setPosition(sf::Vector2f(190, 450));
 
-	//Please enter an email
-	this->pleaseEnterAnEmail.setFont(this->font);
-	this->pleaseEnterAnEmail.setFillColor(sf::Color::Red);
-	this->pleaseEnterAnEmail.setCharacterSize(32);
-	this->pleaseEnterAnEmail.setPosition(sf::Vector2f(230, 450));
+	//Email is not valid
+	this->emailIsNotValid.setFont(this->font);
+	this->emailIsNotValid.setFillColor(sf::Color::Red);
+	this->emailIsNotValid.setCharacterSize(32);
+	this->emailIsNotValid.setPosition(sf::Vector2f(230, 450));
 
 	//Account already registered string
-	this->accountAlreadyRegisteredString.setFont(this->font);
-	this->accountAlreadyRegisteredString.setFillColor(sf::Color::Red);
-	this->accountAlreadyRegisteredString.setCharacterSize(32);
-	this->accountAlreadyRegisteredString.setPosition(sf::Vector2f(230, 450));
+	this->accountAlreadyRegisteredText.setFont(this->font);
+	this->accountAlreadyRegisteredText.setFillColor(sf::Color::Red);
+	this->accountAlreadyRegisteredText.setCharacterSize(32);
+	this->accountAlreadyRegisteredText.setPosition(sf::Vector2f(230, 450));
 }
 
 void RegistrationState::initButtons()
@@ -164,6 +170,21 @@ void RegistrationState::initButtons()
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255)
 	);
+
+	this->buttons["SHOWPASSWORD"] = new Button(
+		753.f, 323.f, 45.f, 40.f,
+		&this->font,
+		"", 50,
+		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 250)
+	);
+
+	// Init the hide password button
+	this->showButtonTexture.loadFromFile("Resources/Images/Show_Hide_Buttons/Hide button.png");
+	this->showButtonTexture.setSmooth(true);
+	this->showButtonSprite.setTexture(showButtonTexture);
+	this->showButtonSprite.setPosition(sf::Vector2f(759.f, 333.f));
+	this->showButtonSprite.setScale(0.3f, 0.3f);
 }
 
 bool RegistrationState::verifPasswords(std::string pass1, std::string pass2)
@@ -181,9 +202,7 @@ bool RegistrationState::addAccount(std::string email, std::string password)
 		MYSQL_ROW row = NULL;
 
 		Hash_t hashedPassword(password);
-		std::cout << password<< "\n";
 		password = hashedPassword.ReturnHash();
-		std::cout <<"\n"<< password << "\n";
 
 		std::string query = "INSERT INTO `users`(`ID`, `Email`, `Password`) VALUES (0, '" + email + "', '" + password + "')"; //the query
 
@@ -227,6 +246,13 @@ bool RegistrationState::isRegistrated(std::string email)
 			return false;
 	}
 	else return false;
+}
+
+bool RegistrationState::emailValid(std::string email)
+{
+	EmailValidation email1(email);
+
+	return email1.isValid();
 }
 
 RegistrationState::RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states), accountDataBase(accountDataBase)
@@ -323,21 +349,40 @@ void RegistrationState::updateCursor()
 	}
 	
 	else if (writeOnEmailText) {
-		this->emailText.setString(emailInput + (show_cursor ? '|' : ' '));
-		this->passwordText.setString(passwordAsterisk);
-		this->confirmPasswordText.setString(confirmPasswordAsterisk);
+		this->emailText.setString(this->emailInput + (show_cursor ? '|' : ' '));
+		if (this->showPassword) {
+			this->passwordText.setString(this->passwordInput);
+			this->confirmPasswordText.setString(this->confirmPasswordInput);
+		}
+		else {
+			this->passwordText.setString(passwordAsterisk);
+			this->confirmPasswordText.setString(confirmPasswordAsterisk);
+		}
 	}
 
 	else if(writeOnPasswordText){
-		this->emailText.setString(emailInput);
-		this->passwordText.setString(passwordAsterisk + (show_cursor ? '|' : ' '));
-		this->confirmPasswordText.setString(confirmPasswordAsterisk);
+		this->emailText.setString(this->emailInput);
+		if (this->showPassword) {
+			this->passwordText.setString(this->passwordInput + (show_cursor ? '|' : ' '));
+			this->confirmPasswordText.setString(this->confirmPasswordInput);
+		}
+		else {
+			this->passwordText.setString(this->passwordAsterisk + (show_cursor ? '|' : ' '));
+			this->confirmPasswordText.setString(this->confirmPasswordAsterisk);
+		}
 	}
 	
 	else if(writeOnConfirmPasswordText){
-		this->emailText.setString(emailInput);
-		this->passwordText.setString(passwordAsterisk);
-		this->confirmPasswordText.setString(confirmPasswordAsterisk + (show_cursor ? '|' : ' '));
+		this->emailText.setString(this->emailInput);
+		if (this->showPassword) {
+			this->passwordText.setString(this->passwordInput);
+			this->confirmPasswordText.setString(this->confirmPasswordInput + (show_cursor ? '|' : ' '));
+		}
+		else {
+			this->passwordText.setString(this->passwordAsterisk);
+			this->confirmPasswordText.setString(this->confirmPasswordAsterisk + (show_cursor ? '|' : ' '));
+		}
+		
 	}
 }
 
@@ -348,12 +393,13 @@ void RegistrationState::updateButtons()
 
 	//Confirm button(register) -> create the account
 	if (this->buttons["CONNECT"]->isPressed()) {
-		if (!emailInput.empty()) {
-			this->emptyEmail = false;
+		if (emailValid(emailInput)) {
+			validEmail = true;
 			if (!passwordInput.empty()) {
+				this->pleaseEnterAPassword.setString("");
 				if (!this->isRegistrated(this->emailInput)) {
 					if (this->verifPasswords(passwordInput, confirmPasswordInput)) {
-						std::cout << "\nPasswords are the same!";
+						//std::cout << "\nPasswords are the same!"; TO BE DELETED
 						this->failedConfirmation.setString("");
 						this->numberOfFailedPasswordConfirmations = 0;
 
@@ -361,38 +407,55 @@ void RegistrationState::updateButtons()
 						if (this->addAccount(this->emailInput, this->passwordInput))
 							std::cout << "Account registrated!";
 						else
-							std::cout << "Account isn't registrared!";
+							std::cout << "Account wasn't registrared!";
 
 						//Previous state
 						this->states->top()->endState();
 					}
 					else {
 						std::cout << "\nPasswords mismatch!";
+						this->failedConfirmation.setString("");
+						this->pleaseEnterAPassword.setString("");
+						this->accountAlreadyRegisteredText.setString("");
+						this->emailIsNotValid.setString("");
 						this->samePasswords = false;
 						this->failedConfirmation.setString(failedConfirmationString + std::to_string(numberOfFailedPasswordConfirmations));
-						this->accountAlreadyRegisteredString.setString("");
+						this->accountAlreadyRegisteredText.setString("");
 						numberOfFailedPasswordConfirmations++;
 					}
 				}
 				else {
+					this->failedConfirmation.setString("");
+					this->pleaseEnterAPassword.setString("");
+					this->accountAlreadyRegisteredText.setString("");
+					this->emailIsNotValid.setString("");
 					this->accountAlreadyRegistered = true;
-					this->accountAlreadyRegisteredString.setString("Email Used!!!");
+					this->accountAlreadyRegisteredText.setString("Email Used!!!");
 					this->failedConfirmation.setString("");
 				}
 			}
 			else {
 				std::cout << "Please enter a password and confirm it!";
 				this->failedConfirmation.setString("");
-				this->pleaseEnterAPassword.setString("Please enter a password!");
+				this->pleaseEnterAPassword.setString("");
+				this->accountAlreadyRegisteredText.setString("");
+				this->emailIsNotValid.setString("");
+				this->failedConfirmation.setString("");
+				this->pleaseEnterAPassword.setString("Please enter a password and confirm it!");
 				this->emptyPassword = true;
 			}
 		}
 		else {
 			this->failedConfirmation.setString("");
-			this->pleaseEnterAnEmail.setString("Please enter an email!");
-			this->emptyEmail = true;
+			this->pleaseEnterAPassword.setString("");
+			this->accountAlreadyRegisteredText.setString("");
+			this->emailIsNotValid.setString("");
+			this->failedValidation.setString("");
+			this->emailIsNotValid.setString("Email is not valid!");
+			this->validEmail = false;
 		}
 	}
+
 	//Previous state
 	if (this->buttons["BACK"]->isPressed()) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -418,6 +481,23 @@ void RegistrationState::updateButtons()
 		this->writeOnEmailText = false;
 		this->writeOnPasswordText = false;
 		this->writeOnConfirmPasswordText = true;
+	}
+
+	// Show/Hide password button
+	if (this->buttons["SHOWPASSWORD"]->isPressed()) {
+		this->showPassword = !this->showPassword;
+
+		if (this->showPassword == false) {
+			this->showButtonTexture.loadFromFile("Resources/Images/Show_Hide_Buttons/Hide button.png");
+			this->showButtonTexture.setSmooth(true);
+		}
+			
+		else {
+			this->showButtonTexture.loadFromFile("Resources/Images/Show_Hide_Buttons/Show button.png");
+			this->showButtonTexture.setSmooth(true);
+		}
+		
+		this->showButtonSprite.setTexture(this->showButtonTexture);
 	}
 }
 
@@ -451,13 +531,17 @@ void RegistrationState::render(sf::RenderTarget* target)
 	target->draw(this->emailText);
 	target->draw(this->passwordText);
 	target->draw(this->confirmPasswordText);
+	target->draw(this->showButtonSprite);
+	
+
 	if (!this->samePasswords)
 		target->draw(this->failedConfirmation);
-	if (!this->emptyPassword)
+	if (this->emptyPassword)
 		target->draw(this->pleaseEnterAPassword);
 	if (this->accountAlreadyRegistered)
-		target->draw(this->accountAlreadyRegisteredString);
-	if (!this->emptyEmail)
-		target->draw(this->pleaseEnterAnEmail);
+		target->draw(this->accountAlreadyRegisteredText);
+	if (!this->validEmail) 
+		target->draw(this->emailIsNotValid);
+	
 	this->window->display();
 }

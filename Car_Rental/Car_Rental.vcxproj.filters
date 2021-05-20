@@ -1,16 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Frame">
-      <UniqueIdentifier>{2fe114f1-4108-44a2-8b00-882e6b205d8f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Application">
       <UniqueIdentifier>{a5c0f249-6e3e-4048-a024-461eba62fad8}</UniqueIdentifier>
@@ -33,6 +26,15 @@
     </Filter>
     <Filter Include="Database">
       <UniqueIdentifier>{e6c3839b-b317-434d-b810-8e92221a32b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SearchState">
+      <UniqueIdentifier>{84c3401d-c448-41dd-aab3-b66666ce06a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PassHash">
+      <UniqueIdentifier>{0b6cfcb7-57b2-4303-b6fd-a9b3b91c9c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EmailValidation">
+      <UniqueIdentifier>{371b7f7d-9216-40df-b061-aebd4f3ce40c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +59,15 @@
     <ClCompile Include="RegistrationState.cpp">
       <Filter>RegistrationState</Filter>
     </ClCompile>
+    <ClCompile Include="SearchState.cpp">
+      <Filter>SearchState</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleHash.cpp">
+      <Filter>PassHash</Filter>
+    </ClCompile>
+    <ClCompile Include="EmailValidation.cpp">
+      <Filter>EmailValidation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -77,5 +88,19 @@
     <ClInclude Include="RegistrationState.h">
       <Filter>RegistrationState</Filter>
     </ClInclude>
+    <ClInclude Include="SearchState.h">
+      <Filter>SearchState</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleHash.h">
+      <Filter>PassHash</Filter>
+    </ClInclude>
+    <ClInclude Include="EmailValidation.h">
+      <Filter>EmailValidation</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Marci Masini.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

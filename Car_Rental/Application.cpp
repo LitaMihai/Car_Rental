@@ -53,7 +53,7 @@ void Application::initStates()
 
 void Application::initDB()
 {
-    this->dataBase.declareConnection("localhost", "root", "", "car_rental", 3306, NULL, 0);
+    this->dataBase.declareConnection("localhost", "root", "", "car_rental", 2295, NULL, 0);
     this->dataBase.initConnection();
     if (dataBase.isConnected())
         std::cout << "M-am conectat la baza de date!";
