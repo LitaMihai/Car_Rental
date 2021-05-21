@@ -26,8 +26,10 @@ private:
 	sf::Time text_effect_time;
 
 	bool show_cursor;
-
 	bool showPassword;
+
+	bool enterPressed;
+
 	sf::Texture showButtonTexture;
 	sf::Sprite showButtonSprite;
 

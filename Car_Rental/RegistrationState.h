@@ -37,6 +37,8 @@ private:
 	bool validEmail;
 
 	bool showPassword;
+	bool enterPressed;
+
 	sf::Texture showButtonTexture;
 	sf::Sprite showButtonSprite;
 

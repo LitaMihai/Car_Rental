@@ -33,6 +33,8 @@ void RegistrationState::initVariables()
 	this->emailLabel.setString("");
 	this->passwordLabel.setString("");
 	this->confirmPasswordLabel.setString("");
+
+	this->enterPressed = false;
 }
 
 void RegistrationState::initBackground()
@@ -336,6 +338,9 @@ void RegistrationState::updateSFMLEvents()
 					this->writeOnConfirmPasswordText = false;
 				}
 			}
+
+			if (this->event.key.code == sf::Keyboard::Enter) 
+				this->enterPressed = true;
 		}
 	}
 }
@@ -392,7 +397,9 @@ void RegistrationState::updateButtons()
 		it.second->update(this->mousePosView);
 
 	//Confirm button(register) -> create the account
-	if (this->buttons["CONNECT"]->isPressed()) {
+	if (this->buttons["CONNECT"]->isPressed() || this->enterPressed) {
+		this->enterPressed = false;
+
 		if (emailValid(emailInput)) {
 			validEmail = true;
 			if (!passwordInput.empty()) {

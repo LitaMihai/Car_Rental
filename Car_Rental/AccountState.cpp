@@ -20,6 +20,7 @@ void AccountState::initVariables()
 	this->passwordLabel.setString("");
 
 	this->showPassword = false;
+	this->enterPressed = false;
 }
 
 void AccountState::initBackground()
@@ -189,8 +190,10 @@ void AccountState::updateSFMLEvents()
 
 				if (this->event.key.code == sf::Keyboard::Tab)
 					this->write_on_emailText = !this->write_on_emailText;
+
+				if (this->event.key.code == sf::Keyboard::Enter) 
+					this->enterPressed = true;
 			}
-				
 
 			if (this->event.type == sf::Event::Closed)
 				this->window->close();
@@ -254,7 +257,9 @@ void AccountState::updateButtons()
 		it.second->update(this->mousePosView);
 	
 	//Connection to the database -> Next state
-	if (this->buttons["CONNECT"]->isPressed()) {
+	if (this->buttons["CONNECT"]->isPressed() || this->enterPressed) {
+		enterPressed = false;
+
 		if (this->verifAccount(emailInput, passwordInput)) {
 			std::cout << "\nAccount connected!";
 			this->wrongAccount.setString("");
@@ -274,6 +279,9 @@ void AccountState::updateButtons()
 	if (this->buttons["REGISTER"]->isPressed()) {
 		//Register state
 		this->states->push(new RegistrationState(this->window, this->states, this->accountDataBase));
+		this->emailInput = "";
+		this->passwordInput = "";
+		this->passwordAsterisk = "";
 	}
 
 	//Quit the app
