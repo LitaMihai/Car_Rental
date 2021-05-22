@@ -21,6 +21,13 @@ void SearchState::initWindow(sf::RenderWindow* window)
 	this->window->setIcon(this->icon.getSize().x, this->icon.getSize().y, this->icon.getPixelsPtr());
 }
 
+void SearchState::initVariables()
+{
+	this->renderLineForModels = false;
+	this->renderTheLastLine = false;
+	this->seePhoto = false;
+}
+
 void SearchState::initBackground()
 {
 	this->background.setSize(
@@ -51,8 +58,8 @@ void SearchState::initLines()
 	this->linie[2].setPosition(450.f, 41.f);
 
 	this->linie[3].setFillColor(sf::Color::Black);//Invisible at start
-	this->linie[3].setSize(sf::Vector2f(800.f, 1.f));
-	this->linie[3].setPosition(800.f, 601.f);
+	this->linie[3].setSize(sf::Vector2f(1150.f, 1.f));
+	this->linie[3].setPosition(450.f, 601.f);
 }
 
 void SearchState::initFonts()
@@ -74,331 +81,85 @@ void SearchState::initButtons()
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
+
+	this->buttons["LEFT"] = new Button(
+		0.f, -100.f, 45.f, 30.f,
+		&this->font,
+		"RIGHT", 25,
+		sf::Color(250, 250, 250, 0), sf::Color(250, 250, 250, 0), sf::Color(20, 20, 20, 0),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 100), sf::Color(20, 20, 20, 105)
+	);
+
+	this->buttons["RIGHT"] = new Button(
+		0.f, -100.f, 45.f, 30.f,
+		&this->font,
+		"LEFT", 25,
+		sf::Color(250, 250, 250, 0), sf::Color(250, 250, 250, 0), sf::Color(20, 20, 20, 0),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 100), sf::Color(20, 20, 20, 105)
+	);
+
+	this->leftButtonTexture.loadFromFile("Resources/Images/Left_Right_Buttons/Left.png");
+	this->leftButtonTexture.setSmooth(true);
+	this->leftButtonSprite.setTexture(leftButtonTexture);
+	this->leftButtonSprite.setPosition(sf::Vector2f(0.f, -100.f));
+	this->leftButtonSprite.setScale(0.2, 0.2);
+
+	this->rightButtonTexture.loadFromFile("Resources/Images/Left_Right_Buttons/Right.png");
+	this->rightButtonTexture.setSmooth(true);
+	this->rightButtonSprite.setTexture(rightButtonTexture);
+	this->rightButtonSprite.setPosition(sf::Vector2f(0.f, -100.f));
+	this->rightButtonSprite.setScale(0.2, 0.2);
 }
 
 void SearchState::initMake()
 {
-	this->make["ALFA_ROMEO"] = new Button(
-		0.f, 40.f, 225.f, 25.f,
-		&this->font,
-		"Alfa Romeo", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
+	std::ifstream i("Resources/Makes/Makes.json");
+	json j;
+	i >> j;
+	i.close();
 
-	this->make["ASTON_MARTIN"] = new Button(
-		0.f, 65.f, 225.f, 25.f,
-		&this->font,
-		"Aston Martin", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
+	float y = 40.f;
+	for (auto& x : j.items()) {
 
-	this->make["AUDI"] = new Button(
-		0.f, 90.f, 225.f, 25.f,
-		&this->font,
-		"Audi", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
+		std::string name = x.value().find("Make").value();
 
-	this->make["BENTLEY"] = new Button(
-		0.f, 115.f, 225.f, 25.f,
-		&this->font,
-		"Bentley", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
+		this->make[name] = new Button(
+			0.f, y, 225.f, 25.f,
+			&this->font,
+			name, 20,
+			sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+			sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		);
 
-	this->make["BMW"] = new Button(
-		0.f, 140.f, 225.f, 25.f,
-		&this->font,
-		"BMW", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["BUGATTI"] = new Button(
-		0.f, 165.f, 225.f, 25.f,
-		&this->font,
-		"Bugatti", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["CADILLAC"] = new Button(
-		0.f, 190.f, 225.f, 25.f,
-		&this->font,
-		"Cadillac", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["CHEVROLET"] = new Button(
-		0.f, 215.f, 225.f, 25.f,
-		&this->font,
-		"Chevrolet", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-	
-	this->make["CITROEN"] = new Button(
-		0.f, 240.f, 225.f, 25.f,
-		&this->font,
-		"Citroën", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["DACIA"] = new Button(
-		0.f, 265.f, 225.f, 25.f,
-		&this->font,
-		"Dacia", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["DAEWOO"] = new Button(
-		0.f, 290.f, 225.f, 25.f,
-		&this->font,
-		"Daewoo", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["DODGE"] = new Button(
-		0.f, 315.f, 225.f, 25.f,
-		&this->font,
-		"Dodge", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["FERRARI"] = new Button(
-		0.f, 340.f, 225.f, 25.f,
-		&this->font,
-		"Ferrari", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["FIAT"] = new Button(
-		0.f, 365.f, 225.f, 25.f,
-		&this->font,
-		"Fiat", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["FORD"] = new Button(
-		0.f, 390.f, 225.f, 25.f,
-		&this->font,
-		"Ford", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["HONDA"] = new Button(
-		0.f, 415.f, 225.f, 25.f,
-		&this->font,
-		"Honda", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["HYUNDAI"] = new Button(
-		0.f, 440.f, 225.f, 25.f,
-		&this->font,
-		"Hyundai", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["JAGUAR"] = new Button(
-		0.f, 465.f, 225.f, 25.f,
-		&this->font,
-		"Jaguar", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["JEEP"] = new Button(
-		0.f, 490.f, 225.f, 25.f,
-		&this->font,
-		"Jeep", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["LAMBORGHINI"] = new Button(
-		0.f, 515.f, 225.f, 25.f,
-		&this->font,
-		"Lamborghini", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["LAND_ROVER"] = new Button(
-		0.f, 540.f, 225.f, 25.f,
-		&this->font,
-		"Land Rover", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["MASERATI"] = new Button(
-		0.f, 565.f, 225.f, 25.f,
-		&this->font,
-		"Maserati", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["MAYBACH"] = new Button(
-		0.f, 590.f, 225.f, 25.f,
-		&this->font,
-		"Maybach", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["MAZDA"] = new Button(
-		0.f, 615.f, 225.f, 25.f,
-		&this->font,
-		"Mazda", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["MERCEDES_BENZ"] = new Button(
-		0.f, 640.f, 225.f, 25.f,
-		&this->font,
-		"Mercedes-Benz", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["MITSUBISHI"] = new Button(
-		0.f, 665.f, 225.f, 25.f,
-		&this->font,
-		"Mitsubishi", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["NISSAN"] = new Button(
-		0.f, 690.f, 225.f, 25.f,
-		&this->font,
-		"Nissan", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["OPEL"] = new Button(
-		0.f, 715.f, 225.f, 25.f,
-		&this->font,
-		"Opel", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["PEUGEOT"] = new Button(
-		0.f, 740.f, 225.f, 25.f,
-		&this->font,
-		"Peugeot", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["PORCHE"] = new Button(
-		0.f, 765.f, 225.f, 25.f,
-		&this->font,
-		"Porche", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["RENAULT"] = new Button(
-		0.f, 790.f, 225.f, 25.f,
-		&this->font,
-		"Renault", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["ROLLS_ROYCE"] = new Button(
-		0.f, 815.f, 225.f, 25.f,
-		&this->font,
-		"Rolls-Royce", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["SEAT"] = new Button(
-		0.f, 840.f, 225.f, 25.f,
-		&this->font,
-		"Seat", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["SKODA"] = new Button(
-		0.f, 865.f, 225.f, 25.f,
-		&this->font,
-		"Skoda", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["SUBARU"] = new Button(
-		0.f, 890.f, 225.f, 25.f,
-		&this->font,
-		"Subaru", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["SUZUKI"] = new Button(
-		0.f, 740.f, 225.f, 25.f,
-		&this->font,
-		"Suzuki", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["TESLA"] = new Button(
-		0.f, 740.f, 225.f, 25.f,
-		&this->font,
-		"Tesla", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["TOYOTA"] = new Button(
-		0.f, 740.f, 225.f, 25.f,
-		&this->font,
-		"Toyota", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->make["VOLKSWAGEN"] = new Button(
-		0.f, 740.f, 225.f, 25.f,
-		&this->font,
-		"Volkswagen", 20,
-		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
+		y += 25.f;
+	}
 }
 
 void SearchState::initModel()
 {
+	std::ifstream i("Resources/Makes/Cars.json");
+	json j;
+	i >> j;
+	i.close();
 
+	for (auto& x : j.items()) {
+
+		std::string name = x.value().find("Model").value();
+
+		this->model[name] = new Button(
+			0.f, -100.f, 225.f, 25.f,
+			&this->font,
+			name, 20,
+			sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+			sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		);
+	}
 }
 
 SearchState::SearchState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states)
 {
 	this->initWindow(window);
+	this->initVariables();
 	this->initBackground();
 	this->initLines();
 	this->initFonts();
@@ -444,12 +205,103 @@ void SearchState::updateButtons()
 	for (auto& it1: this->make)
 		it1.second->update(this->mousePosView);
 
+	for (auto& it1 : this->model)
+		it1.second->update(this->mousePosView);
+
 	if (this->buttons["LOG_OUT"]->isPressed()) {
 		this->endState();
 		this->window->close();
 		this->prevWindow->setActive(true);
 		this->prevWindow->setVisible(true);
 	}
+
+	for (auto& it1 : this->make)
+		if (it1.second->isPressed()) {
+			this->renderLineForModels = true;
+
+			for (auto& it2 : this->model)
+				it2.second->move(0.f, -100.f);
+
+			std::string name = it1.second->returnName(); // the make to search in the cars json
+
+			std::ifstream i("Resources/Makes/Cars.json");
+			json j;
+			i >> j;
+			i.close();
+
+			int nr = 0;
+			float x_init = 225.f, y_init = 400.f;
+			for (auto& x : j.items()) { 
+
+				if (x.value().find("Make").value() == name) {
+					nr++;
+
+					for(auto& it2 : this->model)
+						if (it2.second->returnName() == x.value().find("Model").value()) {
+							it2.second->move(x_init, y_init);
+							y_init += 50.f;
+						}
+				}
+
+				if (nr == 3)// we know that there are only 3 cars for each make so we don't need to search further
+					break;
+			}
+		}
+
+	for (auto& it1 : this->model)
+		if (it1.second->isPressed()) {
+			this->renderTheLastLine = true;
+			this->seePhoto = true;
+
+			for (auto& it2 : this->buttons) {
+				if (it2.second->returnName() == "LEFT") {
+					it2.second->move(460.f, 320.f);
+					this->leftButtonSprite.setPosition(460.f, 320.f);
+				}
+					
+				if (it2.second->returnName() == "RIGHT") {
+					it2.second->move(1550.f, 320.f);
+					this->rightButtonSprite.setPosition(1550.f, 320.f);
+				}
+			}
+
+			std::string way1 = "Resources/Makes/", way2 = "Resources/Makes/";
+
+			std::string makeFolderName;
+			std::string modelFolderName = it1.second->returnName();
+
+			std::ifstream i("Resources/Makes/Cars.json");
+			json j;
+			i >> j;
+			i.close();
+
+			for (auto& x : j.items()) 
+				if (x.value().find("Model").value() == modelFolderName) {
+					makeFolderName = x.value().find("Make").value();
+					break;
+				}
+
+			way1 = way1 + makeFolderName + "/" + modelFolderName + "/" + modelFolderName + "_1.jpg";
+			way2 = way2 + makeFolderName + "/" + modelFolderName + "/" + modelFolderName + "_2.jpg";
+
+			this->firstPhotoTexture.loadFromFile(way1);
+			this->firstPhotoTexture.setSmooth(true);
+			//this->firstPhotoSprite.setTexture(firstPhotoTexture);
+			//this->firstPhotoSprite.setPosition(sf::Vector2f(400.f, 250.f));
+			//this->firstPhotoSprite.setScale(0.5, 0.5);
+			this->shape.setTexture(&this->firstPhotoTexture);
+			this->shape.setPosition(sf::Vector2f(505.f, 40.f));
+			this->shape.setSize(sf::Vector2f(1044.f, 561.f));
+
+			this->secondPhotoTexture.loadFromFile(way2);
+			this->secondPhotoTexture.setSmooth(true);
+			//this->secondPhotoSprite.setTexture(secondPhotoTexture);
+			//this->secondPhotoSprite.setPosition(sf::Vector2f(0.f, -1000.f));
+			//this->secondPhotoSprite.setScale(0.2, 0.2);
+			this->shape.setTexture(&this->secondPhotoTexture); //To be deleted!!!!
+			this->shape.setPosition(sf::Vector2f(505.f, 40.f));
+			this->shape.setSize(sf::Vector2f(1044.f, 561.f));
+		}
 }
 
 void SearchState::update()
@@ -458,7 +310,7 @@ void SearchState::update()
 	this->updateMousePositions(this->window);
 	this->updateButtons();
 
-	// std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n"; /*TO BE DELETED!!!*/
+	 std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n"; /*TO BE DELETED!!!*/
 }
 
 void SearchState::renderText(sf::RenderTarget* target)
@@ -468,6 +320,12 @@ void SearchState::renderText(sf::RenderTarget* target)
 
 void SearchState::renderLines(sf::RenderTarget* target)
 {
+	if (this->renderLineForModels)
+		linie[2].setFillColor(sf::Color::White);
+
+	if (this->renderTheLastLine)
+		linie[3].setFillColor(sf::Color::White);
+
 	for (int i = 0; i < 4; i++)
 		target->draw(this->linie[i]);
 }
@@ -479,14 +337,28 @@ void SearchState::renderButtons(sf::RenderTarget* target)
 
 	for (auto& it1 : this->make)
 		it1.second->render(target);
+
+	for (auto& it1 : this->model)
+		it1.second->render(target);
 }
 
 void SearchState::render(sf::RenderTarget* target)
 {
 	target = this->window;
 	target->draw(this->background);
+	target->draw(this->leftButtonSprite);
+	target->draw(this->rightButtonSprite);
+
+	if (seePhoto) {
+		target->draw(this->firstPhotoSprite);
+		target->draw(this->secondPhotoSprite);
+	}
+
+	target->draw(this->shape);
+
 	this->renderLines(target);
 	this->renderButtons(target);
 	this->renderText(target);
 	this->window->display();
+	
 }

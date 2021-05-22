@@ -133,7 +133,7 @@ void AccountState::initButtons()
 		&this->font,
 		"", 50,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 250)
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 255)
 	);
 
 	// Init the hide password button

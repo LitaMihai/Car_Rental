@@ -1,0 +1,55 @@
+[
+  {
+    "Body": "Coupe",
+    "Capacity": 1.8,
+    "Combustible": "Gasoline",
+    "Gearbox": "Automatic/Manual",
+    "Hp": 240,
+    "Make": "Alfa Romeo",
+    "Miles": "180000",
+    "Model": "Giulietta",
+    "Price": 300,
+    "Transmission": "Face",
+    "Year": "2016"
+  },
+  {
+    "Body": "Hatchback",
+    "Capacity": 2.9,
+    "Combustible": "Gasoline",
+    "Gearbox": "Automatic",
+    "Hp": 540,
+    "Make": "Alfa Romeo",
+    "Miles": "90000",
+    "Model": "Giulia GTA",
+    "Price": 600,
+    "Transmission": "Face",
+    "Year": "2020"
+  },
+  {
+    "Body": "Cabrio",
+    "Capacity": 1.7,
+    "Combustible": "Gasoline",
+    "Gearbox": "Manual",
+    "Hp": 240,
+    "Make": "Alfa Romeo",
+    "Miles": "200000",
+    "Model": "4C Spider",
+    "Price": 300,
+    "Transmission": "Back",
+    "Year": "2015"
+  },
+  {
+    "Body": "Cabrio",
+    "Capacity": 5.2,
+    "Combustible": "Gasoline",
+    "Gearbox": "Automatic/Manual",
+    "Hp": 602,
+    "Make": "Audi",
+    "Miles": "5000",
+    "Model": "R8 Spyder",
+    "Price": 700,
+    "Transmission": "Face",
+    "Year": "2021"
+  }
+	
+]

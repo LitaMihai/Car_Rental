@@ -1,7 +1,11 @@
 #pragma once
 
+#include "iomanip"
 #include "State.h"
 #include "Button.h"
+#include "Json/single_include/nlohmann/json.hpp"
+
+using json = nlohmann::json;
 
 class SearchState : public State
 {
@@ -18,6 +22,23 @@ private:
 
 	sf::Event event;
 
+	bool renderLineForModels;
+	bool renderTheLastLine;
+
+	sf::Texture leftButtonTexture;
+	sf::Sprite leftButtonSprite;
+	sf::Texture rightButtonTexture;
+	sf::Sprite rightButtonSprite;
+
+	sf::Texture firstPhotoTexture;
+	sf::Sprite firstPhotoSprite;
+	sf::Texture secondPhotoTexture;
+	sf::Sprite secondPhotoSprite;
+
+	sf::RectangleShape shape;
+
+	bool seePhoto;
+
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;
@@ -27,6 +48,7 @@ private:
 
 	//Functions
 	void initWindow(sf::RenderWindow* window);
+	void initVariables();
 	void initBackground();
 	void initLines();
 	void initFonts();

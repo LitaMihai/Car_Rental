@@ -40,6 +40,9 @@ public:
 	const bool isPressed() const;
 
 	//Functions
+	void move(float x, float y);
+	std::string returnName();
+
 	void update(const sf::Vector2f mousePos);
 	void render(sf::RenderTarget* target);
 };
