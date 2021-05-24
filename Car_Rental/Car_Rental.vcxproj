@@ -162,6 +162,7 @@
     <ClCompile Include="DbConnection.cpp" />
     <ClCompile Include="EmailValidation.cpp" />
     <ClCompile Include="RegistrationState.cpp" />
+    <ClCompile Include="RentState.cpp" />
     <ClCompile Include="SearchState.cpp" />
     <ClCompile Include="SimpleHash.cpp" />
     <ClCompile Include="State.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="DbConnection.h" />
     <ClInclude Include="EmailValidation.h" />
     <ClInclude Include="RegistrationState.h" />
+    <ClInclude Include="RentState.h" />
     <ClInclude Include="SearchState.h" />
     <ClInclude Include="SimpleHash.h" />
     <ClInclude Include="State.h" />

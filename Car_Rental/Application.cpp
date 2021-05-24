@@ -104,8 +104,6 @@ void Application::render()
 
     if (!this->states.empty())
         this->states.top()->render(this->window);
-
-    //this->window->display();
 }
 
 void Application::run()

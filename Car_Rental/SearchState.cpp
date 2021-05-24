@@ -80,7 +80,7 @@ void SearchState::initButtons()
 	);
 
 	this->buttons["RENT"] = new Button(
-		1215.f, 730.f, 150.f, 100.f,
+		0.f, -100.f, 150.f, 100.f,
 		&this->font,
 		"Rent", 50,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
@@ -88,7 +88,7 @@ void SearchState::initButtons()
 	);
 
 	this->buttons["DETAILS"] = new Button(
-		700.f, 730.f, 150.f, 100.f,
+		0.f, -100.f, 150.f, 100.f,
 		&this->font,
 		"Details", 50,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
@@ -144,7 +144,7 @@ void SearchState::initMake()
 			sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 		);
 
-		y += 25.f;
+		y += 27.5;
 	}
 }
 
@@ -199,11 +199,6 @@ SearchState::~SearchState()
 void SearchState::updateSFMLEvents()
 {
 	while (this->window->pollEvent(this->event)) {
-		if (this->event.type == sf::Event::KeyPressed) {
-			if (this->event.key.code == sf::Keyboard::Escape)
-				this->endState();
-		}
-
 		if (this->event.type == sf::Event::Closed)
 			this->window->close();
 	}
@@ -225,6 +220,19 @@ void SearchState::updateButtons()
 		this->window->close();
 		this->prevWindow->setActive(true);
 		this->prevWindow->setVisible(true);
+	}
+
+	if (this->buttons["LEFT"]->isPressed())
+		this->shape.setTexture(&this->firstPhotoTexture);
+
+	if (this->buttons["RIGHT"]->isPressed())
+		this->shape.setTexture(&this->secondPhotoTexture);
+
+	if (this->buttons["RENT"]->isPressed())
+		this->states->push(new RentState(this->window, this->states));
+
+	if (this->buttons["DETAILS"]->isPressed()) {
+		// Details state
 	}
 
 	for (auto& it1 : this->make)
@@ -266,18 +274,16 @@ void SearchState::updateButtons()
 			this->seePhoto = true;
 
 			if (!this->buttonsMoved) {
-				for (auto& it2 : this->buttons) {
+				
+				this->buttons["LEFT"]->move(460.f, 320.f);
+				this->leftButtonSprite.setPosition(460.f, 320.f);
 
-					if (it2.second->returnName() == "LEFT") {
-						it2.second->move(460.f, 320.f);
-						this->leftButtonSprite.setPosition(460.f, 320.f);
-					}
+				this->buttons["RIGHT"]->move(1550.f, 320.f);
+				this->rightButtonSprite.setPosition(1550.f, 320.f);
 
-					if (it2.second->returnName() == "RIGHT") {
-						it2.second->move(1550.f, 320.f);
-						this->rightButtonSprite.setPosition(1550.f, 320.f);
-					}
-				}
+				this->buttons["DETAILS"]->move(700.f, 730.f);
+				this->buttons["RENT"]->move(1215.f, 730.f);
+			
 				this->buttonsMoved = true;
 			}
 
@@ -310,20 +316,6 @@ void SearchState::updateButtons()
 			this->shape.setPosition(sf::Vector2f(503.f, 40.f));
 			this->shape.setSize(sf::Vector2f(1044.f, 661.f));
 		}
-
-	for (auto& it1 : this->buttons) {
-		if (it1.second->returnName() == "LEFT") {
-			if (it1.second->isPressed()) {
-				this->shape.setTexture(&this->firstPhotoTexture);
-			}
-		}
-
-		if (it1.second->returnName() == "RIGHT") {
-			if (it1.second->isPressed()) {
-				this->shape.setTexture(&this->secondPhotoTexture);
-			}
-		}
-	}
 }
 
 void SearchState::update()
@@ -331,8 +323,6 @@ void SearchState::update()
 	this->updateSFMLEvents();
 	this->updateMousePositions(this->window);
 	this->updateButtons();
-
-	std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n"; /*TO BE DELETED!!!*/
 }
 
 void SearchState::renderLines(sf::RenderTarget* target)
@@ -366,7 +356,7 @@ void SearchState::render(sf::RenderTarget* target)
 	target->draw(this->leftButtonSprite);
 	target->draw(this->rightButtonSprite);
 
-	if (seePhoto) 
+	if (seePhoto)
 		target->draw(this->shape);
 
 	this->renderLines(target);

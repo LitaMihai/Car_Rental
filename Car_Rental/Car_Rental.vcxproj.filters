@@ -36,6 +36,9 @@
     <Filter Include="EmailValidation">
       <UniqueIdentifier>{371b7f7d-9216-40df-b061-aebd4f3ce40c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RentState">
+      <UniqueIdentifier>{e2467c01-1917-4e8a-8cb6-d39c5aab4582}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -68,6 +71,9 @@
     <ClCompile Include="EmailValidation.cpp">
       <Filter>EmailValidation</Filter>
     </ClCompile>
+    <ClCompile Include="RentState.cpp">
+      <Filter>RentState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -96,6 +102,9 @@
     </ClInclude>
     <ClInclude Include="EmailValidation.h">
       <Filter>EmailValidation</Filter>
+    </ClInclude>
+    <ClInclude Include="RentState.h">
+      <Filter>RentState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
