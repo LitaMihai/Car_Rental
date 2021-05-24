@@ -3,13 +3,13 @@
     "Body": "Coupe",
     "Capacity": 1.8,
     "Combustible": "Gasoline",
-    "Gearbox": "Automatic/Manual",
+    "Gearbox": "Manual",
     "Hp": 240,
     "Make": "Alfa Romeo",
     "Miles": "180000",
     "Model": "Giulietta",
     "Price": 300,
-    "Transmission": "Face",
+    "Transmission": "Front Wheel Drive",
     "Year": "2016"
   },
   {
@@ -22,7 +22,7 @@
     "Miles": "90000",
     "Model": "Giulia GTA",
     "Price": 600,
-    "Transmission": "Face",
+    "Transmission": "Front Wheel Drive",
     "Year": "2020"
   },
   {
@@ -35,21 +35,47 @@
     "Miles": "200000",
     "Model": "4C Spider",
     "Price": 300,
-    "Transmission": "Back",
+    "Transmission": "Rear Wheel Drive",
     "Year": "2015"
   },
   {
     "Body": "Cabrio",
     "Capacity": 5.2,
     "Combustible": "Gasoline",
-    "Gearbox": "Automatic/Manual",
+    "Gearbox": "Automatic",
     "Hp": 602,
     "Make": "Audi",
     "Miles": "5000",
     "Model": "R8 Spyder",
     "Price": 700,
-    "Transmission": "Face",
+    "Transmission": "Front Wheel Drive",
     "Year": "2021"
+  },
+  {
+    "Body": "SUV",
+    "Capacity": 2.0,
+    "Combustible": "Electric",
+    "Gearbox": "Automatic",
+    "Hp": 170,
+    "Make": "Audi",
+    "Miles": "1000",
+    "Model": "e tron",
+    "Price": 200,
+    "Transmission": "Front Wheel Drive",
+    "Year": "2021"
+  },
+  {
+    "Body": "SUV",
+    "Capacity": 52,
+    "Combustible": "Electric/Diesel",
+    "Gearbox": "Automatic",
+    "Hp": 204,
+    "Make": "Audi",
+    "Miles": "5000",
+    "Model": "Q5",
+    "Price": 300,
+    "Transmission": "All Wheel Drive",
+    "Year": "2020"
   }
 	
 ]

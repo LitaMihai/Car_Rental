@@ -24,6 +24,8 @@ private:
 
 	bool renderLineForModels;
 	bool renderTheLastLine;
+	
+	bool buttonsMoved;
 
 	sf::Texture leftButtonTexture;
 	sf::Sprite leftButtonSprite;
@@ -52,7 +54,6 @@ private:
 	void initBackground();
 	void initLines();
 	void initFonts();
-	void initText();
 	void initButtons();
 	void initMake();
 	void initModel();
@@ -67,7 +68,6 @@ public:
 	void updateButtons();
 	void update();
 
-	void renderText(sf::RenderTarget* target = NULL);
 	void renderLines(sf::RenderTarget* target = NULL);
 	void renderButtons(sf::RenderTarget* target = NULL);
 	void render(sf::RenderTarget* target = NULL);

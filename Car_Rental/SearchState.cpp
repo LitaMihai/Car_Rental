@@ -26,6 +26,7 @@ void SearchState::initVariables()
 	this->renderLineForModels = false;
 	this->renderTheLastLine = false;
 	this->seePhoto = false;
+	this->buttonsMoved = false;
 }
 
 void SearchState::initBackground()
@@ -59,7 +60,7 @@ void SearchState::initLines()
 
 	this->linie[3].setFillColor(sf::Color::Black);//Invisible at start
 	this->linie[3].setSize(sf::Vector2f(1150.f, 1.f));
-	this->linie[3].setPosition(450.f, 601.f);
+	this->linie[3].setPosition(450.f, 701.f);
 }
 
 void SearchState::initFonts()
@@ -68,16 +69,28 @@ void SearchState::initFonts()
 		throw("ERROR::SEARCHSTATE::COULD NOT LOAD FONT");
 }
 
-void SearchState::initText()
-{
-}
-
 void SearchState::initButtons()
 {
 	this->buttons["LOG_OUT"] = new Button(
 		1515.f, 5.f, 70.f, 30.f,
 		&this->font,
 		"Log Out", 25,
+		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
+	this->buttons["RENT"] = new Button(
+		1215.f, 730.f, 150.f, 100.f,
+		&this->font,
+		"Rent", 50,
+		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
+	this->buttons["DETAILS"] = new Button(
+		700.f, 730.f, 150.f, 100.f,
+		&this->font,
+		"Details", 50,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -102,13 +115,13 @@ void SearchState::initButtons()
 	this->leftButtonTexture.setSmooth(true);
 	this->leftButtonSprite.setTexture(leftButtonTexture);
 	this->leftButtonSprite.setPosition(sf::Vector2f(0.f, -100.f));
-	this->leftButtonSprite.setScale(0.2, 0.2);
+	this->leftButtonSprite.setScale(static_cast<float>(0.2), static_cast<float>(0.2));
 
 	this->rightButtonTexture.loadFromFile("Resources/Images/Left_Right_Buttons/Right.png");
 	this->rightButtonTexture.setSmooth(true);
 	this->rightButtonSprite.setTexture(rightButtonTexture);
 	this->rightButtonSprite.setPosition(sf::Vector2f(0.f, -100.f));
-	this->rightButtonSprite.setScale(0.2, 0.2);
+	this->rightButtonSprite.setScale(static_cast<float>(0.2), static_cast<float>(0.2));
 }
 
 void SearchState::initMake()
@@ -163,7 +176,6 @@ SearchState::SearchState(sf::RenderWindow* window, std::stack<State*>* states, D
 	this->initBackground();
 	this->initLines();
 	this->initFonts();
-	this->initText();
 	this->initButtons();
 	this->initMake();
 	this->initModel();
@@ -253,16 +265,20 @@ void SearchState::updateButtons()
 			this->renderTheLastLine = true;
 			this->seePhoto = true;
 
-			for (auto& it2 : this->buttons) {
-				if (it2.second->returnName() == "LEFT") {
-					it2.second->move(460.f, 320.f);
-					this->leftButtonSprite.setPosition(460.f, 320.f);
+			if (!this->buttonsMoved) {
+				for (auto& it2 : this->buttons) {
+
+					if (it2.second->returnName() == "LEFT") {
+						it2.second->move(460.f, 320.f);
+						this->leftButtonSprite.setPosition(460.f, 320.f);
+					}
+
+					if (it2.second->returnName() == "RIGHT") {
+						it2.second->move(1550.f, 320.f);
+						this->rightButtonSprite.setPosition(1550.f, 320.f);
+					}
 				}
-					
-				if (it2.second->returnName() == "RIGHT") {
-					it2.second->move(1550.f, 320.f);
-					this->rightButtonSprite.setPosition(1550.f, 320.f);
-				}
+				this->buttonsMoved = true;
 			}
 
 			std::string way1 = "Resources/Makes/", way2 = "Resources/Makes/";
@@ -283,25 +299,31 @@ void SearchState::updateButtons()
 
 			way1 = way1 + makeFolderName + "/" + modelFolderName + "/" + modelFolderName + "_1.jpg";
 			way2 = way2 + makeFolderName + "/" + modelFolderName + "/" + modelFolderName + "_2.jpg";
-
+			
 			this->firstPhotoTexture.loadFromFile(way1);
 			this->firstPhotoTexture.setSmooth(true);
-			//this->firstPhotoSprite.setTexture(firstPhotoTexture);
-			//this->firstPhotoSprite.setPosition(sf::Vector2f(400.f, 250.f));
-			//this->firstPhotoSprite.setScale(0.5, 0.5);
-			this->shape.setTexture(&this->firstPhotoTexture);
-			this->shape.setPosition(sf::Vector2f(505.f, 40.f));
-			this->shape.setSize(sf::Vector2f(1044.f, 561.f));
 
 			this->secondPhotoTexture.loadFromFile(way2);
 			this->secondPhotoTexture.setSmooth(true);
-			//this->secondPhotoSprite.setTexture(secondPhotoTexture);
-			//this->secondPhotoSprite.setPosition(sf::Vector2f(0.f, -1000.f));
-			//this->secondPhotoSprite.setScale(0.2, 0.2);
-			this->shape.setTexture(&this->secondPhotoTexture); //To be deleted!!!!
-			this->shape.setPosition(sf::Vector2f(505.f, 40.f));
-			this->shape.setSize(sf::Vector2f(1044.f, 561.f));
+
+			this->shape.setTexture(&this->firstPhotoTexture);
+			this->shape.setPosition(sf::Vector2f(503.f, 40.f));
+			this->shape.setSize(sf::Vector2f(1044.f, 661.f));
 		}
+
+	for (auto& it1 : this->buttons) {
+		if (it1.second->returnName() == "LEFT") {
+			if (it1.second->isPressed()) {
+				this->shape.setTexture(&this->firstPhotoTexture);
+			}
+		}
+
+		if (it1.second->returnName() == "RIGHT") {
+			if (it1.second->isPressed()) {
+				this->shape.setTexture(&this->secondPhotoTexture);
+			}
+		}
+	}
 }
 
 void SearchState::update()
@@ -310,12 +332,7 @@ void SearchState::update()
 	this->updateMousePositions(this->window);
 	this->updateButtons();
 
-	 std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n"; /*TO BE DELETED!!!*/
-}
-
-void SearchState::renderText(sf::RenderTarget* target)
-{
-
+	std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n"; /*TO BE DELETED!!!*/
 }
 
 void SearchState::renderLines(sf::RenderTarget* target)
@@ -349,16 +366,11 @@ void SearchState::render(sf::RenderTarget* target)
 	target->draw(this->leftButtonSprite);
 	target->draw(this->rightButtonSprite);
 
-	if (seePhoto) {
-		target->draw(this->firstPhotoSprite);
-		target->draw(this->secondPhotoSprite);
-	}
-
-	target->draw(this->shape);
+	if (seePhoto) 
+		target->draw(this->shape);
 
 	this->renderLines(target);
 	this->renderButtons(target);
-	this->renderText(target);
 	this->window->display();
 	
 }
