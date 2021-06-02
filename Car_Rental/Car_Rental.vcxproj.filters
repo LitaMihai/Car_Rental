@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Application">
       <UniqueIdentifier>{a5c0f249-6e3e-4048-a024-461eba62fad8}</UniqueIdentifier>
     </Filter>
@@ -38,6 +34,9 @@
     </Filter>
     <Filter Include="RentState">
       <UniqueIdentifier>{e2467c01-1917-4e8a-8cb6-d39c5aab4582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DetailsState">
+      <UniqueIdentifier>{272bd18b-4692-4caf-98b7-3a39c14d1778}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +73,9 @@
     <ClCompile Include="RentState.cpp">
       <Filter>RentState</Filter>
     </ClCompile>
+    <ClCompile Include="DetailsState.cpp">
+      <Filter>DetailsState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -106,10 +108,8 @@
     <ClInclude Include="RentState.h">
       <Filter>RentState</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Marci Masini.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClInclude Include="DetailsState.h">
+      <Filter>DetailsState</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

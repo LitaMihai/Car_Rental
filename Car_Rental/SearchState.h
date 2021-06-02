@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Button.h"
 #include "RentState.h"
+#include "DetailsState.h"
 #include "Json/single_include/nlohmann/json.hpp"
 
 using json = nlohmann::json;
@@ -45,6 +46,8 @@ private:
 	sf::RectangleShape background;
 	sf::Font font;
 	sf::RectangleShape linie[4];
+
+	std::string carName;
 
 	sf::Image icon;
 

@@ -76,5 +76,44 @@
     "Price": 300,
     "Transmission": "All Wheel Drive",
     "Year": "2020"
+  },
+  {
+    "Body": "SUV",
+    "Capacity": 370,
+    "Combustible": "Electric",
+    "Gearbox": "Automatic",
+    "Hp": 500,
+    "Make": "BMW",
+    "Miles": "1000",
+    "Model": "iX",
+    "Price": 600,
+    "Transmission": "All Wheel Drive",
+    "Year": "2021"
+  },
+  {
+    "Body": "Cabrio",
+    "Capacity": 1.5,
+    "Combustible": "Electric/Gasoline",
+    "Gearbox": "Automatic",
+    "Hp": 374,
+    "Make": "BMW",
+    "Miles": "10000",
+    "Model": "i8 Roadster",
+    "Price": 400,
+    "Transmission": "Rear Wheel Drive",
+    "Year": "2020"
+  },
+  {
+    "Body": "Cabrio",
+    "Capacity": 2.0,
+    "Combustible": "Gasoline",
+    "Gearbox": "Automatic",
+    "Hp": 258,
+    "Make": "BMW",
+    "Miles": "7000",
+    "Model": "4 Series Convertible",
+    "Price": 300,
+    "Transmission": "Rear Wheel Drive",
+    "Year": "2020"
   }
 ]

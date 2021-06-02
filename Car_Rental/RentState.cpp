@@ -51,7 +51,7 @@ void RentState::initFonts()
 
 void RentState::initButtons()
 {
-	ok = new Button(
+	this->ok = new Button(
 		180.f, 120.f, 45.f, 40.f,
 		&this->font,
 		"OK", 25,
@@ -71,7 +71,7 @@ RentState::RentState(sf::RenderWindow* window, std::stack<State*>* states) : Sta
 
 RentState::~RentState()
 {
-	delete ok;
+	delete this->ok;
 }
 
 void RentState::updateSFMLEvents()
@@ -86,9 +86,9 @@ void RentState::updateSFMLEvents()
 
 void RentState::updateButtons()
 {
-	ok->update(this->mousePosView);
+	this->ok->update(this->mousePosView);
 
-	if (ok->isPressed()) {
+	if (this->ok->isPressed()) {
 		this->window->close();
 		this->endState();	
 	}
@@ -103,7 +103,7 @@ void RentState::update()
 
 void RentState::renderButtons(sf::RenderTarget* target)
 {
-	ok->render(target);
+	this->ok->render(target);
 }
 
 void RentState::render(sf::RenderTarget* target)

@@ -232,7 +232,7 @@ void SearchState::updateButtons()
 		this->states->push(new RentState(this->window, this->states));
 
 	if (this->buttons["DETAILS"]->isPressed()) {
-		// Details state
+		this->states->push(new DetailsState(this->window, this->states, this->carName));
 	}
 
 	for (auto& it1 : this->make)
@@ -291,6 +291,8 @@ void SearchState::updateButtons()
 
 			std::string makeFolderName;
 			std::string modelFolderName = it1.second->returnName();
+
+			this->carName = it1.second->returnName();
 
 			std::ifstream i("Resources/Makes/Cars.json");
 			json j;
