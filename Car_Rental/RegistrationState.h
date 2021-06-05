@@ -74,6 +74,7 @@ private:
 	bool addAccount(std::string email, std::string password);
 	bool isRegistrated(std::string email);
 	bool emailValid(std::string email);
+
 public:
 	//Constructor-Destructor
 	RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase);

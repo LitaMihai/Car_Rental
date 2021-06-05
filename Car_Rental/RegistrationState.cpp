@@ -461,6 +461,8 @@ void RegistrationState::updateButtons()
 			this->emailIsNotValid.setString("Email is not valid!");
 			this->validEmail = false;
 		}
+
+
 	}
 
 	//Previous state

@@ -53,7 +53,7 @@ void Application::initStates()
 
 void Application::initDB()
 {
-    this->dataBase.declareConnection("localhost", "root", "", "car_rental", 2295, NULL, 0);
+    this->dataBase.declareConnection("remotemysql.com", "KXi0qciACI", "ZuQeO7OlVy", "KXi0qciACI", 3306, NULL, 0);
     this->dataBase.initConnection();
     if (dataBase.isConnected())
         std::cout << "M-am conectat la baza de date!";
