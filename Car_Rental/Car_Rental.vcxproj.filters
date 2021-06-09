@@ -38,6 +38,9 @@
     <Filter Include="DetailsState">
       <UniqueIdentifier>{272bd18b-4692-4caf-98b7-3a39c14d1778}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UpdateApp">
+      <UniqueIdentifier>{3652ebb7-a315-477c-8594-3ad9172fba0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -76,6 +79,9 @@
     <ClCompile Include="DetailsState.cpp">
       <Filter>DetailsState</Filter>
     </ClCompile>
+    <ClCompile Include="UpdateApp.cpp">
+      <Filter>UpdateApp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -111,5 +117,11 @@
     <ClInclude Include="DetailsState.h">
       <Filter>DetailsState</Filter>
     </ClInclude>
+    <ClInclude Include="UpdateApp.h">
+      <Filter>UpdateApp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

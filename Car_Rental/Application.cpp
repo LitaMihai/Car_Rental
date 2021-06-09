@@ -4,6 +4,19 @@ void Application::initVariables()
 {
 	this->window = NULL;
 	this->fullscreen = false;
+    this->updateApp = false;
+
+    std::ifstream ifs("./Config/version.ini");
+
+    char* value = nullptr;
+
+    if (ifs.is_open()) 
+        std::getline(ifs, this->version);
+    else
+        std::cout << "Cannot open 'version.ini' file!";
+
+    std::cout << "\n" << version << "\n";
+    ifs.close();
 }
 
 void Application::initWindow()
@@ -48,21 +61,65 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-    this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
+    if (this->updateApp)
+        this->states.push(new UpdateApp(this->window, &this->states));
+    else
+        this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
 }
 
 void Application::initDB()
 {
     this->dataBase.declareConnection("remotemysql.com", "KXi0qciACI", "ZuQeO7OlVy", "KXi0qciACI", 3306, NULL, 0);
     this->dataBase.initConnection();
-    if (dataBase.isConnected())
+    if (this->dataBase.isConnected())
         std::cout << "M-am conectat la baza de date!";
+}
+
+void Application::needsUpdate()
+{
+    if (seeIfItNeedsUpdate())
+        this->updateApp = true;
+    else
+        this->updateApp = false;
+}
+
+bool Application::seeIfItNeedsUpdate()
+{
+    if (this->dataBase.isConnected()) {
+        MYSQL_RES* result;
+        MYSQL_ROW row = NULL;
+        int query_rez;
+        bool ok = false;
+
+        std::string query = "SELECT `New Update` FROM `Need Update` WHERE `New Update` = '" + this->version + "'"; //the query
+
+        query_rez = mysql_query(this->dataBase.getConnection(), query.c_str()); //send the query
+
+        result = mysql_store_result(this->dataBase.getConnection()); //store the result
+
+        if (result)
+            row = mysql_fetch_row(result);
+        mysql_free_result(result);
+
+        if (!row) {
+            std::cout << "ARE NEVOIE DE UPDATE!";
+            return true;
+        }
+            
+        else {
+            std::cout << "NU ARE NEVOIE DE UPDATE!";
+            return false;
+        }
+    }
+   
+    return false;
 }
 
 Application::Application()
 {   
     this->initVariables();
     this->initDB();
+    this->needsUpdate();
     this->initWindow();
     this->initStates();
 }

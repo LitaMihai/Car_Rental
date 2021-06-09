@@ -111,6 +111,14 @@ void SearchState::initButtons()
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 100), sf::Color(20, 20, 20, 105)
 	);
 
+	/*this->buttons["SETTINGS"] = new Button(
+		1400.f, 5.f, 70.f, 30.f,
+		&this->font,
+		"Settings", 25,
+		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);*/
+
 	this->leftButtonTexture.loadFromFile("Resources/Images/Left_Right_Buttons/Left.png");
 	this->leftButtonTexture.setSmooth(true);
 	this->leftButtonSprite.setTexture(leftButtonTexture);
@@ -325,6 +333,8 @@ void SearchState::update()
 	this->updateSFMLEvents();
 	this->updateMousePositions(this->window);
 	this->updateButtons();
+
+	std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n";
 }
 
 void SearchState::renderLines(sf::RenderTarget* target)

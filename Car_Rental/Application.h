@@ -4,9 +4,10 @@
 #include "AccountState.h"
 #include "RegistrationState.h"
 #include "DbConnection.h"
+#include "UpdateApp.h"
 
-class Application
-{
+class Application{
+
 private:
 	//Variables
 	sf::RenderWindow* window;
@@ -14,7 +15,11 @@ private:
 	sf::ContextSettings windowSettings;
 	bool fullscreen;
 
+	bool updateApp;
+
 	DbConnection dataBase;
+
+	std::string version;
 
 	std::stack<State*> states;
 
@@ -26,7 +31,12 @@ private:
 	void initStates();
 	void initDB();
 
+	//Functions
+	void needsUpdate();
+	bool seeIfItNeedsUpdate();
+
 public:
+
 	//Constructor - Destructor
 	Application();
 	virtual ~Application();
