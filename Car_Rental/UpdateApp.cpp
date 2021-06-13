@@ -38,10 +38,15 @@ void UpdateApp::initBackground()
 
 void UpdateApp::initVariables()
 {
-	this->rented.setPosition(150.f, 45.f);
-	this->rented.setCharacterSize(30);
-	this->rented.setFont(this->font);
-	this->rented.setString("Update?");
+	this->updateText.setCharacterSize(40);
+	this->updateText.setFont(this->font);
+	this->updateText.setString("Update?");
+	this->updateText.setPosition(140.f, 45.f);
+	
+	this->appWillOpen.setCharacterSize(18);
+	this->appWillOpen.setFont(this->font);
+	this->appWillOpen.setString("The app will open after the update!");
+	this->appWillOpen.setPosition(80.f, 90.f);
 }
 
 void UpdateApp::initFonts()
@@ -71,6 +76,9 @@ void UpdateApp::initButtons()
 
 void UpdateApp::beginUpdate()
 {
+	system("chdir Config && start python3.9.5.exe /quiet InstallAllUsers = 1 PrependPath = 1 Include_test = 0");
+	system("pip install requests"); // reqests lib for the py script
+
 	Py_Initialize();
 	int argc = 6;
 	char** argv = new char* [argc];
@@ -104,11 +112,40 @@ void UpdateApp::beginUpdate()
 	PyRun_SimpleFile(file, "dropbox.py");
 
 	Py_Finalize();
-
 	fclose(file);
+
+	this->readTheNewVersion();
+
+	this->font.~Font();
+
+	// Start the updated app
+	std::string folderName = "chdir .. && chdir && chdir Car_Rental_v_" + this->version + " && start Car_Rental.exe";
+	char* folder_Name = &folderName[0];
+
+	system(folder_Name);
 }
 
-UpdateApp::UpdateApp(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states)
+void UpdateApp::readTheNewVersion()
+{
+	// Read from the database the new version and store it
+	if (this->dataBase->isConnected()) {
+		MYSQL_RES* result;
+		MYSQL_ROW row = NULL;
+		int query_rez;
+		bool ok = false;
+
+		std::string query = "SELECT `New Update` FROM `Need Update`"; //the query
+
+		query_rez = mysql_query(this->dataBase->getConnection(), query.c_str()); //send the query
+
+		result = mysql_store_result(this->dataBase->getConnection()); //store the result
+
+		while ((row = mysql_fetch_row(result)) != NULL)
+			this->version = row[0];
+	}
+}
+
+UpdateApp::UpdateApp(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* DataBase) : State(window, states), dataBase(DataBase)
 {
 	this->initWindow(window);
 	this->initVariables();
@@ -168,7 +205,8 @@ void UpdateApp::render(sf::RenderTarget* target)
 	target = this->window;
 	target->draw(this->background);
 
-	target->draw(this->rented);
+	target->draw(this->updateText);
+	target->draw(this->appWillOpen);
 	this->renderButtons(target);
 	this->window->display();
 }

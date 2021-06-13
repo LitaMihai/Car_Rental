@@ -1,6 +1,8 @@
 #include "Application.h"
 
-int main(/*HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow*/) {
+int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+
+	Sleep(1000);
 
 	Application app;
 

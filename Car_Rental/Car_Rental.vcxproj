@@ -73,19 +73,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>C:\Users\Mihai\AppData\Local\Programs\Python\Python39\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Programare\Proiecte Visual studio\Car_Rental\packages\python.3.9.5\tools\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>C:\Users\Mihai\AppData\Local\Programs\Python\Python39\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Programare\Proiecte Visual studio\Car_Rental\packages\python.3.9.5\tools\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>C:\Users\Mihai\AppData\Local\Programs\Python\Python39\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Programare\Proiecte Visual studio\Car_Rental\packages\python.3.9.5\tools\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>C:\Users\Mihai\AppData\Local\Programs\Python\Python39\libs;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Programare\Proiecte Visual studio\Car_Rental\packages\python.3.9.5\tools\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,7 +96,7 @@
       <AdditionalIncludeDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\lib;</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;python39_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -113,7 +113,7 @@
       <AdditionalIncludeDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -130,7 +130,7 @@
       <AdditionalIncludeDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\MySQL\boost_1_75_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\MySQL Server 8.0\lib;$(wxWid)\lib\vc142_x64_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;python39_d.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,7 +149,7 @@
       <AdditionalIncludeDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\MySQL\boost_1_75_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>

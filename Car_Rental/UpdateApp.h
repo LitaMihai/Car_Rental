@@ -6,6 +6,7 @@
 
 class UpdateApp :public State
 {
+private:
 	// Variables
 
 	sf::RenderWindow* prevWindow;
@@ -21,7 +22,11 @@ class UpdateApp :public State
 	sf::RectangleShape background;
 	sf::Font font;
 
-	sf::Text rented;
+	DbConnection *dataBase;
+	std::string version;
+
+	sf::Text updateText;
+	sf::Text appWillOpen;
 
 	Button *yes, *no;
 
@@ -31,13 +36,13 @@ class UpdateApp :public State
 	void initVariables();
 	void initFonts();
 	void initButtons();
-
 	void beginUpdate();
+	void readTheNewVersion();
 
 public:
 
 	// Constructor -> Destructor
-	UpdateApp(sf::RenderWindow* window, std::stack<State*>* states);
+	UpdateApp(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* DataBase);
 	virtual ~UpdateApp();
 
 	// Functions

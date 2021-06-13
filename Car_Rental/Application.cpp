@@ -62,7 +62,7 @@ void Application::initWindow()
 void Application::initStates()
 {
     if (this->updateApp)
-        this->states.push(new UpdateApp(this->window, &this->states));
+        this->states.push(new UpdateApp(this->window, &this->states, &this->dataBase));
     else
         this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
 }
@@ -81,6 +81,26 @@ void Application::needsUpdate()
         this->updateApp = true;
     else
         this->updateApp = false;
+}
+
+void Application::deletePrevFolder()
+{
+    if (this->updateApp == false) { // Delete the prev folder
+        std::string prevVersion;
+
+        std::ifstream ifs("Config/prev_version.ini");
+
+        if (ifs.is_open())
+            ifs >> prevVersion;
+        else
+            std::cout << "Cannot open 'prev_version.ini' file!";
+        ifs.close();
+
+        std::string folderName = "rmdir /Q /S ..\\Car_Rental_v_" + prevVersion;
+        char* folder_Name = &folderName[0];
+
+        system(folder_Name);
+    }
 }
 
 bool Application::seeIfItNeedsUpdate()
@@ -120,6 +140,7 @@ Application::Application()
     this->initVariables();
     this->initDB();
     this->needsUpdate();
+    this->deletePrevFolder();
     this->initWindow();
     this->initStates();
 }

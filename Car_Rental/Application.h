@@ -33,6 +33,7 @@ private:
 
 	//Functions
 	void needsUpdate();
+	void deletePrevFolder();
 	bool seeIfItNeedsUpdate();
 
 public:

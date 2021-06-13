@@ -177,4 +177,3 @@ for suppliedLink in suppliedLinks:
         #check if zip files should be deleted
         if not arguments.retain_zip:
             os.remove(filePath)
-            
