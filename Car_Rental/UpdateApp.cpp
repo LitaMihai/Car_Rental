@@ -76,53 +76,89 @@ void UpdateApp::initButtons()
 
 void UpdateApp::beginUpdate()
 {
-	system("chdir Config && start python3.9.5.exe /quiet InstallAllUsers = 1 PrependPath = 1 Include_test = 0");
-	system("pip install requests"); // reqests lib for the py script
+	// Update
+	STARTUPINFOW si = { 0 };
+	si.cb = sizeof(si);
+	PROCESS_INFORMATION pi = { 0 };
 
-	Py_Initialize();
-	int argc = 6;
-	char** argv = new char* [argc];
-	for (int i = 0; i < argc; ++i)
-		argv[i] = new char[100];
+	wchar_t command[] = L"start python3.9.5.exe /quiet InstallAllUsers = 1 PrependPath = 1 Include_test = 0";
 
-	strcpy(argv[0], "./Config/dropbox.py");
-	strcpy(argv[1], "--read");
-	strcpy(argv[2], "./Config/links.txt");
-	strcpy(argv[3], "--dest");
-	strcpy(argv[4], "..");
-	strcpy(argv[5], "--unzip");
+	// Create the child process
+	BOOL success = CreateProcessW(
+		L"Config\\python3.9.5.exe",  // Path to executable
+		command,// Command line arguments
+		NULL,                                   // Process attributes
+		NULL,                                   // Thread attributes
+		FALSE,                                  // Inherit handles
+		0,                                      // Creation flags
+		NULL,                                   // Environment
+		NULL,                                   // Working directory
+		&si,                                    // Startup info
+		&pi);                                   // Process information
 
-	wchar_t* program = Py_DecodeLocale(argv[0], NULL);
+	if (success)
+	{
+		// Wait for the process to exit
+		WaitForSingleObject(pi.hProcess, INFINITE);
 
-	wchar_t** _argv = new wchar_t* [argc];
-	for (int i = 0; i < argc; ++i)
-		_argv[i] = new wchar_t[100];
+		// Process has exited - check its exit code
+		DWORD exitCode;
+		GetExitCodeProcess(pi.hProcess, &exitCode);
 
-	for (int i = 0; i < argc; i++) {
-		wchar_t* arg = Py_DecodeLocale(argv[i], NULL);
-		_argv[i] = arg;
+		// At this point exitCode is set to the process' exit code
+
+		// Handles must be closed when they are no longer needed
+		CloseHandle(pi.hThread);
+		CloseHandle(pi.hProcess);
+
+		system("chdir C:\\Users\\%username%\\AppData\\Local\\Programs\\Python\\Python39 && python -m pip install requests"); // reqests lib for the py script
+
+		Py_Initialize();
+		int argc = 6;
+		char** argv = new char* [argc];
+		for (int i = 0; i < argc; ++i)
+			argv[i] = new char[100];
+
+		strcpy(argv[0], "./Config/dropbox.py");
+		strcpy(argv[1], "--read");
+		strcpy(argv[2], "./Config/links.txt");
+		strcpy(argv[3], "--dest");
+		strcpy(argv[4], "..");
+		strcpy(argv[5], "--unzip");
+
+		wchar_t* program = Py_DecodeLocale(argv[0], NULL);
+
+		wchar_t** _argv = new wchar_t* [argc];
+		for (int i = 0; i < argc; ++i)
+			_argv[i] = new wchar_t[100];
+
+		for (int i = 0; i < argc; i++) {
+			wchar_t* arg = Py_DecodeLocale(argv[i], NULL);
+			_argv[i] = arg;
+		}
+
+		Py_SetProgramName(program);
+
+		PySys_SetArgv(argc, _argv);
+
+		FILE* file = fopen("./Config/dropbox.py", "rb");
+
+		PyRun_SimpleFile(file, "dropbox.py");
+
+		Py_Finalize();
+		fclose(file);
+
+		this->readTheNewVersion();
+
+		this->font.~Font();
+
+		// Start the updated app
+		std::string folderName = "chdir .. && chdir && chdir Car_Rental_v_" + this->version + " && start Car_Rental.exe";
+		char* folder_Name = &folderName[0];
+
+		system(folder_Name);
+		this->window->close();
 	}
-
-	Py_SetProgramName(program);
-
-	PySys_SetArgv(argc, _argv);
-
-	FILE* file = fopen("./Config/dropbox.py", "rb");
-
-	PyRun_SimpleFile(file, "dropbox.py");
-
-	Py_Finalize();
-	fclose(file);
-
-	this->readTheNewVersion();
-
-	this->font.~Font();
-
-	// Start the updated app
-	std::string folderName = "chdir .. && chdir && chdir Car_Rental_v_" + this->version + " && start Car_Rental.exe";
-	char* folder_Name = &folderName[0];
-
-	system(folder_Name);
 }
 
 void UpdateApp::readTheNewVersion()
@@ -181,7 +217,19 @@ void UpdateApp::updateButtons()
 	}
 
 	if (this->yes->isPressed()) {
-		this->window->close();
+
+		// Change the window's text
+		this->updateText.setPosition(130.f, 55.f);
+		this->updateText.setString("Updating...");
+
+		this->appWillOpen.setPosition(60.f, 125.f);
+		this->appWillOpen.setString("DO NOT CLOSE (EVEN IF NOT RESPONDING) !!!");
+
+		this->window->draw(this->background);
+		this->window->draw(this->updateText);
+		this->window->draw(this->appWillOpen);
+		this->window->display();
+
 		this->beginUpdate();
 		this->endState();
 	}

@@ -36,6 +36,7 @@ private:
 	void initVariables();
 	void initFonts();
 	void initButtons();
+
 	void beginUpdate();
 	void readTheNewVersion();
 

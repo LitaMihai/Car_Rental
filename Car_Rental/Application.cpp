@@ -85,7 +85,7 @@ void Application::needsUpdate()
 
 void Application::deletePrevFolder()
 {
-    if (this->updateApp == false) { // Delete the prev folder
+    if (this->updateApp == false) {
         std::string prevVersion;
 
         std::ifstream ifs("Config/prev_version.ini");
@@ -136,7 +136,7 @@ bool Application::seeIfItNeedsUpdate()
 }
 
 Application::Application()
-{   
+{
     this->initVariables();
     this->initDB();
     this->needsUpdate();
