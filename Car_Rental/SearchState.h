@@ -1,8 +1,11 @@
 #pragma once
 
+
+
 #include "State.h"
 #include "Button.h"
 #include "RentState.h"
+#include "SettingsState.h"
 #include "DetailsState.h"
 #include "Json/single_include/nlohmann/json.hpp"
 

@@ -10,7 +10,7 @@ void SearchState::initWindow(sf::RenderWindow* window)
 	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
 	window_bounds.width = 1600;
 	window_bounds.height = 900;
-	windowSettings.antialiasingLevel = 0;
+	windowSettings.antialiasingLevel = 16;
 
 	this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSettings);
 	this->window->setVerticalSyncEnabled(true);
@@ -80,7 +80,7 @@ void SearchState::initButtons()
 	);
 
 	this->buttons["RENT"] = new Button(
-		0.f, -100.f, 150.f, 100.f,
+		-100000.f, -100000.f, 150.f, 100.f,
 		&this->font,
 		"Rent", 50,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
@@ -88,7 +88,7 @@ void SearchState::initButtons()
 	);
 
 	this->buttons["DETAILS"] = new Button(
-		0.f, -100.f, 150.f, 100.f,
+		-100000.f, -100000.f, 150.f, 100.f,
 		&this->font,
 		"Details", 50,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
@@ -96,7 +96,7 @@ void SearchState::initButtons()
 	);
 
 	this->buttons["LEFT"] = new Button(
-		0.f, -100.f, 45.f, 30.f,
+		-100000.f, -100000.f, 45.f, 30.f,
 		&this->font,
 		"RIGHT", 25,
 		sf::Color(250, 250, 250, 0), sf::Color(250, 250, 250, 0), sf::Color(20, 20, 20, 0),
@@ -104,20 +104,20 @@ void SearchState::initButtons()
 	);
 
 	this->buttons["RIGHT"] = new Button(
-		0.f, -100.f, 45.f, 30.f,
+		-100000.f, -100000.f, 45.f, 30.f,
 		&this->font,
 		"LEFT", 25,
 		sf::Color(250, 250, 250, 0), sf::Color(250, 250, 250, 0), sf::Color(20, 20, 20, 0),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 100), sf::Color(20, 20, 20, 105)
 	);
 
-	/*this->buttons["SETTINGS"] = new Button(
+	this->buttons["SETTINGS"] = new Button(
 		1400.f, 5.f, 70.f, 30.f,
 		&this->font,
 		"Settings", 25,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);*/
+	);
 
 	this->leftButtonTexture.loadFromFile("Resources/Images/Left_Right_Buttons/Left.png");
 	this->leftButtonTexture.setSmooth(true);
@@ -239,9 +239,11 @@ void SearchState::updateButtons()
 	if (this->buttons["RENT"]->isPressed())
 		this->states->push(new RentState(this->window, this->states));
 
-	if (this->buttons["DETAILS"]->isPressed()) {
+	if (this->buttons["DETAILS"]->isPressed()) 
 		this->states->push(new DetailsState(this->window, this->states, this->carName));
-	}
+
+	/*if (this->buttons["SETTINGS"]->isPressed())
+		this->states->push(new SettingsState(this->window, this->states));*/
 
 	for (auto& it1 : this->make)
 		if (it1.second->isPressed()) {

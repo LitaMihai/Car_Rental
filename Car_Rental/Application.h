@@ -4,7 +4,6 @@
 #include "AccountState.h"
 #include "RegistrationState.h"
 #include "DbConnection.h"
-#include "UpdateApp.h"
 
 class Application{
 

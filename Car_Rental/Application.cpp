@@ -61,9 +61,9 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-    if (this->updateApp)
+   /* if (this->updateApp)
         this->states.push(new UpdateApp(this->window, &this->states, &this->dataBase));
-    else
+    else */
         this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
 }
 

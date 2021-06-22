@@ -9,7 +9,7 @@ void RentState::initWindow(sf::RenderWindow* window)
 	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
 	window_bounds.width = 400;
 	window_bounds.height = 200;
-	windowSettings.antialiasingLevel = 0;
+	windowSettings.antialiasingLevel = 16;
 
 	this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSettings);
 	this->window->setVerticalSyncEnabled(true);

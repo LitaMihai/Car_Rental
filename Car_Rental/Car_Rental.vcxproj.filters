@@ -38,8 +38,11 @@
     <Filter Include="DetailsState">
       <UniqueIdentifier>{272bd18b-4692-4caf-98b7-3a39c14d1778}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UpdateApp">
-      <UniqueIdentifier>{3652ebb7-a315-477c-8594-3ad9172fba0a}</UniqueIdentifier>
+    <Filter Include="SettingsState">
+      <UniqueIdentifier>{bc8f6c33-42c6-41f4-a757-e0dbf47ba3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DesignSettings">
+      <UniqueIdentifier>{0de4a965-b6c2-48aa-a7bf-0783ee3a07de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,8 +82,11 @@
     <ClCompile Include="DetailsState.cpp">
       <Filter>DetailsState</Filter>
     </ClCompile>
-    <ClCompile Include="UpdateApp.cpp">
-      <Filter>UpdateApp</Filter>
+    <ClCompile Include="SettingsState.cpp">
+      <Filter>SettingsState</Filter>
+    </ClCompile>
+    <ClCompile Include="DesignSettings.cpp">
+      <Filter>DesignSettings</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,8 +123,11 @@
     <ClInclude Include="DetailsState.h">
       <Filter>DetailsState</Filter>
     </ClInclude>
-    <ClInclude Include="UpdateApp.h">
-      <Filter>UpdateApp</Filter>
+    <ClInclude Include="SettingsState.h">
+      <Filter>SettingsState</Filter>
+    </ClInclude>
+    <ClInclude Include="DesignSettings.h">
+      <Filter>DesignSettings</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
