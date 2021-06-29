@@ -207,8 +207,11 @@ SearchState::~SearchState()
 void SearchState::updateSFMLEvents()
 {
 	while (this->window->pollEvent(this->event)) {
-		if (this->event.type == sf::Event::Closed)
+		if (this->event.type == sf::Event::Closed) {
+			this->endState();
 			this->window->close();
+			this->prevWindow->close();
+		}
 	}
 }
 
@@ -242,8 +245,8 @@ void SearchState::updateButtons()
 	if (this->buttons["DETAILS"]->isPressed()) 
 		this->states->push(new DetailsState(this->window, this->states, this->carName));
 
-	/*if (this->buttons["SETTINGS"]->isPressed())
-		this->states->push(new SettingsState(this->window, this->states));*/
+	if (this->buttons["SETTINGS"]->isPressed())
+		this->states->push(new SettingsState(this->window, this->states));
 
 	for (auto& it1 : this->make)
 		if (it1.second->isPressed()) {

@@ -1,0 +1,18 @@
+;aiu;
+
+[Update 2.0]
+Name = Car Rental
+ProductVersion = 2.0.0.0
+URL = https://www.dropbox.com/s/4hlq2m077ch7i0o/Car%20Rental%202.0.exe?dl=1
+Size = 26413692
+ReleaseDate = 22/06/2021
+SHA256 = 3F3BA92056D6AB12866C1ADCE896364247E10B4FCE7240E111478C546E7DD99F
+MD5 = 60f7b3be9390d479deac53dd6fb4f614
+ServerFileName = Car Rental 2.0.exe
+RegistryKey = HKUD\Software\Lita SRL\Car Rental\Version
+Version = 2.0.0.0
+UpdatedApplications = Car Rental(1.0-2.0]
+Description = Update 2.0
+Feature = Made an installer and an updater
+Feature1 = Started the settings menu and design state
+Enhancement = Deleted the python scripts and installer

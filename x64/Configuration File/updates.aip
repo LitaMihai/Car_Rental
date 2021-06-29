@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="16.6.1" version="16.6.1" Modules="update" RootPath="." Language="en" Id="{96C2D61A-5FAA-4FBA-8467-0B9253ED938B}">
+  <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
+    <ROW Name="HiddenItems" Value="TilesComponent"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;aiu-ue.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;aiu-ue_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.UpdaterEditorComponent">
+    <ROW Section="Update 2.0" Key="Name" Value="Car Rental"/>
+    <ROW Section="Update 2.0" Key="ProductVersion" Value="2.0.0.0" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="URL" Value="https://www.dropbox.com/s/4hlq2m077ch7i0o/Car%20Rental%202.0.exe?dl=1" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="Size" Value="..\Car Rental Installer\Car Rental-SetupFiles\Car Rental 2.0.exe" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="ReleaseDate" Value="21206" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="SHA256" Value="..\Car Rental Installer\Car Rental-SetupFiles\Car Rental 2.0.exe" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="MD5" Value="..\Car Rental Installer\Car Rental-SetupFiles\Car Rental 2.0.exe" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="ServerFileName" Value="Car Rental 2.0.exe" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="RegistryKey" Value="HKUD\Software\Lita SRL\Car Rental\Version" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="Version" Value="2.0.0.0" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="UpdatedApplications" Value="Car Rental(1.0-2.0]" ValueLocId="-"/>
+    <ROW Section="Update 2.0" Key="Description" Value="Update 2.0"/>
+    <ROW Section="Update 2.0" Key="Feature" Value="Made an installer and an updater&#13;&#10;Started the settings menu and design state"/>
+    <ROW Section="Update 2.0" Key="Enhancement" Value="Deleted the python scripts and installer"/>
+    <ATTRIBUTE name="OutputFileName" value=".txt"/>
+  </COMPONENT>
+</DOCUMENT>

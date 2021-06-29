@@ -45,6 +45,7 @@ const bool Button::isPressed() const {
 void Button::move(float x, float y)
 {
 	this->shape.setPosition(sf::Vector2f(x, y));
+
 	this->text.setPosition(
 		static_cast<int>(this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f),
 		static_cast<int>(this->shape.getPosition().y + (this->shape.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f)

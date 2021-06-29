@@ -34,7 +34,7 @@ void SettingsState::initBackground()
 		)
 	);
 
-	this->background.setFillColor(sf::Color(57, 62, 70, 255));
+	this->background.setFillColor(sf::Color(0, 0, 0, 255));
 }
 
 void SettingsState::initFonts()

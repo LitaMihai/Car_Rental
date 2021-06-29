@@ -61,10 +61,7 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-   /* if (this->updateApp)
-        this->states.push(new UpdateApp(this->window, &this->states, &this->dataBase));
-    else */
-        this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
+    this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
 }
 
 void Application::initDB()

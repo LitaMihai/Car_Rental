@@ -9,6 +9,7 @@ class AccountState : public State
 {
 private:
 	//Variables
+	
 	std::string emailInput;
 	sf::Text emailText;
 	std::string passwordInput;

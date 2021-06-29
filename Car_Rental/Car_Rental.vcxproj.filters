@@ -131,6 +131,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Text Include="Bugs to be resolved.txt" />
   </ItemGroup>
 </Project>

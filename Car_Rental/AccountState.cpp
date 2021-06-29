@@ -346,10 +346,13 @@ void AccountState::render(sf::RenderTarget* target)
 
 	this->renderButtons(target);
 	this->renderText(target);
+
 	target->draw(this->emailText);
 	target->draw(this->passwordText);
 	target->draw(this->showButtonSprite);
+
 	if (!this->accountConnected)
 		target->draw(this->wrongAccount);
+
 	this->window->display();
 }
