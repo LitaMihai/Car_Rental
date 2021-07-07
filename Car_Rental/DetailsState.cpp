@@ -9,7 +9,7 @@ void DetailsState::initWindow(sf::RenderWindow* window)
 	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
 	window_bounds.width = 600;
 	window_bounds.height = 400;
-	windowSettings.antialiasingLevel = 16;
+	windowSettings.antialiasingLevel = 8;
 
 	this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSettings);
 	this->window->setVerticalSyncEnabled(true);
@@ -151,12 +151,13 @@ void DetailsState::initButtons()
 		70.f, 45.f,
 		&this->font,
 		"Close", 35,
+		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 }
 
-DetailsState::DetailsState(sf::RenderWindow* window, std::stack<State*>* states, std::string carName) : State(window, states)
+DetailsState::DetailsState(sf::RenderWindow* window, std::stack<State*>* states, std::string carName, sf::Texture* buttonsBackground) : State(window, states), buttonsBackground(buttonsBackground)
 {
 	this->initWindow(window);
 	this->initVariables();

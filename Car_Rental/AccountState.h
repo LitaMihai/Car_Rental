@@ -38,6 +38,8 @@ private:
 	sf::Text emailLabel;
 	sf::Text passwordLabel;
 
+	sf::Texture* buttonsBackground;
+
 	sf::Event event;
 
 	sf::Texture backgroundTexture;
@@ -59,7 +61,7 @@ private:
 
 public:
 	//Constructor - Destructor
-	AccountState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase);
+	AccountState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase, sf::Texture* buttonsBackground);
 	virtual ~AccountState();
 
 	//Functions

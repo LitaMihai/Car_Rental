@@ -44,6 +44,9 @@
     <Filter Include="DesignSettings">
       <UniqueIdentifier>{0de4a965-b6c2-48aa-a7bf-0783ee3a07de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LogOutConfirmation">
+      <UniqueIdentifier>{f5c415a2-52c8-44bc-9edb-78d24bf97026}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -88,6 +91,9 @@
     <ClCompile Include="DesignSettings.cpp">
       <Filter>DesignSettings</Filter>
     </ClCompile>
+    <ClCompile Include="LogOutConfirmation.cpp">
+      <Filter>LogOutConfirmation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -128,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="DesignSettings.h">
       <Filter>DesignSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="LogOutConfirmation.h">
+      <Filter>LogOutConfirmation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

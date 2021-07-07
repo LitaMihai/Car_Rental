@@ -18,22 +18,17 @@ private:
 
 	DbConnection dataBase;
 
-	std::string version;
-
 	std::stack<State*> states;
 
 	sf::Image icon;
+
+	sf::Texture buttons_background;
 
 	//Initializations
 	void initVariables();
 	void initWindow();
 	void initStates();
 	void initDB();
-
-	//Functions
-	void needsUpdate();
-	void deletePrevFolder();
-	bool seeIfItNeedsUpdate();
 
 public:
 

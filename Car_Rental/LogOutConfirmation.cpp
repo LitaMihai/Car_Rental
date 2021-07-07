@@ -1,6 +1,6 @@
-#include "RentState.h"
+#include "LogOutConfirmation.h"
 
-void RentState::initWindow(sf::RenderWindow* window)
+void LogOutConfirmation::initWindow(sf::RenderWindow* window)
 {
 	this->prevWindow = window;
 	this->prevWindow->setActive(false);
@@ -20,7 +20,7 @@ void RentState::initWindow(sf::RenderWindow* window)
 	this->window->setIcon(this->icon.getSize().x, this->icon.getSize().y, this->icon.getPixelsPtr());
 }
 
-void RentState::initBackground()
+void LogOutConfirmation::initBackground()
 {
 	this->background.setSize(
 		sf::Vector2f(
@@ -35,33 +35,42 @@ void RentState::initBackground()
 	this->background.setTexture(&this->backgroundTexture);
 }
 
-void RentState::initVariables()
+void LogOutConfirmation::initVariables()
 {
-	this->rented.setPosition(45.f, 45.f);
-	this->rented.setCharacterSize(30);
-	this->rented.setFont(this->font);
-	this->rented.setString("I booked the car in the store!");
+	this->areYouSure.setPosition(13.f, 45.f);
+	this->areYouSure.setCharacterSize(30);
+	this->areYouSure.setFont(this->font);
+	this->areYouSure.setString("Are you sure you want to log out?");
 }
 
-void RentState::initFonts()
+void LogOutConfirmation::initFonts()
 {
 	if (!this->font.loadFromFile("Resources/Font/Dosis-Light.ttf"))
 		throw("ERROR::SEARCHSTATE::COULD NOT LOAD FONT");
 }
 
-void RentState::initButtons()
+void LogOutConfirmation::initButtons()
 {
-	this->ok = new Button(
-		180.f, 120.f, 45.f, 40.f,
+	this->yes = new Button(
+		100.f, 120.f, 45.f, 40.f,
 		&this->font,
-		"OK", 25,
+		"Yes", 25,
+		this->buttonsBackground, 20, 20,
+		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
+	this->no = new Button(
+		250.f, 120.f, 45.f, 40.f,
+		&this->font,
+		"No", 25,
 		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 }
 
-RentState::RentState(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground) : State(window, states), buttonsBackground(buttonsBackground)
+LogOutConfirmation::LogOutConfirmation(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground, bool* logout) : State(window, states), buttonsBackground(buttonsBackground), logout(logout)
 {
 	this->initWindow(window);
 	this->initVariables();
@@ -70,49 +79,62 @@ RentState::RentState(sf::RenderWindow* window, std::stack<State*>* states, sf::T
 	this->initButtons();
 }
 
-RentState::~RentState()
+LogOutConfirmation::~LogOutConfirmation()
 {
-	delete this->ok;
+	delete this->yes;
+	delete this->no;
 }
 
-void RentState::updateSFMLEvents()
+void LogOutConfirmation::updateSFMLEvents()
 {
 	while (this->window->pollEvent(this->event)) {
 		if (this->event.type == sf::Event::Closed) {
+			this->prevWindow->setActive(true);
 			this->endState();
 			this->window->close();
-		}	
+		}
 	}
 }
 
-void RentState::updateButtons()
+void LogOutConfirmation::updateButtons()
 {
-	this->ok->update(this->mousePosView);
+	this->yes->update(this->mousePosView);
+	this->no->update(this->mousePosView);
 
-	if (this->ok->isPressed()) {
+	if (this->yes->isPressed()) {
+		*this->logout = true;
+		this->prevWindow->setActive(true);
 		this->window->close();
-		this->endState();	
+		this->endState();
+	}
+
+	if (this->no->isPressed()) {
+		*this->logout = false;
+		this->prevWindow->setActive(true);
+		this->window->close();
+		this->endState();
 	}
 }
 
-void RentState::update()
+void LogOutConfirmation::update()
 {
 	this->updateSFMLEvents();
 	this->updateMousePositions(this->window);
 	this->updateButtons();
 }
 
-void RentState::renderButtons(sf::RenderTarget* target)
+void LogOutConfirmation::renderButtons(sf::RenderTarget* target)
 {
-	this->ok->render(target);
+	this->yes->render(target);
+	this->no->render(target);
 }
 
-void RentState::render(sf::RenderTarget* target)
+void LogOutConfirmation::render(sf::RenderTarget* target)
 {
 	target = this->window;
 	target->draw(this->background);
 
-	target->draw(this->rented);
+	target->draw(this->areYouSure);
 	this->renderButtons(target);
 	this->window->display();
 }

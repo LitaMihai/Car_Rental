@@ -9,7 +9,7 @@ void SettingsState::initWindow(sf::RenderWindow* window)
 	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
 	window_bounds.width = 800;
 	window_bounds.height = 600;
-	windowSettings.antialiasingLevel = 16;
+	windowSettings.antialiasingLevel = 8;
 
 	this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSettings);
 	this->window->setVerticalSyncEnabled(true);
@@ -50,6 +50,7 @@ void SettingsState::initButtons()
 		225.f, 25.f,
 		&this->font,
 		"Design Settings", 20,
+		this->buttonsBackground, 20, 20,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -59,6 +60,27 @@ void SettingsState::initButtons()
 		225.f, 25.f,
 		&this->font,
 		"Account Settings", 20,
+		this->buttonsBackground, 20, 20,
+		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
+	this->buttons["CONTACTS"] = new Button(
+		0, 50,
+		225.f, 25.f,
+		&this->font,
+		"Contacts", 20,
+		this->buttonsBackground, 20, 20,
+		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
+	this->buttons["COVID_19"] = new Button(
+		0, 75,
+		225.f, 25.f,
+		&this->font,
+		"Covid-19 Measures", 20,
+		this->buttonsBackground, 20, 20,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -68,12 +90,23 @@ void SettingsState::initButtons()
 		225.f, 25.f,
 		&this->font,
 		"About Us", 20,
+		this->buttonsBackground, 20, 20,
+		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
+	this->buttons["CLOSE"] = new Button(
+		0, 150,
+		225.f, 25.f,
+		&this->font,
+		"Close", 20,
+		this->buttonsBackground, 20, 20,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 }
 
-SettingsState::SettingsState(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states)
+SettingsState::SettingsState(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground) : State(window, states), buttonsBackground(buttonsBackground)
 {
 	this->initWindow(window);
 	this->initVariables();
@@ -106,9 +139,9 @@ void SettingsState::updateButtons()
 		it.second->update(this->mousePosView);
 
 	if (this->buttons["DESIGN_SETTINGS"]->isPressed())
-		this->states->push(new DesignSettings(this->window, this->states));
+		this->states->push(new DesignSettings(this->window, this->states, this->buttonsBackground));
 
-	if (this->buttons["ABOUT_US"]->isPressed()) {
+	if (this->buttons["CLOSE"]->isPressed()) {
 		this->prevWindow->setActive(true);
 		this->window->close();
 		this->endState();

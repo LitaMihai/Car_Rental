@@ -6,17 +6,10 @@ void Application::initVariables()
 	this->fullscreen = false;
     this->updateApp = false;
 
-    std::ifstream ifs("./Config/version.ini");
-
+    if (!buttons_background.loadFromFile("Resources/Images/Buttons/Buttons_Background.png")) 
+        std::cout << "Cannot open 'Buttons_Background.png' file!";
+    
     char* value = nullptr;
-
-    if (ifs.is_open()) 
-        std::getline(ifs, this->version);
-    else
-        std::cout << "Cannot open 'version.ini' file!";
-
-    std::cout << "\n" << version << "\n";
-    ifs.close();
 }
 
 void Application::initWindow()
@@ -26,7 +19,7 @@ void Application::initWindow()
     bool fullscreen = false;
     unsigned framerate_limit = 60;
     bool vertical_sync_enabled = false;
-    unsigned antialiasing_level = 0;
+    unsigned antialiasing_level = 8;
 
     std::ifstream ifs("Config/window.ini");
 
@@ -61,7 +54,7 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-    this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
+    this->states.push(new AccountState(this->window, &this->states, &this->dataBase, &this->buttons_background));
 }
 
 void Application::initDB()
@@ -72,72 +65,10 @@ void Application::initDB()
         std::cout << "M-am conectat la baza de date!";
 }
 
-void Application::needsUpdate()
-{
-    if (seeIfItNeedsUpdate())
-        this->updateApp = true;
-    else
-        this->updateApp = false;
-}
-
-void Application::deletePrevFolder()
-{
-    if (this->updateApp == false) {
-        std::string prevVersion;
-
-        std::ifstream ifs("Config/prev_version.ini");
-
-        if (ifs.is_open())
-            ifs >> prevVersion;
-        else
-            std::cout << "Cannot open 'prev_version.ini' file!";
-        ifs.close();
-
-        std::string folderName = "rmdir /Q /S ..\\Car_Rental_v_" + prevVersion;
-        char* folder_Name = &folderName[0];
-
-        system(folder_Name);
-    }
-}
-
-bool Application::seeIfItNeedsUpdate()
-{
-    if (this->dataBase.isConnected()) {
-        MYSQL_RES* result;
-        MYSQL_ROW row = NULL;
-        int query_rez;
-        bool ok = false;
-
-        std::string query = "SELECT `New Update` FROM `Need Update` WHERE `New Update` = '" + this->version + "'"; //the query
-
-        query_rez = mysql_query(this->dataBase.getConnection(), query.c_str()); //send the query
-
-        result = mysql_store_result(this->dataBase.getConnection()); //store the result
-
-        if (result)
-            row = mysql_fetch_row(result);
-        mysql_free_result(result);
-
-        if (!row) {
-            std::cout << "ARE NEVOIE DE UPDATE!";
-            return true;
-        }
-            
-        else {
-            std::cout << "NU ARE NEVOIE DE UPDATE!";
-            return false;
-        }
-    }
-   
-    return false;
-}
-
 Application::Application()
 {
     this->initVariables();
     this->initDB();
-    this->needsUpdate();
-    this->deletePrevFolder();
     this->initWindow();
     this->initStates();
 }

@@ -22,6 +22,8 @@ private:
 
 	sf::Image icon;
 
+	sf::Texture* buttonsBackground;
+
 	// Functions
 	void initWindow(sf::RenderWindow* window);
 	void initVariables();
@@ -31,7 +33,7 @@ private:
 
 public:
 	// Constructor-Destructor
-	DesignSettings(sf::RenderWindow* window, std::stack<State*>* states);
+	DesignSettings(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground);
 	virtual ~DesignSettings();
 
 	// Functions

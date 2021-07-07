@@ -7,6 +7,7 @@
 #include "RentState.h"
 #include "SettingsState.h"
 #include "DetailsState.h"
+#include "LogOutConfirmation.h"
 #include "Json/single_include/nlohmann/json.hpp"
 
 using json = nlohmann::json;
@@ -29,6 +30,8 @@ private:
 	bool renderLineForModels;
 	bool renderTheLastLine;
 	
+	bool logout;
+
 	bool buttonsMoved;
 
 	sf::Texture leftButtonTexture;
@@ -54,6 +57,10 @@ private:
 
 	sf::Image icon;
 
+	sf::Texture* buttonsBackground;
+
+	sf::Text car;
+
 	//Functions
 	void initWindow(sf::RenderWindow* window);
 	void initVariables();
@@ -63,10 +70,11 @@ private:
 	void initButtons();
 	void initMake();
 	void initModel();
+	void checkLogOut();
 
 public:
 	//Constructor-Destructor
-	SearchState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase);
+	SearchState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, sf::Texture* buttonsBackground);
 	virtual ~SearchState();
 
 	//Functions

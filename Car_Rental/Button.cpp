@@ -3,14 +3,18 @@
 Button::Button(
 	float x, float y, float width, float height,
 	sf::Font* font, std::string text, unsigned character_size,
+	sf::Texture* buttons_background, int poz_rect_x, int poz_rect_y,
 	sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
-	sf::Color idle_color, sf::Color hover_color, sf::Color active_color) 
+	sf::Color idle_color, sf::Color hover_color, sf::Color active_color)
 {
 	this->buttonState = BTN_IDLE;
 
 	this->shape.setPosition(sf::Vector2f(x, y));
 	this->shape.setSize(sf::Vector2f(width, height));
 	this->shape.setFillColor(idle_color);
+
+	/*this->shape.setTexture(buttons_background);
+	this->shape.setTextureRect(sf::IntRect(poz_rect_x, poz_rect_y, width, height));*/
 
 	this->font = font;
 	this->text.setFont(*this->font);

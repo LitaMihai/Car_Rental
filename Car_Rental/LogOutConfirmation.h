@@ -2,40 +2,43 @@
 
 #include "State.h"
 #include "Button.h"
-#include "DesignSettings.h"
 
-class SettingsState : public State
-{
+class LogOutConfirmation : public State {
 private:
 	// Variables
+
 	sf::RenderWindow* prevWindow;
 	sf::RenderWindow* window;
 	std::vector<sf::VideoMode> videoModes;
 	sf::ContextSettings windowSettings;
 
-	std::map<std::string, Button*> buttons;
+	sf::Image icon;
+
+	sf::Event event;
 
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;
 
-	sf::Event event;
+	sf::Text areYouSure;
+	bool* logout;
 
-	sf::Image icon;
+	Button* yes, *no;
 
-	sf::Texture* buttonsBackground;
-
+	sf::Texture* buttonsBackground; // For later
+	
 	// Functions
 	void initWindow(sf::RenderWindow* window);
-	void initVariables();
 	void initBackground();
+	void initVariables();
 	void initFonts();
 	void initButtons();
 
 public:
-	// Constructor-Destructor
-	SettingsState(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground);
-	virtual ~SettingsState();
+
+	// Constructor - Destructor
+	LogOutConfirmation(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground, bool* logout);
+	virtual ~LogOutConfirmation();
 
 	// Functions
 	void updateSFMLEvents();
@@ -45,4 +48,3 @@ public:
 	void renderButtons(sf::RenderTarget* target = NULL);
 	void render(sf::RenderTarget* target = NULL);
 };
-

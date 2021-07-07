@@ -95,7 +95,7 @@
       <AdditionalIncludeDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\lib;</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -137,7 +137,7 @@
       <AdditionalIncludeDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\include;C:\Program Files\MySQL\Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\MySQL\boost_1_75_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\Programare\Librarii\SFML-2.5.1-64bit\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\Program Files\MySQL\MySQL Server 8.0\lib;$(wxWid)\lib\vc142_x64_dll;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;sfml-audio-d.lib;sfml-network-d.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -183,6 +183,7 @@
     <ClCompile Include="DesignSettings.cpp" />
     <ClCompile Include="DetailsState.cpp" />
     <ClCompile Include="EmailValidation.cpp" />
+    <ClCompile Include="LogOutConfirmation.cpp" />
     <ClCompile Include="RegistrationState.cpp" />
     <ClCompile Include="RentState.cpp" />
     <ClCompile Include="SearchState.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="DesignSettings.h" />
     <ClInclude Include="DetailsState.h" />
     <ClInclude Include="EmailValidation.h" />
+    <ClInclude Include="LogOutConfirmation.h" />
     <ClInclude Include="RegistrationState.h" />
     <ClInclude Include="RentState.h" />
     <ClInclude Include="SearchState.h" />

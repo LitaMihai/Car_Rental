@@ -10,7 +10,7 @@ void SearchState::initWindow(sf::RenderWindow* window)
 	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
 	window_bounds.width = 1600;
 	window_bounds.height = 900;
-	windowSettings.antialiasingLevel = 16;
+	windowSettings.antialiasingLevel = 8;
 
 	this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSettings);
 	this->window->setVerticalSyncEnabled(true);
@@ -27,6 +27,7 @@ void SearchState::initVariables()
 	this->renderTheLastLine = false;
 	this->seePhoto = false;
 	this->buttonsMoved = false;
+	this->logout = false;
 }
 
 void SearchState::initBackground()
@@ -67,6 +68,11 @@ void SearchState::initFonts()
 {
 	if (!this->font.loadFromFile("Resources/Font/Dosis-Light.ttf"))
 		throw("ERROR::SEARCHSTATE::COULD NOT LOAD FONT");
+
+	this->car.setPosition(-1000.f, -1000.f);
+	this->car.setCharacterSize(25);
+	this->car.setFillColor(sf::Color::White);
+	this->car.setFont(this->font);
 }
 
 void SearchState::initButtons()
@@ -75,6 +81,7 @@ void SearchState::initButtons()
 		1515.f, 5.f, 70.f, 30.f,
 		&this->font,
 		"Log Out", 25,
+		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -83,6 +90,7 @@ void SearchState::initButtons()
 		-100000.f, -100000.f, 150.f, 100.f,
 		&this->font,
 		"Rent", 50,
+		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -91,6 +99,7 @@ void SearchState::initButtons()
 		-100000.f, -100000.f, 150.f, 100.f,
 		&this->font,
 		"Details", 50,
+		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -99,6 +108,7 @@ void SearchState::initButtons()
 		-100000.f, -100000.f, 45.f, 30.f,
 		&this->font,
 		"RIGHT", 25,
+		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 0), sf::Color(250, 250, 250, 0), sf::Color(20, 20, 20, 0),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 100), sf::Color(20, 20, 20, 105)
 	);
@@ -107,6 +117,7 @@ void SearchState::initButtons()
 		-100000.f, -100000.f, 45.f, 30.f,
 		&this->font,
 		"LEFT", 25,
+		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 0), sf::Color(250, 250, 250, 0), sf::Color(20, 20, 20, 0),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 100), sf::Color(20, 20, 20, 105)
 	);
@@ -115,6 +126,7 @@ void SearchState::initButtons()
 		1400.f, 5.f, 70.f, 30.f,
 		&this->font,
 		"Settings", 25,
+		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -148,6 +160,7 @@ void SearchState::initMake()
 			0.f, y, 225.f, 25.f,
 			&this->font,
 			name, 20,
+			this->buttonsBackground, 20, 20,
 			sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 			sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 		);
@@ -171,13 +184,26 @@ void SearchState::initModel()
 			0.f, -100.f, 225.f, 25.f,
 			&this->font,
 			name, 20,
+			this->buttonsBackground, 20, 20,
 			sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 			sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 		);
 	}
 }
 
-SearchState::SearchState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states)
+void SearchState::checkLogOut()
+{
+	if (this->logout) {
+		this->endState();
+		this->window->close();
+		this->prevWindow->setActive(true);
+		this->prevWindow->setVisible(true);
+	}
+	else
+		this->logout = false;
+}
+
+SearchState::SearchState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, sf::Texture* buttonsBackground) : State(window, states), buttonsBackground(buttonsBackground)
 {
 	this->initWindow(window);
 	this->initVariables();
@@ -227,10 +253,9 @@ void SearchState::updateButtons()
 		it1.second->update(this->mousePosView);
 
 	if (this->buttons["LOG_OUT"]->isPressed()) {
-		this->endState();
-		this->window->close();
-		this->prevWindow->setActive(true);
-		this->prevWindow->setVisible(true);
+
+		//Are you sure you want to log out?
+		this->states->push(new LogOutConfirmation(this->window, this->states, this->buttonsBackground, &this->logout));
 	}
 
 	if (this->buttons["LEFT"]->isPressed())
@@ -240,13 +265,13 @@ void SearchState::updateButtons()
 		this->shape.setTexture(&this->secondPhotoTexture);
 
 	if (this->buttons["RENT"]->isPressed())
-		this->states->push(new RentState(this->window, this->states));
+		this->states->push(new RentState(this->window, this->states, this->buttonsBackground));
 
 	if (this->buttons["DETAILS"]->isPressed()) 
-		this->states->push(new DetailsState(this->window, this->states, this->carName));
+		this->states->push(new DetailsState(this->window, this->states, this->carName, this->buttonsBackground));
 
 	if (this->buttons["SETTINGS"]->isPressed())
-		this->states->push(new SettingsState(this->window, this->states));
+		this->states->push(new SettingsState(this->window, this->states, this->buttonsBackground));
 
 	for (auto& it1 : this->make)
 		if (it1.second->isPressed()) {
@@ -297,6 +322,8 @@ void SearchState::updateButtons()
 				this->buttons["DETAILS"]->move(700.f, 730.f);
 				this->buttons["RENT"]->move(1215.f, 730.f);
 			
+				this->car.setPosition(850.f, 7.f);
+
 				this->buttonsMoved = true;
 			}
 
@@ -330,16 +357,20 @@ void SearchState::updateButtons()
 			this->shape.setTexture(&this->firstPhotoTexture);
 			this->shape.setPosition(sf::Vector2f(503.f, 40.f));
 			this->shape.setSize(sf::Vector2f(1044.f, 661.f));
+
+			std::string carString = makeFolderName + " " + modelFolderName;
+			this->car.setString(carString);
 		}
 }
 
 void SearchState::update()
 {
+	this->checkLogOut();
 	this->updateSFMLEvents();
 	this->updateMousePositions(this->window);
 	this->updateButtons();
 
-	std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n";
+	// std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n";
 }
 
 void SearchState::renderLines(sf::RenderTarget* target)
@@ -372,6 +403,7 @@ void SearchState::render(sf::RenderTarget* target)
 	target->draw(this->background);
 	target->draw(this->leftButtonSprite);
 	target->draw(this->rightButtonSprite);
+	target->draw(this->car);
 
 	if (seePhoto)
 		target->draw(this->shape);
