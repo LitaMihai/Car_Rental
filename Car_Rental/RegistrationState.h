@@ -59,8 +59,6 @@ private:
 	sf::RectangleShape background;
 	sf::Font font;
 
-	sf::Texture* buttonsBackground;
-
 	DbConnection *accountDataBase;
 
 	std::map<std::string, Button*> buttons;
@@ -79,7 +77,7 @@ private:
 
 public:
 	//Constructor-Destructor
-	RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase, sf::Texture* buttonsBackground);
+	RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase);
 	virtual ~RegistrationState();
 
 	//Functions

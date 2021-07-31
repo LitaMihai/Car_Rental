@@ -151,13 +151,12 @@ void DetailsState::initButtons()
 		70.f, 45.f,
 		&this->font,
 		"Close", 35,
-		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 }
 
-DetailsState::DetailsState(sf::RenderWindow* window, std::stack<State*>* states, std::string carName, sf::Texture* buttonsBackground) : State(window, states), buttonsBackground(buttonsBackground)
+DetailsState::DetailsState(sf::RenderWindow* window, std::stack<State*>* states, std::string carName) : State(window, states)
 {
 	this->initWindow(window);
 	this->initVariables();

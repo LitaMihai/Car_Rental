@@ -22,8 +22,6 @@ private:
 
 	sf::Image icon;
 
-	sf::Texture buttons_background;
-
 	//Initializations
 	void initVariables();
 	void initWindow();

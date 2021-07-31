@@ -57,8 +57,6 @@ private:
 
 	sf::Image icon;
 
-	sf::Texture* buttonsBackground;
-
 	sf::Text car;
 
 	//Functions
@@ -74,7 +72,7 @@ private:
 
 public:
 	//Constructor-Destructor
-	SearchState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, sf::Texture* buttonsBackground);
+	SearchState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase);
 	virtual ~SearchState();
 
 	//Functions

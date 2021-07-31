@@ -52,8 +52,6 @@ private:
 
 	Button* close;
 
-	sf::Texture* buttonsBackground;
-
 	// Functions
 	void initWindow(sf::RenderWindow* window);
 	void initBackground();
@@ -65,7 +63,7 @@ private:
 public:
 
 	//Constructor -> Destructor
-	DetailsState(sf::RenderWindow* window, std::stack<State*>* states, std::string carName, sf::Texture* buttonsBackground);
+	DetailsState(sf::RenderWindow* window, std::stack<State*>* states, std::string carName);
 	virtual ~DetailsState();
 
 	// Functions

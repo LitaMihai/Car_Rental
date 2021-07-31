@@ -24,8 +24,6 @@ private:
 	bool* logout;
 
 	Button* yes, *no;
-
-	sf::Texture* buttonsBackground; // For later
 	
 	// Functions
 	void initWindow(sf::RenderWindow* window);
@@ -37,7 +35,7 @@ private:
 public:
 
 	// Constructor - Destructor
-	LogOutConfirmation(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground, bool* logout);
+	LogOutConfirmation(sf::RenderWindow* window, std::stack<State*>* states, bool* logout);
 	virtual ~LogOutConfirmation();
 
 	// Functions

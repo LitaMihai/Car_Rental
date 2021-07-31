@@ -19,11 +19,11 @@ private:
 	sf::RectangleShape background;
 	sf::Font font;
 
+	sf::Text settings;
+
 	sf::Event event;
 
 	sf::Image icon;
-
-	sf::Texture* buttonsBackground;
 
 	// Functions
 	void initWindow(sf::RenderWindow* window);
@@ -34,7 +34,7 @@ private:
 
 public:
 	// Constructor-Destructor
-	SettingsState(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground);
+	SettingsState(sf::RenderWindow* window, std::stack<State*>* states);
 	virtual ~SettingsState();
 
 	// Functions

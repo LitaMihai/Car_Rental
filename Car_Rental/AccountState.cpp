@@ -92,7 +92,6 @@ void AccountState::initButtons()
 		50.f, 490.f, 150.f, 70.f,
 		&this->font,
 		"Connect", 50,
-		this->buttonsBackground, 100, 230,
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(255, 255, 255, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -101,7 +100,6 @@ void AccountState::initButtons()
 		620.f, 490.f, 100.f, 70.f,
 		&this->font,
 		"Exit", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -110,7 +108,6 @@ void AccountState::initButtons()
 		250.f, 255.f, 500.f, 35.f,
 		&this->font,
 		"", 50,
-		NULL, 0, 0,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255)
 	);
@@ -119,7 +116,6 @@ void AccountState::initButtons()
 		250.f, 355.f, 500.f, 35.f,
 		&this->font,
 		"", 50,
-		NULL, 0, 0,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255)
 	);
@@ -128,7 +124,6 @@ void AccountState::initButtons()
 		600.f, 20.f, 175.f, 35.f,
 		&this->font,
 		"Sign Up", 35,
-		this->buttonsBackground, 20, 20,
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -137,7 +132,6 @@ void AccountState::initButtons()
 		752.f, 352.f, 45.f, 40.f,
 		&this->font,
 		"", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 255)
 	);
@@ -150,7 +144,7 @@ void AccountState::initButtons()
 	this->showButtonSprite.setScale(0.3f, 0.3f);
 }
 
-AccountState::AccountState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase, sf::Texture* buttonsBackground) : State(window, states), accountDataBase(accountDataBase), buttonsBackground(buttonsBackground)
+AccountState::AccountState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase) : State(window, states), accountDataBase(accountDataBase)
 {
 	this->initVariables();
 	this->initBackground();
@@ -271,7 +265,7 @@ void AccountState::updateButtons()
 			this->wrongAccount.setString("");
 			this->numberOfFailedEntries = 0;
 			//Next state
-			this->states->push(new SearchState(this->window, this->states, this->accountDataBase, this->buttonsBackground));
+			this->states->push(new SearchState(this->window, this->states, this->accountDataBase));
 		}
 		else {
 			std::cout << "\nWrong email or password!";
@@ -284,7 +278,7 @@ void AccountState::updateButtons()
 	//Register an account
 	if (this->buttons["REGISTER"]->isPressed()) {
 		//Register state
-		this->states->push(new RegistrationState(this->window, this->states, this->accountDataBase, this->buttonsBackground));
+		this->states->push(new RegistrationState(this->window, this->states, this->accountDataBase));
 		this->emailInput = "";
 		this->passwordInput = "";
 		this->passwordAsterisk = "";

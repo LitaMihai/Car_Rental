@@ -25,8 +25,6 @@ private:
 
 	Button *ok;
 
-	sf::Texture* buttonsBackground;
-
 	// Functions
 	void initWindow(sf::RenderWindow* window);
 	void initBackground();
@@ -37,7 +35,7 @@ private:
 public:
 
 	// Constructor -> Destructor
-	RentState(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground);
+	RentState(sf::RenderWindow* window, std::stack<State*>* states);
 	virtual ~RentState();
 
 	// Functions

@@ -22,7 +22,14 @@ void SettingsState::initWindow(sf::RenderWindow* window)
 
 void SettingsState::initVariables()
 {
+	int windowX = this->window->getSize().x;
+	int windowY = this->window->getSize().y;
 
+	this->settings.setPosition(windowX / 2.f - 75.f, 10.f);
+	this->settings.setCharacterSize(50);
+	this->settings.setFillColor(sf::Color::White);
+	this->settings.setFont(this->font);
+	this->settings.setString("Settings");
 }
 
 void SettingsState::initBackground()
@@ -44,69 +51,74 @@ void SettingsState::initFonts()
 }
 
 void SettingsState::initButtons()
-{
+{	
+	int windowX = this->window->getSize().x;
+	int windowY	= this->window->getSize().y;
+	int quarterX = windowX / 4;
+	int quarterY = windowY / 4;
+
 	this->buttons["DESIGN_SETTINGS"] = new Button(
-		0, 0,
-		225.f, 25.f,
+		// 25, 100,
+		quarterX - (225.f / 2), quarterY - (25.f / 2),
+		225.f, 50.f,
 		&this->font,
-		"Design Settings", 20,
-		this->buttonsBackground, 20, 20,
+		"Design Settings", 30,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		sf::Color(0, 173, 181, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 
 	this->buttons["ACCOUNT_SETTINGS"] = new Button(
-		0, 25, 
-		225.f, 25.f,
+		// 25, 300, 
+		quarterX - (225.f / 2), 2 * quarterY - (25.f / 2),
+		225.f, 50.f,
 		&this->font,
-		"Account Settings", 20,
-		this->buttonsBackground, 20, 20,
+		"Account Settings", 30,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		sf::Color(0, 173, 181, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 
 	this->buttons["CONTACTS"] = new Button(
-		0, 50,
-		225.f, 25.f,
+		// 25, 500,
+		quarterX - (225.f / 2), 3 * quarterY - (25.f / 2),
+		225.f, 50.f,
 		&this->font,
-		"Contacts", 20,
-		this->buttonsBackground, 20, 20,
+		"Contacts", 30,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
-	);
-
-	this->buttons["COVID_19"] = new Button(
-		0, 75,
-		225.f, 25.f,
-		&this->font,
-		"Covid-19 Measures", 20,
-		this->buttonsBackground, 20, 20,
-		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		sf::Color(0, 173, 181, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 
 	this->buttons["ABOUT_US"] = new Button(
-		0, 100,
-		225.f, 25.f,
+		// 425, 300,
+		3 * quarterX - (225.f / 2), quarterY - (25.f / 2),
+		225.f, 50.f,
 		&this->font,
-		"About Us", 20,
-		this->buttonsBackground, 20, 20,
+		"About Us", 30,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		sf::Color(0, 173, 181, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
+	this->buttons["COVID_19"] = new Button(
+		// 425, 100,
+		3 * quarterX - (225.f / 2), 2 * quarterY - (25.f / 2),
+		225.f, 50.f,
+		&this->font,
+		"Covid-19 Measures", 30,
+		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
+		sf::Color(0, 173, 181, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 
 	this->buttons["CLOSE"] = new Button(
-		0, 150,
-		225.f, 25.f,
+		// 425, 500,
+		3 * quarterX - (225.f / 2), 3 * quarterY - (25.f / 2),
+		225.f, 50.f,
 		&this->font,
-		"Close", 20,
-		this->buttonsBackground, 20, 20,
+		"Close", 30,
 		sf::Color(238, 238, 238, 255), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
-		sf::Color(0, 173, 181, 255), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+		sf::Color(0, 173, 181, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 }
 
-SettingsState::SettingsState(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground) : State(window, states), buttonsBackground(buttonsBackground)
+SettingsState::SettingsState(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states)
 {
 	this->initWindow(window);
 	this->initVariables();
@@ -139,7 +151,7 @@ void SettingsState::updateButtons()
 		it.second->update(this->mousePosView);
 
 	if (this->buttons["DESIGN_SETTINGS"]->isPressed())
-		this->states->push(new DesignSettings(this->window, this->states, this->buttonsBackground));
+		this->states->push(new DesignSettings(this->window, this->states));
 
 	if (this->buttons["CLOSE"]->isPressed()) {
 		this->prevWindow->setActive(true);
@@ -164,8 +176,10 @@ void SettingsState::renderButtons(sf::RenderTarget* target)
 void SettingsState::render(sf::RenderTarget* target)
 {
 	target = this->window;
-	target->draw(this->background);
 
+	target->draw(this->background);
+	target->draw(this->settings);
 	this->renderButtons(target);
+
 	this->window->display();
 }

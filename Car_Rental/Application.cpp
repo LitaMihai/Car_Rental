@@ -5,10 +5,7 @@ void Application::initVariables()
 	this->window = NULL;
 	this->fullscreen = false;
     this->updateApp = false;
-
-    if (!buttons_background.loadFromFile("Resources/Images/Buttons/Buttons_Background.png")) 
-        std::cout << "Cannot open 'Buttons_Background.png' file!";
-    
+  
     char* value = nullptr;
 }
 
@@ -54,7 +51,7 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-    this->states.push(new AccountState(this->window, &this->states, &this->dataBase, &this->buttons_background));
+    this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
 }
 
 void Application::initDB()

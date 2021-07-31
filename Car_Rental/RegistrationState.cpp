@@ -137,7 +137,6 @@ void RegistrationState::initButtons()
 		50.f, 490.f, 175.f, 70.f,
 		&this->font,
 		"Register", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -146,7 +145,6 @@ void RegistrationState::initButtons()
 		620.f, 490.f, 100.f, 70.f,
 		&this->font,
 		"Back", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -155,7 +153,6 @@ void RegistrationState::initButtons()
 		250.f, 255.f, 500.f, 35.f,
 		&this->font,
 		"", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255)
 	);
@@ -164,7 +161,6 @@ void RegistrationState::initButtons()
 		250.f, 325.f, 500.f, 35.f,
 		&this->font,
 		"", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255)
 	);
@@ -173,7 +169,6 @@ void RegistrationState::initButtons()
 		250.f, 395.f, 500.f, 35.f,
 		&this->font,
 		"", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255), sf::Color(255, 255, 255, 255)
 	);
@@ -182,7 +177,6 @@ void RegistrationState::initButtons()
 		753.f, 323.f, 45.f, 40.f,
 		&this->font,
 		"", 50,
-		this->buttonsBackground, 20, 20,
 		sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0), sf::Color(0, 0, 0, 0),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 250)
 	);
@@ -263,7 +257,7 @@ bool RegistrationState::emailValid(std::string email)
 	return email1.isValid();
 }
 
-RegistrationState::RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, sf::Texture* buttonsBackground) : State(window, states), accountDataBase(accountDataBase), buttonsBackground(buttonsBackground)
+RegistrationState::RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states), accountDataBase(accountDataBase)
 {
 	this->initVariables();
 	this->initBackground();

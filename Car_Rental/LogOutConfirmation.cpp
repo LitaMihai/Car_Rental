@@ -55,7 +55,6 @@ void LogOutConfirmation::initButtons()
 		100.f, 120.f, 45.f, 40.f,
 		&this->font,
 		"Yes", 25,
-		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
@@ -64,13 +63,12 @@ void LogOutConfirmation::initButtons()
 		250.f, 120.f, 45.f, 40.f,
 		&this->font,
 		"No", 25,
-		this->buttonsBackground, 20, 20,
 		sf::Color(250, 250, 250, 250), sf::Color(250, 250, 250, 75), sf::Color(20, 20, 20, 50),
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 }
 
-LogOutConfirmation::LogOutConfirmation(sf::RenderWindow* window, std::stack<State*>* states, sf::Texture* buttonsBackground, bool* logout) : State(window, states), buttonsBackground(buttonsBackground), logout(logout)
+LogOutConfirmation::LogOutConfirmation(sf::RenderWindow* window, std::stack<State*>* states, bool* logout) : State(window, states), logout(logout)
 {
 	this->initWindow(window);
 	this->initVariables();
