@@ -1,5 +1,6 @@
 #include "RegistrationState.h"
 
+
 void RegistrationState::initVariables()
 {
 	this->emailInput = "";
@@ -35,6 +36,8 @@ void RegistrationState::initVariables()
 	this->confirmPasswordLabel.setString("");
 
 	this->enterPressed = false;
+
+	this->continueRegistration = false;
 }
 
 void RegistrationState::initBackground()
@@ -257,6 +260,102 @@ bool RegistrationState::emailValid(std::string email)
 	return email1.isValid();
 }
 
+size_t RegistrationState::payload_source(char* ptr, size_t size, size_t nmemb, void* userp)
+{
+	struct upload_status* upload_ctx = (struct upload_status*)userp;
+	const char* data;
+	size_t room = size * nmemb;
+
+	if ((size == 0) || (nmemb == 0) || ((size * nmemb) < 1)) {
+		return 0;
+	}
+
+	data = &payload_text[upload_ctx->bytes_read];
+
+	if (data) {
+		size_t len = strlen(data);
+		if (room < len)
+			len = room;
+		memcpy(ptr, data, len);
+		upload_ctx->bytes_read += len;
+
+		return len;
+	}
+
+	return 0;
+}
+
+int RegistrationState::sendEmail(std::string email)
+{
+	srand(time(NULL));
+	
+	char securityCode[5];
+	this->codeInt = rand() % 9000 + 1000;
+	_itoa(this->codeInt, securityCode, 10);
+
+	strcpy(payload_text,
+		"To: "
+	);
+	strcat(payload_text, email.c_str());
+	strcat(payload_text,
+		"\r\n"
+		"From: " "<Car_Rental2021@outlook.com>" "\r\n"
+		"Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@"
+		"rfcpedant.example.org>\r\n"
+		"Subject: Car Rental account security code\r\n"
+		"\r\n\r\n"
+		"Security code: "
+	);
+	strcat(payload_text, securityCode);
+	strcat(payload_text,
+		"\r\n"
+		"\r\n\r\n"
+		"If you didn't request this code, you can safely ignore this email. Someone else might have typed your email address by mistake.\r\n"
+		"\r\n\r\n"
+		"Thanks, \r\n"
+		"The Car Rental Staff\r\n"
+	);
+
+	curl = curl_easy_init();
+	if (curl) {
+
+		curl_easy_setopt(curl, CURLOPT_USERNAME, "litamihai13@gmail.com");
+		curl_easy_setopt(curl, CURLOPT_PASSWORD, "bzntvcvykbxmxsyn");
+
+		curl_easy_setopt(curl, CURLOPT_URL, "smtp.gmail.com:587");
+
+		curl_easy_setopt(curl, CURLOPT_SASL_AUTHZID, "Car Rental's Team");
+
+		curl_easy_setopt(curl, CURLOPT_LOGIN_OPTIONS, "AUTH=PLAIN");
+
+		curl_easy_setopt(curl, CURLOPT_USE_SSL, (long)CURLUSESSL_ALL);
+
+		curl_easy_setopt(curl, CURLOPT_MAIL_FROM, "<Car_Rental2021@outlook.com>");
+
+		recipients = curl_slist_append(recipients, email.c_str());
+
+		curl_easy_setopt(curl, CURLOPT_MAIL_RCPT, recipients);
+
+		curl_easy_setopt(curl, CURLOPT_READFUNCTION, payload_source);
+		curl_easy_setopt(curl, CURLOPT_READDATA, &upload_ctx);
+		curl_easy_setopt(curl, CURLOPT_UPLOAD, 1L);
+
+		curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+
+		res = curl_easy_perform(curl);
+
+		if (res != CURLE_OK)
+			fprintf(stderr, "curl_easy_perform() failed: %s\n",
+				curl_easy_strerror(res));
+
+		curl_slist_free_all(recipients);
+
+		curl_easy_cleanup(curl);
+	}
+
+	return (int)res;
+}
+
 RegistrationState::RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states), accountDataBase(accountDataBase)
 {
 	this->initVariables();
@@ -396,28 +495,36 @@ void RegistrationState::updateButtons()
 	for (auto& it : this->buttons)
 		it.second->update(this->mousePosView);
 
-	//Confirm button(register) -> create the account
+	// Confirm button(register) -> create the account
 	if (this->buttons["CONNECT"]->isPressed() || this->enterPressed) {
 		this->enterPressed = false;
 
 		if (emailValid(emailInput)) {
 			validEmail = true;
+
 			if (!passwordInput.empty()) {
 				this->pleaseEnterAPassword.setString("");
+
 				if (!this->isRegistrated(this->emailInput)) {
+
 					if (this->verifPasswords(passwordInput, confirmPasswordInput)) {
-						//std::cout << "\nPasswords are the same!"; TO BE DELETED
 						this->failedConfirmation.setString("");
 						this->numberOfFailedPasswordConfirmations = 0;
 
-						//Adding the account in the database.
-						if (this->addAccount(this->emailInput, this->passwordInput))
-							std::cout << "Account registrated!";
-						else
-							std::cout << "Account wasn't registrared!";
+						// Email Verification state
+						this->sendEmail(emailInput); 
 
-						//Previous state
-						this->states->top()->endState();
+						this->states->push(new EmailVerificationState(this->window, this->states, &this->codeInt, &this->continueRegistration));
+
+						// Adding the account in the database.
+						if (this->continueRegistration) {
+							if (this->addAccount(this->emailInput, this->passwordInput)) {
+								std::cout << "Account registrated!";
+								this->states->top()->endState();
+							}
+							else
+								std::cout << "Account wasn't registrared!";
+						}
 					}
 					else {
 						std::cout << "\nPasswords mismatch!";
@@ -461,8 +568,6 @@ void RegistrationState::updateButtons()
 			this->emailIsNotValid.setString("Email is not valid!");
 			this->validEmail = false;
 		}
-
-
 	}
 
 	//Previous state
@@ -537,11 +642,11 @@ void RegistrationState::render(sf::RenderTarget* target)
 	target->draw(this->background);
 	this->renderButtons(target);
 	this->renderText(target);
+
 	target->draw(this->emailText);
 	target->draw(this->passwordText);
 	target->draw(this->confirmPasswordText);
 	target->draw(this->showButtonSprite);
-	
 
 	if (!this->samePasswords)
 		target->draw(this->failedConfirmation);

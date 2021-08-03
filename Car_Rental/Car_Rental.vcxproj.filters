@@ -47,6 +47,9 @@
     <Filter Include="LogOutConfirmation">
       <UniqueIdentifier>{f5c415a2-52c8-44bc-9edb-78d24bf97026}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EmailVerificationState">
+      <UniqueIdentifier>{f7502e0a-7f20-4e96-adca-9f680965e51a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -94,6 +97,9 @@
     <ClCompile Include="LogOutConfirmation.cpp">
       <Filter>LogOutConfirmation</Filter>
     </ClCompile>
+    <ClCompile Include="EmailVerificationState.cpp">
+      <Filter>EmailVerificationState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -137,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="LogOutConfirmation.h">
       <Filter>LogOutConfirmation</Filter>
+    </ClInclude>
+    <ClInclude Include="EmailVerificationState.h">
+      <Filter>EmailVerificationState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,20 @@
 #include "Button.h"
 #include "SimpleHash.h"
 #include "EmailValidation.h"
+#include "EmailVerificationState.h"
+
+#include <curl/curl.h>
+
+struct upload_status {
+	size_t bytes_read;
+};
+
+static char* payload_text = new char;
+
+static CURL* curl;
+static CURLcode res = CURLE_OK;
+static struct curl_slist* recipients = NULL;
+static struct upload_status upload_ctx = { 0 };
 
 class RegistrationState : public State
 {
@@ -63,6 +77,9 @@ private:
 
 	std::map<std::string, Button*> buttons;
 
+	int codeInt;
+	bool continueRegistration;
+
 	//Functions
 	void initVariables();
 	void initBackground();
@@ -75,11 +92,14 @@ private:
 	bool isRegistrated(std::string email);
 	bool emailValid(std::string email);
 
+	static size_t payload_source(char* ptr, size_t size, size_t nmemb, void* userp);
+	int sendEmail(std::string email);
+
 public:
 	//Constructor-Destructor
 	RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase);
 	virtual ~RegistrationState();
-
+	
 	//Functions
 	void updateSFMLEvents();
 	void updateCursor();
