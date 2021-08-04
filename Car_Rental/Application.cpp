@@ -51,9 +51,7 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-    // this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
-    bool test = false;
-    this->states.push(new EmailVerificationState(this->window, &this->states, 0000, &test));
+    this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
 }
 
 void Application::initDB()

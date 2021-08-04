@@ -2,6 +2,19 @@
 
 #include "State.h"
 #include "Button.h"
+#include "SimpleHash.h"
+#include "curl/curl.h"
+
+struct upload_status {
+	size_t bytes_read;
+};
+
+static char* payload_text = new char;
+
+static CURL* curl;
+static CURLcode res = CURLE_OK;
+static struct curl_slist* recipients = NULL;
+static struct upload_status upload_ctx = { 0 };
 
 class EmailVerificationState : public State
 {
@@ -22,13 +35,22 @@ private:
 	sf::RectangleShape background;
 	sf::Font font;
 
-	int* code;
+	int code;
 
 	sf::Clock clock;
 	sf::Time text_effect_time;
 	bool show_cursor;
 
 	bool* continueRegistration;
+
+	std::string emailString;
+	std::string password;
+
+	sf::Text email;
+	sf::Text anEmailWasSent;
+	sf::Text pleaseEnterTheCodeBelow;
+
+	DbConnection* accountDataBase;
 
 	// Functions
 	void initVariables();
@@ -38,10 +60,14 @@ private:
 	void initButtons();
 
 	bool codeVerif(std::string codeInput);
+	bool addAccount(std::string email, std::string password);
+
+	static size_t payload_source(char* ptr, size_t size, size_t nmemb, void* userp);
+	int sendEmail(std::string email);
 
 public:
 	// Constructor - Destructor
-	EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, int* code, bool* continueRegistration);
+	EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* emailString, std::string* password);
 	virtual ~EmailVerificationState();
 
 	// Functions
