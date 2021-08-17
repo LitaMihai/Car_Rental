@@ -13,7 +13,7 @@ Libraries used:
   - MySQL
   - nlohmann/JSON
 
-To build and run this code you need to download MySQL Connector/C++ and MySQL Server from https://dev.mysql.com/downloads/;
+To build and run this code you need to download MySQL Connector/C++ and MySQL Server from https://dev.mysql.com/downloads/.
 After that, in project settings, set the 4 directories path (both includes and libs).
 
 The others libraries are already functionally.
