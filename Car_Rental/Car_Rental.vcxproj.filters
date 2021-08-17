@@ -50,6 +50,9 @@
     <Filter Include="EmailVerificationState">
       <UniqueIdentifier>{f7502e0a-7f20-4e96-adca-9f680965e51a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ForgotPassState">
+      <UniqueIdentifier>{e17abcf5-c011-41e6-a9e8-092a95211e72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -100,6 +103,9 @@
     <ClCompile Include="EmailVerificationState.cpp">
       <Filter>EmailVerificationState</Filter>
     </ClCompile>
+    <ClCompile Include="ForgotPassState.cpp">
+      <Filter>ForgotPassState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -146,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="EmailVerificationState.h">
       <Filter>EmailVerificationState</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgotPassState.h">
+      <Filter>ForgotPassState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
