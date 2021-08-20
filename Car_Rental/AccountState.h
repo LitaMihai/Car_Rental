@@ -4,6 +4,7 @@
 #include "Button.h"
 #include "RegistrationState.h"
 #include "SearchState.h"
+#include "ForgotPassState.h"
 
 class AccountState : public State
 {

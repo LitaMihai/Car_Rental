@@ -2,32 +2,25 @@
 
 #include "State.h"
 #include "Button.h"
-#include "SimpleHash.h"
 #include "curl/curl.h"
+#include "EmailVerificationState.h"
+#include "EmailValidation.h"
+#include "ForgotPassCodeState.h"
 
-struct upload_status {
-	size_t bytes_read;
-};
-
-static char* payload_text = new char;
-
-static CURL* curl;
-static CURLcode res = CURLE_OK;
-static struct curl_slist* recipients = NULL;
-static struct upload_status upload_ctx = { 0 };
-
-class EmailVerificationState : public State
+class ForgotPassState : public State
 {
 private:
 	// Variables
 
 	sf::Event event;
 
-	std::string codeInput;
-	sf::Text codeText;
-	sf::Text codeLabel;
+	std::string emailInput;
+	sf::Text emailText;
+	sf::Text emailLabel;
 
-	sf::Text incorrectCode;
+	sf::Text pleaseEnterYourEmail;
+	sf::Text forgotPass;
+	sf::Text emailIsNotValid;
 
 	std::map<std::string, Button*> buttons;
 
@@ -35,18 +28,11 @@ private:
 	sf::RectangleShape background;
 	sf::Font font;
 
-	int code;
-
 	sf::Clock clock;
 	sf::Time text_effect_time;
 	bool show_cursor;
 
-	std::string emailString;
-	std::string password;
-
-	sf::Text email;
-	sf::Text anEmailWasSent;
-	sf::Text pleaseEnterTheCodeBelow;
+	int code;
 
 	DbConnection* accountDataBase;
 
@@ -57,16 +43,16 @@ private:
 	void initText();
 	void initButtons();
 
-	bool codeVerif(std::string codeInput);
-	bool addAccount(std::string email, std::string password);
+	bool emailValid(std::string email);
+	bool isRegistrated(std::string email);
 
 	static size_t payload_source(char* ptr, size_t size, size_t nmemb, void* userp);
 	int sendEmail(std::string email);
 
 public:
 	// Constructor - Destructor
-	EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* emailString, std::string* password);
-	virtual ~EmailVerificationState();
+	ForgotPassState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase);
+	virtual ~ForgotPassState();
 
 	// Functions
 	void updateSFMLEvents();

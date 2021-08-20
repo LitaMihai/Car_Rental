@@ -5,6 +5,8 @@
 #include "RegistrationState.h"
 #include "DbConnection.h"
 
+#include "ForgotPass_NewPass_State.h"
+
 class Application{
 
 private:

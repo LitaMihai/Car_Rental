@@ -192,6 +192,9 @@
     <ClCompile Include="DetailsState.cpp" />
     <ClCompile Include="EmailValidation.cpp" />
     <ClCompile Include="EmailVerificationState.cpp" />
+    <ClCompile Include="ForgotPassCodeState.cpp" />
+    <ClCompile Include="ForgotPassState.cpp" />
+    <ClCompile Include="ForgotPass_NewPass_State.cpp" />
     <ClCompile Include="LogOutConfirmation.cpp" />
     <ClCompile Include="RegistrationState.cpp" />
     <ClCompile Include="RentState.cpp" />
@@ -209,6 +212,9 @@
     <ClInclude Include="DetailsState.h" />
     <ClInclude Include="EmailValidation.h" />
     <ClInclude Include="EmailVerificationState.h" />
+    <ClInclude Include="ForgotPassCodeState.h" />
+    <ClInclude Include="ForgotPassState.h" />
+    <ClInclude Include="ForgotPass_NewPass_State.h" />
     <ClInclude Include="LogOutConfirmation.h" />
     <ClInclude Include="RegistrationState.h" />
     <ClInclude Include="RentState.h" />
@@ -216,9 +222,6 @@
     <ClInclude Include="SettingsState.h" />
     <ClInclude Include="SimpleHash.h" />
     <ClInclude Include="State.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Bugs to be resolved.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

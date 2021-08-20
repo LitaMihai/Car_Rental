@@ -50,6 +50,9 @@
     <Filter Include="EmailVerificationState">
       <UniqueIdentifier>{f7502e0a-7f20-4e96-adca-9f680965e51a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ForgotPass/Code/NewPassState">
+      <UniqueIdentifier>{dc0ef5c9-ab7d-49ba-8a66-1295fdfe1f1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -100,6 +103,15 @@
     <ClCompile Include="EmailVerificationState.cpp">
       <Filter>EmailVerificationState</Filter>
     </ClCompile>
+    <ClCompile Include="ForgotPassState.cpp">
+      <Filter>ForgotPass/Code/NewPassState</Filter>
+    </ClCompile>
+    <ClCompile Include="ForgotPassCodeState.cpp">
+      <Filter>ForgotPass/Code/NewPassState</Filter>
+    </ClCompile>
+    <ClCompile Include="ForgotPass_NewPass_State.cpp">
+      <Filter>ForgotPass/Code/NewPassState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -147,8 +159,14 @@
     <ClInclude Include="EmailVerificationState.h">
       <Filter>EmailVerificationState</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Bugs to be resolved.txt" />
+    <ClInclude Include="ForgotPassState.h">
+      <Filter>ForgotPass/Code/NewPassState</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgotPassCodeState.h">
+      <Filter>ForgotPass/Code/NewPassState</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgotPass_NewPass_State.h">
+      <Filter>ForgotPass/Code/NewPassState</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

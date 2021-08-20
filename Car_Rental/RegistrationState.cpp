@@ -223,13 +223,15 @@ bool RegistrationState::isRegistrated(std::string email)
 		else
 			return false;
 	}
-	else return false;
+	else {
+		std::cout << "\n\n\nDATABASE NOT CONNECTED - REGISTRATION_STATE!\n\n\n";
+		return false;
+	}
 }
 
 bool RegistrationState::emailValid(std::string email)
 {
 	EmailValidation email1(email);
-
 	return email1.isValid();
 }
 
@@ -493,24 +495,10 @@ void RegistrationState::renderText(sf::RenderTarget* target)
 	target->draw(this->emailLabel);
 	target->draw(this->passwordLabel);
 	target->draw(this->confirmPasswordLabel);
-}
-
-void RegistrationState::renderButtons(sf::RenderTarget* target)
-{
-	for (auto& it : this->buttons)
-		it.second->render(target);
-}
-
-void RegistrationState::render(sf::RenderTarget* target)
-{
-	target->draw(this->background);
-	this->renderButtons(target);
-	this->renderText(target);
 
 	target->draw(this->emailText);
 	target->draw(this->passwordText);
 	target->draw(this->confirmPasswordText);
-	target->draw(this->showButtonSprite);
 
 	if (!this->samePasswords)
 		target->draw(this->failedConfirmation);
@@ -518,8 +506,24 @@ void RegistrationState::render(sf::RenderTarget* target)
 		target->draw(this->pleaseEnterAPassword);
 	if (this->accountAlreadyRegistered)
 		target->draw(this->accountAlreadyRegisteredText);
-	if (!this->validEmail) 
+	if (!this->validEmail)
 		target->draw(this->emailIsNotValid);
+}
+
+void RegistrationState::renderButtons(sf::RenderTarget* target)
+{
+	for (auto& it : this->buttons)
+		it.second->render(target);
+
+	target->draw(this->showButtonSprite);
+}
+
+void RegistrationState::render(sf::RenderTarget* target)
+{
+	target->draw(this->background);
+
+	this->renderButtons(target);
+	this->renderText(target);
 	
 	this->window->display();
 }

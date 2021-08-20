@@ -1,19 +1,17 @@
-#include "EmailVerificationState.h"
+#include "ForgotPassState.h"
 
-void EmailVerificationState::initVariables()
+void ForgotPassState::initVariables()
 {
-	this->codeInput = "";
-	this->codeText.setString("");
-	this->codeLabel.setString("");
+	this->emailInput = "";
+	this->emailText.setString("");
+	this->emailLabel.setString("");
 
-	this->incorrectCode.setString("");
-
-	this->email.setString("");
-	this->anEmailWasSent.setString("An email with a code was sent to:");
-	this->pleaseEnterTheCodeBelow.setString("Please enter the code below");
+	this->pleaseEnterYourEmail.setString("Please enter your email below");
+	this->forgotPass.setString("Forgot Password?");
+	this->emailIsNotValid.setString("");
 }
 
-void EmailVerificationState::initBackground()
+void ForgotPassState::initBackground()
 {
 	this->background.setSize(
 		sf::Vector2f(
@@ -28,48 +26,42 @@ void EmailVerificationState::initBackground()
 	this->background.setTexture(&this->backgroundTexture);
 }
 
-void EmailVerificationState::initFonts()
+void ForgotPassState::initFonts()
 {
 	if (!this->font.loadFromFile("Resources/Font/Dosis-Light.ttf"))
 		throw("ERROR::MAINMENUSTATE::COULD NOT LOAD FONT");
 }
 
-void EmailVerificationState::initText()
+void ForgotPassState::initText()
 {
-	this->codeLabel.setFont(this->font);
-	this->codeLabel.setFillColor(sf::Color::White);
-	this->codeLabel.setCharacterSize(40);
-	this->codeLabel.setPosition(sf::Vector2f(80, 315));
-	this->codeLabel.setString("Code");
+	this->emailLabel.setFont(this->font);
+	this->emailLabel.setFillColor(sf::Color::White);
+	this->emailLabel.setCharacterSize(40);
+	this->emailLabel.setPosition(sf::Vector2f(80, 315));
+	this->emailLabel.setString("Email");
 
-	this->incorrectCode.setFont(this->font);
-	this->incorrectCode.setFillColor(sf::Color::White);
-	this->incorrectCode.setCharacterSize(32);
-	this->incorrectCode.setPosition(sf::Vector2f(20, 450));
+	this->pleaseEnterYourEmail.setFont(this->font);
+	this->pleaseEnterYourEmail.setFillColor(sf::Color::White);
+	this->pleaseEnterYourEmail.setCharacterSize(30);
+	this->pleaseEnterYourEmail.setPosition(sf::Vector2f(320, 280));
 
-	this->codeText.setFont(this->font);
-	this->codeText.setFillColor(sf::Color::Black);
-	this->codeText.setCharacterSize(28);
-	this->codeText.setPosition(sf::Vector2f(255, 323));
+	this->forgotPass.setFont(this->font);
+	this->forgotPass.setFillColor(sf::Color::White);
+	this->forgotPass.setCharacterSize(40);
+	this->forgotPass.setPosition(sf::Vector2f(280, 40));
 
-	this->email.setFont(this->font);
-	this->email.setFillColor(sf::Color::White);
-	this->email.setCharacterSize(40);
-	this->email.setPosition(sf::Vector2f(220, 90));
-	this->email.setString(this->emailString);
+	this->emailText.setFont(this->font);
+	this->emailText.setFillColor(sf::Color::Black);
+	this->emailText.setCharacterSize(28);
+	this->emailText.setPosition(sf::Vector2f(255, 323));
 
-	this->anEmailWasSent.setFillColor(sf::Color::White);
-	this->anEmailWasSent.setCharacterSize(40);
-	this->anEmailWasSent.setPosition(sf::Vector2f(150, 40));
-	this->anEmailWasSent.setFont(this->font);
-
-	this->pleaseEnterTheCodeBelow.setFillColor(sf::Color::White);
-	this->pleaseEnterTheCodeBelow.setCharacterSize(30);
-	this->pleaseEnterTheCodeBelow.setPosition(sf::Vector2f(320, 280));
-	this->pleaseEnterTheCodeBelow.setFont(this->font);
+	this->emailIsNotValid.setFont(this->font);
+	this->emailIsNotValid.setFillColor(sf::Color::Red);
+	this->emailIsNotValid.setCharacterSize(32);
+	this->emailIsNotValid.setPosition(sf::Vector2f(250, 450));
 }
 
-void EmailVerificationState::initButtons()
+void ForgotPassState::initButtons()
 {
 	this->buttons["CANCEL"] = new Button(
 		620.f, 490.f, 100.f, 70.f,
@@ -87,7 +79,7 @@ void EmailVerificationState::initButtons()
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
 	);
 
-	this->buttons["CODE"] = new Button(
+	this->buttons["EMAIL"] = new Button(
 		250.f, 325.f, 500.f, 35.f,
 		&this->font,
 		"", 50,
@@ -96,26 +88,23 @@ void EmailVerificationState::initButtons()
 	);
 }
 
-bool EmailVerificationState::codeVerif(std::string codeInput)
+bool ForgotPassState::emailValid(std::string email)
 {
-	if (this->code == atoi(codeInput.c_str())) 
-		return true;
-
-	return false;
+	EmailValidation email1(email);
+	return email1.isValid();
 }
 
-bool EmailVerificationState::addAccount(std::string email, std::string password)
+bool ForgotPassState::isRegistrated(std::string email)
 {
 	if (this->accountDataBase->isConnected()) {
 		MYSQL_RES* result;
 		MYSQL_ROW row = NULL;
+		int query_rez;
+		bool ok = false;
 
-		Hash_t hashedPassword(password);
-		password = hashedPassword.ReturnHash();
+		std::string query = "SELECT `Email` FROM `users` WHERE `Email` = '" + email + "'"; //the query
 
-		std::string query = "INSERT INTO `users`(`ID`, `Email`, `Password`) VALUES (0, '" + email + "', '" + password + "')"; //the query
-
-		mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
+		query_rez = mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
 
 		result = mysql_store_result(this->accountDataBase->getConnection()); //store the result
 
@@ -123,15 +112,18 @@ bool EmailVerificationState::addAccount(std::string email, std::string password)
 			row = mysql_fetch_row(result);
 		mysql_free_result(result);
 
-		if (!row)
+		if (row)
 			return true;
 		else
 			return false;
 	}
-	else return false;
+	else {
+		std::cout << "\n\n\nDATABASE NOT CONNECTED - FORGOT_PASS_STATE!\n\n\n";
+		return false;
+	}
 }
 
-size_t EmailVerificationState::payload_source(char* ptr, size_t size, size_t nmemb, void* userp)
+size_t ForgotPassState::payload_source(char* ptr, size_t size, size_t nmemb, void* userp)
 {
 	struct upload_status* upload_ctx = (struct upload_status*)userp;
 	const char* data;
@@ -156,7 +148,7 @@ size_t EmailVerificationState::payload_source(char* ptr, size_t size, size_t nme
 	return 0;
 }
 
-int EmailVerificationState::sendEmail(std::string email)
+int ForgotPassState::sendEmail(std::string email)
 {
 	srand(time(NULL));
 
@@ -227,46 +219,43 @@ int EmailVerificationState::sendEmail(std::string email)
 	return (int)res;
 }
 
-EmailVerificationState::EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* emailString, std::string* password) : State(window, states), emailString(*emailString), password(*password), accountDataBase(accountDataBase)
+ForgotPassState::ForgotPassState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states), accountDataBase(accountDataBase)
 {
 	this->initVariables();
 	this->initBackground();
 	this->initFonts();
 	this->initText();
 	this->initButtons();
-
-	// Email Verification state
-	this->sendEmail(this->emailString);
 }
 
-EmailVerificationState::~EmailVerificationState()
+ForgotPassState::~ForgotPassState()
 {
 	auto it = this->buttons.begin();
 	for (it = this->buttons.begin(); it != this->buttons.end(); ++it)
 		delete it->second;
 }
 
-void EmailVerificationState::updateSFMLEvents()
+void ForgotPassState::updateSFMLEvents()
 {
 	while (this->window->pollEvent(this->event)) {
 		if (this->event.type == sf::Event::Closed) {
 			this->endState();
 			this->window->close();
 		}
-			
+
 		if (this->event.type == sf::Event::TextEntered)
 			if (std::isprint(this->event.text.unicode))
-				this->codeInput += this->event.text.unicode;
+				this->emailInput += this->event.text.unicode;
 
 		if (this->event.type == sf::Event::KeyPressed) {
 			if (this->event.key.code == sf::Keyboard::BackSpace)
-				if (!codeInput.empty())
-					this->codeInput.pop_back();
+				if (!emailInput.empty())
+					this->emailInput.pop_back();
 		}
 	}
 }
 
-void EmailVerificationState::updateCursor()
+void ForgotPassState::updateCursor()
 {
 	this->text_effect_time += this->clock.restart();
 	if (this->text_effect_time >= sf::seconds(0.5f)) {
@@ -274,30 +263,31 @@ void EmailVerificationState::updateCursor()
 		this->text_effect_time = sf::Time::Zero;
 	}
 
-	this->codeText.setString(this->codeInput + (show_cursor ? '|' : ' '));
+	this->emailText.setString(this->emailInput + (show_cursor ? '|' : ' '));
 }
 
-void EmailVerificationState::updateButtons()
+void ForgotPassState::updateButtons()
 {
 	for (auto& it : this->buttons)
 		it.second->update(this->mousePosView);
 
 	if (this->buttons["CONFIRM"]->isPressed()) {
-		if (codeVerif(this->codeInput)) {
+		// Verifing the email sending the mail etc
+		if (emailValid(this->emailInput)) {
 
-			// Adding the account in the database.
-			if (this->addAccount(this->emailString, this->password)) 
-				std::cout << "Account registrated!";
+			if (isRegistrated(this->emailInput)) {
+				// Send email
+				this->sendEmail(this->emailInput);
+			}
 
-			else
-				std::cout << "Account wasn't registrared!";
-			
-			this->endState();
-			this->states->pop();
-			this->states->top()->endState();
+			// Next State
+			this->states->push(new ForgotPassCodeState(this->window, this->states, this->accountDataBase, &this->emailInput, &this->code));
 		}
-		else 
-			this->incorrectCode.setString("The code is not correct!!!");
+		else {
+			// Email not valid
+			this->emailIsNotValid.setString("Email is not valid!");
+		}
+
 	}
 
 	if (this->buttons["CANCEL"]->isPressed()) {
@@ -306,7 +296,7 @@ void EmailVerificationState::updateButtons()
 	}
 }
 
-void EmailVerificationState::update()
+void ForgotPassState::update()
 {
 	this->updateSFMLEvents();
 	this->updateCursor();
@@ -314,25 +304,23 @@ void EmailVerificationState::update()
 	this->updateButtons();
 }
 
-void EmailVerificationState::renderText(sf::RenderTarget* target)
+void ForgotPassState::renderText(sf::RenderTarget* target)
 {
-	target->draw(this->codeLabel);
+	target->draw(this->emailLabel);
+	target->draw(this->emailText);
+	target->draw(this->emailIsNotValid);
 
-	target->draw(this->email);
-	target->draw(this->anEmailWasSent);
-	target->draw(this->pleaseEnterTheCodeBelow);
-
-	target->draw(this->codeText);
-	target->draw(this->incorrectCode);
+	target->draw(this->pleaseEnterYourEmail);
+	target->draw(this->forgotPass);
 }
 
-void EmailVerificationState::renderButtons(sf::RenderTarget* target)
+void ForgotPassState::renderButtons(sf::RenderTarget* target)
 {
 	for (auto& it : this->buttons)
 		it.second->render(target);
 }
 
-void EmailVerificationState::render(sf::RenderTarget* target)
+void ForgotPassState::render(sf::RenderTarget* target)
 {
 	target->draw(this->background);
 

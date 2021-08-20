@@ -136,6 +136,14 @@ void AccountState::initButtons()
 		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 255)
 	);
 
+	this->buttons["FORGOT_PASS"] = new Button(
+		50.f, 22.f, 175.f, 35.f,
+		&this->font,
+		"Forgot Pass?", 35,
+		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+
 	// Init the hide password button
 	this->showButtonTexture.loadFromFile("Resources/Images/Show_Hide_Buttons/Hide button.png");
 	this->showButtonTexture.setSmooth(true);
@@ -313,6 +321,14 @@ void AccountState::updateButtons()
 		}
 
 		this->showButtonSprite.setTexture(this->showButtonTexture);
+	}
+
+	if (this->buttons["FORGOT_PASS"]->isPressed()) {
+		// Forgot pass state
+		this->states->push(new ForgotPassState(this->window, this->states, this->accountDataBase));
+		this->emailInput = "";
+		this->passwordInput = "";
+		this->passwordAsterisk = "";
 	}
 }
 
