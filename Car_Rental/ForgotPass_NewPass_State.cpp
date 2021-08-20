@@ -162,6 +162,7 @@ bool ForgotPass_NewPass_State::changePassword(std::string pass)
 		else
 			return false;
 	}
+	return false;
 }
 
 ForgotPass_NewPass_State::ForgotPass_NewPass_State(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* email) : State(window, states), accountDataBase(accountDataBase), email(email)
