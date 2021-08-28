@@ -41,17 +41,26 @@
     <Filter Include="SettingsState">
       <UniqueIdentifier>{bc8f6c33-42c6-41f4-a757-e0dbf47ba3c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DesignSettings">
-      <UniqueIdentifier>{0de4a965-b6c2-48aa-a7bf-0783ee3a07de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="LogOutConfirmation">
       <UniqueIdentifier>{f5c415a2-52c8-44bc-9edb-78d24bf97026}</UniqueIdentifier>
     </Filter>
     <Filter Include="EmailVerificationState">
       <UniqueIdentifier>{f7502e0a-7f20-4e96-adca-9f680965e51a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ForgotPass/Code/NewPassState">
+    <Filter Include="ForgotPassState">
       <UniqueIdentifier>{dc0ef5c9-ab7d-49ba-8a66-1295fdfe1f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ForgotPassState\NewPass">
+      <UniqueIdentifier>{dff58e9f-970c-4c79-9873-eb8e16d1cff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ForgotPassState\Code">
+      <UniqueIdentifier>{841a57ae-8b70-4b19-b5dc-eff742a15777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SettingsState\Covid_Settings">
+      <UniqueIdentifier>{e16e824b-2338-4781-a57a-255de048a9a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SettingsState\Design_Settings">
+      <UniqueIdentifier>{0de4a965-b6c2-48aa-a7bf-0783ee3a07de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +104,7 @@
       <Filter>SettingsState</Filter>
     </ClCompile>
     <ClCompile Include="DesignSettings.cpp">
-      <Filter>DesignSettings</Filter>
+      <Filter>SettingsState\Design_Settings</Filter>
     </ClCompile>
     <ClCompile Include="LogOutConfirmation.cpp">
       <Filter>LogOutConfirmation</Filter>
@@ -104,13 +113,16 @@
       <Filter>EmailVerificationState</Filter>
     </ClCompile>
     <ClCompile Include="ForgotPassState.cpp">
-      <Filter>ForgotPass/Code/NewPassState</Filter>
+      <Filter>ForgotPassState</Filter>
     </ClCompile>
-    <ClCompile Include="ForgotPassCodeState.cpp">
-      <Filter>ForgotPass/Code/NewPassState</Filter>
+    <ClCompile Include="Settings_Covid_State.cpp">
+      <Filter>SettingsState\Covid_Settings</Filter>
     </ClCompile>
     <ClCompile Include="ForgotPass_NewPass_State.cpp">
-      <Filter>ForgotPass/Code/NewPassState</Filter>
+      <Filter>ForgotPassState\NewPass</Filter>
+    </ClCompile>
+    <ClCompile Include="ForgotPassCodeState.cpp">
+      <Filter>ForgotPassState\Code</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +163,7 @@
       <Filter>SettingsState</Filter>
     </ClInclude>
     <ClInclude Include="DesignSettings.h">
-      <Filter>DesignSettings</Filter>
+      <Filter>SettingsState\Design_Settings</Filter>
     </ClInclude>
     <ClInclude Include="LogOutConfirmation.h">
       <Filter>LogOutConfirmation</Filter>
@@ -160,13 +172,16 @@
       <Filter>EmailVerificationState</Filter>
     </ClInclude>
     <ClInclude Include="ForgotPassState.h">
-      <Filter>ForgotPass/Code/NewPassState</Filter>
+      <Filter>ForgotPassState</Filter>
     </ClInclude>
-    <ClInclude Include="ForgotPassCodeState.h">
-      <Filter>ForgotPass/Code/NewPassState</Filter>
+    <ClInclude Include="Settings_Covid_State.h">
+      <Filter>SettingsState\Covid_Settings</Filter>
     </ClInclude>
     <ClInclude Include="ForgotPass_NewPass_State.h">
-      <Filter>ForgotPass/Code/NewPassState</Filter>
+      <Filter>ForgotPassState\NewPass</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgotPassCodeState.h">
+      <Filter>ForgotPassState\Code</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

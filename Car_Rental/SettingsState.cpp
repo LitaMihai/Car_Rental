@@ -4,6 +4,7 @@ void SettingsState::initWindow(sf::RenderWindow* window)
 {
 	this->prevWindow = window;
 	this->prevWindow->setActive(false);
+	this->prevWindow->setVisible(false);
 
 	std::string title = "Car Rental";
 	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
@@ -138,6 +139,7 @@ void SettingsState::updateSFMLEvents()
 {
 	while (this->window->pollEvent(this->event)) {
 		if (this->event.type == sf::Event::Closed) {
+			this->prevWindow->setVisible(true);
 			this->prevWindow->setActive(true);
 			this->window->close();
 			this->endState();
@@ -153,7 +155,11 @@ void SettingsState::updateButtons()
 	if (this->buttons["DESIGN_SETTINGS"]->isPressed())
 		this->states->push(new DesignSettings(this->window, this->states));
 
+	if (this->buttons["COVID_19"]->isPressed())
+		this->states->push(new Settings_Covid_State(this->window, this->states));
+
 	if (this->buttons["CLOSE"]->isPressed()) {
+		this->prevWindow->setVisible(true);
 		this->prevWindow->setActive(true);
 		this->window->close();
 		this->endState();

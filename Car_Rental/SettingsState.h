@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Button.h"
 #include "DesignSettings.h"
+#include "Settings_Covid_State.h"
 
 class SettingsState : public State
 {

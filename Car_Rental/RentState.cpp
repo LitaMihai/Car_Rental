@@ -113,5 +113,6 @@ void RentState::render(sf::RenderTarget* target)
 
 	target->draw(this->rented);
 	this->renderButtons(target);
+
 	this->window->display();
 }

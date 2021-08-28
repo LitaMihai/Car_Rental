@@ -7,7 +7,6 @@ class RentState : public State {
 
 private:
 	// Variables
-
 	sf::RenderWindow* prevWindow;
 	sf::RenderWindow* window;
 	std::vector<sf::VideoMode> videoModes;
