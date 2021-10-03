@@ -37,6 +37,5 @@ public:
 	void renderText(sf::RenderTarget* target);
 	void renderButtons(sf::RenderTarget* target);
 	void render(sf::RenderTarget* target = NULL);
-
 };
 

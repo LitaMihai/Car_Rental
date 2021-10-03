@@ -5,7 +5,7 @@
 #include "RegistrationState.h"
 #include "DbConnection.h"
 
-#include "SettingsState.h"
+#include "Contacts.h"
 
 class Application{
 

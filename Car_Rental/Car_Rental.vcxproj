@@ -183,6 +183,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Contacts.cpp" />
     <ClCompile Include="AccountState.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Contacts.h" />
     <ClInclude Include="AccountState.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Button.h" />

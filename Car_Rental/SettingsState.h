@@ -4,6 +4,7 @@
 #include "Button.h"
 #include "DesignSettings.h"
 #include "Settings_Covid_State.h"
+#include "Contacts.h"
 
 class SettingsState : public State
 {
@@ -16,7 +17,6 @@ private:
 
 	std::map<std::string, Button*> buttons;
 
-	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;
 

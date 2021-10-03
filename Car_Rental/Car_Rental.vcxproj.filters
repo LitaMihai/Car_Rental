@@ -62,6 +62,9 @@
     <Filter Include="SettingsState\Design_Settings">
       <UniqueIdentifier>{0de4a965-b6c2-48aa-a7bf-0783ee3a07de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SettingsState\Contacts">
+      <UniqueIdentifier>{34e76922-7e81-4a49-8bc7-91d856cea63c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Car_Rental_Main.cpp">
@@ -124,6 +127,9 @@
     <ClCompile Include="ForgotPassCodeState.cpp">
       <Filter>ForgotPassState\Code</Filter>
     </ClCompile>
+    <ClCompile Include="Contacts.cpp">
+      <Filter>SettingsState\Contacts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DbConnection.h">
@@ -182,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="ForgotPassCodeState.h">
       <Filter>ForgotPassState\Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Contacts.h">
+      <Filter>SettingsState\Contacts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
