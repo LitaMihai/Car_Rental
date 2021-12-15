@@ -1,0 +1,53 @@
+#ifndef APPLICATION_H
+#define APPLICATION_H
+
+#include "State.h"
+#include "AccountState.h"
+#include "RegistrationState.h"
+#include "DbConnection.h"
+
+#include "Contacts.h"
+
+class Application{
+
+private:
+	//Variables
+	sf::RenderWindow* window;
+	sf::Event sfEvent;
+	sf::ContextSettings windowSettings;
+	bool fullscreen;
+
+	bool updateApp;
+
+	DbConnection dataBase;
+
+	std::stack<State*> states;
+
+	sf::Image icon;
+
+	//Initializations
+	void initVariables();
+	void initWindow();
+	void initStates();
+	void initDB();
+
+public:
+
+	//Constructor - Destructor
+	Application();
+	virtual ~Application();
+
+	//Functions
+	void endApplication();
+
+	//Update
+	void update();
+
+	//Render
+	void render();
+
+	//Core
+	void run();
+};
+
+#endif

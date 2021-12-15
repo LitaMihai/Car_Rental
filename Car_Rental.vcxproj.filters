@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{a5c0f249-6e3e-4048-a024-461eba62fad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{c7232e8e-7fae-4507-b85f-100accccd4c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Button">
+      <UniqueIdentifier>{0a6fe075-473e-455f-8fbd-f9f297f71e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RegistrationState">
+      <UniqueIdentifier>{371e1dcb-0214-4df6-97d3-f47c465ef4ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AccountState">
+      <UniqueIdentifier>{daf9fcb0-d064-4835-8dd9-b95826ba82b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Database">
+      <UniqueIdentifier>{e6c3839b-b317-434d-b810-8e92221a32b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SearchState">
+      <UniqueIdentifier>{84c3401d-c448-41dd-aab3-b66666ce06a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PassHash">
+      <UniqueIdentifier>{0b6cfcb7-57b2-4303-b6fd-a9b3b91c9c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EmailValidation">
+      <UniqueIdentifier>{371b7f7d-9216-40df-b061-aebd4f3ce40c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RentState">
+      <UniqueIdentifier>{e2467c01-1917-4e8a-8cb6-d39c5aab4582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DetailsState">
+      <UniqueIdentifier>{272bd18b-4692-4caf-98b7-3a39c14d1778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SettingsState">
+      <UniqueIdentifier>{bc8f6c33-42c6-41f4-a757-e0dbf47ba3c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogOutConfirmation">
+      <UniqueIdentifier>{f5c415a2-52c8-44bc-9edb-78d24bf97026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EmailVerificationState">
+      <UniqueIdentifier>{f7502e0a-7f20-4e96-adca-9f680965e51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ForgotPassState">
+      <UniqueIdentifier>{dc0ef5c9-ab7d-49ba-8a66-1295fdfe1f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ForgotPassState\NewPass">
+      <UniqueIdentifier>{dff58e9f-970c-4c79-9873-eb8e16d1cff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ForgotPassState\Code">
+      <UniqueIdentifier>{841a57ae-8b70-4b19-b5dc-eff742a15777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SettingsState\Covid_Settings">
+      <UniqueIdentifier>{e16e824b-2338-4781-a57a-255de048a9a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SettingsState\Design_Settings">
+      <UniqueIdentifier>{0de4a965-b6c2-48aa-a7bf-0783ee3a07de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SettingsState\Contacts">
+      <UniqueIdentifier>{34e76922-7e81-4a49-8bc7-91d856cea63c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Car_Rental_Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="DbConnection.cpp">
+      <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="AccountState.cpp">
+      <Filter>AccountState</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Button</Filter>
+    </ClCompile>
+    <ClCompile Include="RegistrationState.cpp">
+      <Filter>RegistrationState</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchState.cpp">
+      <Filter>SearchState</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleHash.cpp">
+      <Filter>PassHash</Filter>
+    </ClCompile>
+    <ClCompile Include="EmailValidation.cpp">
+      <Filter>EmailValidation</Filter>
+    </ClCompile>
+    <ClCompile Include="RentState.cpp">
+      <Filter>RentState</Filter>
+    </ClCompile>
+    <ClCompile Include="DetailsState.cpp">
+      <Filter>DetailsState</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsState.cpp">
+      <Filter>SettingsState</Filter>
+    </ClCompile>
+    <ClCompile Include="DesignSettings.cpp">
+      <Filter>SettingsState\Design_Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="LogOutConfirmation.cpp">
+      <Filter>LogOutConfirmation</Filter>
+    </ClCompile>
+    <ClCompile Include="EmailVerificationState.cpp">
+      <Filter>EmailVerificationState</Filter>
+    </ClCompile>
+    <ClCompile Include="ForgotPassState.cpp">
+      <Filter>ForgotPassState</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings_Covid_State.cpp">
+      <Filter>SettingsState\Covid_Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="ForgotPass_NewPass_State.cpp">
+      <Filter>ForgotPassState\NewPass</Filter>
+    </ClCompile>
+    <ClCompile Include="ForgotPassCodeState.cpp">
+      <Filter>ForgotPassState\Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Contacts.cpp">
+      <Filter>SettingsState\Contacts</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DbConnection.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="AccountState.h">
+      <Filter>AccountState</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Button</Filter>
+    </ClInclude>
+    <ClInclude Include="RegistrationState.h">
+      <Filter>RegistrationState</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchState.h">
+      <Filter>SearchState</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleHash.h">
+      <Filter>PassHash</Filter>
+    </ClInclude>
+    <ClInclude Include="EmailValidation.h">
+      <Filter>EmailValidation</Filter>
+    </ClInclude>
+    <ClInclude Include="RentState.h">
+      <Filter>RentState</Filter>
+    </ClInclude>
+    <ClInclude Include="DetailsState.h">
+      <Filter>DetailsState</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsState.h">
+      <Filter>SettingsState</Filter>
+    </ClInclude>
+    <ClInclude Include="DesignSettings.h">
+      <Filter>SettingsState\Design_Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="LogOutConfirmation.h">
+      <Filter>LogOutConfirmation</Filter>
+    </ClInclude>
+    <ClInclude Include="EmailVerificationState.h">
+      <Filter>EmailVerificationState</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgotPassState.h">
+      <Filter>ForgotPassState</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings_Covid_State.h">
+      <Filter>SettingsState\Covid_Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgotPass_NewPass_State.h">
+      <Filter>ForgotPassState\NewPass</Filter>
+    </ClInclude>
+    <ClInclude Include="ForgotPassCodeState.h">
+      <Filter>ForgotPassState\Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Contacts.h">
+      <Filter>SettingsState\Contacts</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
