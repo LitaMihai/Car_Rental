@@ -5,7 +5,9 @@
 #include "Button.h"
 #include "DesignSettings.h"
 #include "Settings_Covid_State.h"
+#include "About_us.h"
 #include "Contacts.h"
+#include "AccountSettings.h"
 
 class SettingsState : public State
 {
