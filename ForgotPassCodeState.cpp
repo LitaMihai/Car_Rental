@@ -121,6 +121,9 @@ ForgotPassCodeState::ForgotPassCodeState(sf::RenderWindow* window, std::stack<St
 
 ForgotPassCodeState::~ForgotPassCodeState()
 {
+	auto it = this->buttons.begin();
+	for (it = this->buttons.begin(); it != this->buttons.end(); ++it)
+		delete it->second;
 }
 
 void ForgotPassCodeState::updateSFMLEvents()

@@ -6,7 +6,7 @@
 #include "RegistrationState.h"
 #include "DbConnection.h"
 
-#include "Contacts.h"
+#include "AccountSettings.h" // TO BE DELETED
 
 class Application{
 
@@ -19,8 +19,6 @@ private:
 
 	bool updateApp;
 
-	DbConnection dataBase;
-
 	std::stack<State*> states;
 
 	sf::Image icon;
@@ -29,10 +27,8 @@ private:
 	void initVariables();
 	void initWindow();
 	void initStates();
-	void initDB();
 
 public:
-
 	//Constructor - Destructor
 	Application();
 	virtual ~Application();

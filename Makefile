@@ -16,6 +16,11 @@ CURL_L = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/cu
 CC = g++
 INCLUDES = -I$(MYSQL) -I$(CURL) -I$(JSON) -I$(SFML) -I$(WORKINGDIR)
 
+build_and_run:
+	make build
+	make link
+	make run
+
 build:
 	$(CC) -c *.cpp $(INCLUDES)
 
@@ -24,11 +29,6 @@ link:
 
 run:
 	./Car_Rental.exe
-
-build_and_run:
-	make build
-	make link
-	make run
 
 clean:
 	rm -f *.o

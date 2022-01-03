@@ -13,12 +13,20 @@
 #include <thread>
 #include <chrono>
 
+#include "Application.h"
+
 #include "SFML/Graphics.hpp"
 #include "SFML/System.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/Audio.hpp"
 #include "SFML/Network.hpp"
 #include "DbConnection.h"
+
+// Global Variables
+	DbConnection database;
+	sf::Font font;
+	sf::Texture backgroundTexture;
+    sf::RectangleShape background;
 
 class State
 {
@@ -30,6 +38,11 @@ protected:
 
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
+
+private:
+	void initDB();
+	void initFont();
+	void initBackground();
 
 public:
 	State(sf::RenderWindow* window, std::stack<State*>* states);
