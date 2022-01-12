@@ -1,8 +1,9 @@
-#pragma once
+#ifndef DETAILSSTATE_H
+#define DETAILSSTATE_H
 
 #include "State.h"
 #include "Button.h"
-#include "Json/single_include/nlohmann/json.hpp"
+#include "single_include/nlohmann/json.hpp"
 
 using json = nlohmann::json;
 
@@ -74,3 +75,5 @@ public:
 	void renderButtons(sf::RenderTarget* target = NULL);
 	void render(sf::RenderTarget* target = NULL);
 };
+
+#endif

@@ -154,7 +154,8 @@ int ForgotPassState::sendEmail(std::string email)
 
 	char securityCode[5];
 	this->code = rand() % 9000 + 1000;
-	_itoa(this->code, securityCode, 10);
+	//_itoa(this->code, securityCode, 10);
+	sprintf(securityCode, "%d", this->code);
 
 	strcpy(payload_text,
 		"To: "

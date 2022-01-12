@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SETTINGS_COVID_STATE_H
+#define SETTINGS_COVID_STATE_H
 
 #include "State.h"
 #include "Button.h"
@@ -39,3 +40,4 @@ public:
 	void render(sf::RenderTarget* target = NULL);
 };
 
+#endif

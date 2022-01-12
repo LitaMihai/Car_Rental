@@ -51,21 +51,13 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-    this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
-}
-
-void Application::initDB()
-{
-    this->dataBase.declareConnection("remotemysql.com", "KXi0qciACI", "ZuQeO7OlVy", "KXi0qciACI", 3306, NULL, 0);
-    this->dataBase.initConnection();
-    if (this->dataBase.isConnected())
-        std::cout << "M-am conectat la baza de date!";
+    // this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
+    this->states.push(new AccountSettings(this->window, &this->states));
 }
 
 Application::Application()
 {
     this->initVariables();
-    this->initDB();
     this->initWindow();
     this->initStates();
 }

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DESIGNSETTINGS_H
+#define DESIGNSETTINGS_H
 
 #include "State.h"
 #include "Button.h"
@@ -44,3 +45,4 @@ public:
 
 };
 
+#endif

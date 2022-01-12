@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FORGOTPASSSTATE_H
+#define FORGOTPASSSTATE_H
 
 #include "State.h"
 #include "Button.h"
@@ -65,3 +66,4 @@ public:
 	void render(sf::RenderTarget* target = NULL);
 };
 
+#endif

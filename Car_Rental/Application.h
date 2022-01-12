@@ -1,11 +1,12 @@
-#pragma once
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
 #include "State.h"
 #include "AccountState.h"
 #include "RegistrationState.h"
 #include "DbConnection.h"
 
-#include "Contacts.h"
+#include "AccountSettings.h" // TO BE DELETED
 
 class Application{
 
@@ -18,8 +19,6 @@ private:
 
 	bool updateApp;
 
-	DbConnection dataBase;
-
 	std::stack<State*> states;
 
 	sf::Image icon;
@@ -28,10 +27,8 @@ private:
 	void initVariables();
 	void initWindow();
 	void initStates();
-	void initDB();
 
 public:
-
 	//Constructor - Destructor
 	Application();
 	virtual ~Application();
@@ -49,3 +46,4 @@ public:
 	void run();
 };
 
+#endif

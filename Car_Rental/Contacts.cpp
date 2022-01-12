@@ -85,6 +85,7 @@ void Contacts::initButtons()
 
 void Contacts::openLink(std::string link)
 {
+	#ifdef _WIN32
 	// Conversion to wide string
 	int len;
 	int slength = (int)link.length() + 1;
@@ -95,6 +96,12 @@ void Contacts::openLink(std::string link)
 	delete[] buf;
 	
 	ShellExecute(0, 0, r.c_str(), 0, 0, SW_SHOW);
+	#endif
+
+	#ifdef linux
+	std::string command = "xdg-open " + link;
+	system(command.c_str());
+	#endif
 }
 
 Contacts::Contacts(sf::RenderWindow* window, std::stack<State*>* states, sf::Font* font) : State(window, states), font(font)

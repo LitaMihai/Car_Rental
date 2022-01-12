@@ -1,6 +1,5 @@
-#pragma once
-
-
+#ifndef SEARCHSTATE_H
+#define SEARCHSTATE_H
 
 #include "State.h"
 #include "Button.h"
@@ -8,7 +7,7 @@
 #include "SettingsState.h"
 #include "DetailsState.h"
 #include "LogOutConfirmation.h"
-#include "Json/single_include/nlohmann/json.hpp"
+#include "single_include/nlohmann/json.hpp"
 
 using json = nlohmann::json;
 
@@ -85,3 +84,4 @@ public:
 	void render(sf::RenderTarget* target = NULL);
 };
 
+#endif
