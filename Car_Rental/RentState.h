@@ -1,4 +1,5 @@
-#pragma once
+#ifndef RENTSTATE_H
+#define RENTSTATE_H
 
 #include "State.h"
 #include "Button.h"
@@ -45,3 +46,5 @@ public:
 	void renderButtons(sf::RenderTarget* target = NULL);
 	void render(sf::RenderTarget* target = NULL);
 };
+
+#endif

@@ -1,9 +1,9 @@
-#pragma once
+#ifndef CONTACTS_H
+#define CONTACTS_H
 
 #include "State.h"
 #include "Button.h"
 #include <curl/curl.h>
-#include <shellapi.h>
 
 class Contacts : public State
 {
@@ -49,3 +49,4 @@ public:
 	void render(sf::RenderTarget* target = NULL);
 };
 
+#endif

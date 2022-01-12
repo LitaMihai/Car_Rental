@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EMAILVALIDATION_H
+#define EMAILVALIDATION_H
 
 #include <iostream>
 
@@ -16,3 +17,5 @@ public:
 
 	bool isValid();
 };
+
+#endif

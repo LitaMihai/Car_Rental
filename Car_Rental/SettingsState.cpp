@@ -155,11 +155,17 @@ void SettingsState::updateButtons()
 	if (this->buttons["DESIGN_SETTINGS"]->isPressed())
 		this->states->push(new DesignSettings(this->window, this->states));
 
+	if (this->buttons["ACCOUNT_SETTINGS"]->isPressed())
+		this->states->push(new AccountSettings(this->window, this->states));
+		
 	if (this->buttons["CONTACTS"]->isPressed())
 		this->states->push(new Contacts(this->window, this->states, &this->font));
 
 	if (this->buttons["COVID_19"]->isPressed())
 		this->states->push(new Settings_Covid_State(this->window, this->states));
+
+	if (this->buttons["ABOUT_US"]->isPressed())
+		this->states->push(new About_us(this->window, this->states));
 
 	if (this->buttons["CLOSE"]->isPressed()) {
 		this->prevWindow->setVisible(true);

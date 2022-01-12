@@ -1,4 +1,5 @@
-#pragma once
+#ifndef REGISTRATIONSTATE_H
+#define REGISTRATIONSTATE_H
 
 #include "State.h"
 #include "Button.h"
@@ -96,3 +97,4 @@ public:
 	void render(sf::RenderTarget* target = NULL);
 };
 
+#endif

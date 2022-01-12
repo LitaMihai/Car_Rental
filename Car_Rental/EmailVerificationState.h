@@ -1,9 +1,11 @@
-#pragma once
+#ifndef EMAILVERIFICATIONSTATE_H
+#define EMAILVERIFICATIONSTATE_H
 
 #include "State.h"
 #include "Button.h"
 #include "SimpleHash.h"
 #include "curl/curl.h"
+#include <stdlib.h>
 
 struct upload_status {
 	size_t bytes_read;
@@ -79,3 +81,4 @@ public:
 	void render(sf::RenderTarget* target = NULL);
 };
 
+#endif

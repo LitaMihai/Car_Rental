@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DBCONNECTION_H
+#define DBCONNECTION_H
 
 #include <mysql.h>
 #include <iostream>
@@ -33,3 +34,4 @@ public:
 	MYSQL* getConnection();
 };
 
+#endif

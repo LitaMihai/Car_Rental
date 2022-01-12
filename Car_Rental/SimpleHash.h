@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SIMPLEHASH_H
+#define SIMPLEHASH_H
 
 #include <iostream>
 #include <string>
@@ -20,4 +21,4 @@ public:
 	std::string ReturnHash(); // Return the hashed password
 };
 
-
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include "State.h"
 
@@ -48,3 +49,4 @@ public:
 	void render(sf::RenderTarget* target);
 };
 
+#endif

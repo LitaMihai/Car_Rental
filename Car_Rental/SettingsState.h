@@ -1,10 +1,13 @@
-#pragma once
+#ifndef SETTINGSSTATE_H
+#define SETTINGSSTATE_H
 
 #include "State.h"
 #include "Button.h"
 #include "DesignSettings.h"
 #include "Settings_Covid_State.h"
+#include "About_us.h"
 #include "Contacts.h"
+#include "AccountSettings.h"
 
 class SettingsState : public State
 {
@@ -47,3 +50,4 @@ public:
 	void render(sf::RenderTarget* target = NULL);
 };
 
+#endif

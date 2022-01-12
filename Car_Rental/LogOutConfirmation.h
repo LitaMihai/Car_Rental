@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LOGOUTCONFIRMATION_H
+#define LOGOUTCONFIRMATION_H
 
 #include "State.h"
 #include "Button.h"
@@ -46,3 +47,5 @@ public:
 	void renderButtons(sf::RenderTarget* target = NULL);
 	void render(sf::RenderTarget* target = NULL);
 };
+
+#endif
