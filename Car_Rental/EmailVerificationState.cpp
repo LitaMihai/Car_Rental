@@ -106,18 +106,18 @@ bool EmailVerificationState::codeVerif(std::string codeInput)
 
 bool EmailVerificationState::addAccount(std::string email, std::string password)
 {
-	if (this->accountDataBase->isConnected()) {
+	if (database.isConnected()) {
 		MYSQL_RES* result;
 		MYSQL_ROW row = NULL;
 
 		Hash_t hashedPassword(password);
 		password = hashedPassword.ReturnHash();
 
-		std::string query = "INSERT INTO `users`(`ID`, `Email`, `Password`) VALUES (0, '" + email + "', '" + password + "')"; //the query
+		std::string query = "INSERT INTO `Accounts`(`Email`, `Password`) VALUES ('" + email + "', '" + password + "')"; //the query
 
-		mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
+		mysql_query(database.getConnection(), query.c_str()); //send the query
 
-		result = mysql_store_result(this->accountDataBase->getConnection()); //store the result
+		result = mysql_store_result(database.getConnection()); //store the result
 
 		if (result)
 			row = mysql_fetch_row(result);
@@ -228,7 +228,7 @@ int EmailVerificationState::sendEmail(std::string email)
 	return (int)res;
 }
 
-EmailVerificationState::EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* emailString, std::string* password) : State(window, states), emailString(*emailString), password(*password), accountDataBase(accountDataBase)
+EmailVerificationState::EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, std::string* emailString, std::string* password) : State(window, states), emailString(*emailString), password(*password)
 {
 	this->initVariables();
 	this->initBackground();

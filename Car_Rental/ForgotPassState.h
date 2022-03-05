@@ -35,8 +35,6 @@ private:
 
 	int code;
 
-	DbConnection* accountDataBase;
-
 	// Functions
 	void initVariables();
 	void initBackground();
@@ -52,7 +50,7 @@ private:
 
 public:
 	// Constructor - Destructor
-	ForgotPassState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase);
+	ForgotPassState(sf::RenderWindow* window, std::stack<State*>* states);
 	virtual ~ForgotPassState();
 
 	// Functions

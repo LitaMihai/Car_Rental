@@ -152,7 +152,7 @@ void AccountState::initButtons()
 	this->showButtonSprite.setScale(0.3f, 0.3f);
 }
 
-AccountState::AccountState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection *accountDataBase) : State(window, states), accountDataBase(accountDataBase)
+AccountState::AccountState(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states)
 {
 	this->initVariables();
 	this->initBackground();
@@ -210,7 +210,7 @@ void AccountState::updateSFMLEvents()
 
 bool AccountState::verifAccount(std::string email, std::string password)
 {
-	if (this->accountDataBase->isConnected()) {
+	if (database.isConnected()) {
 		MYSQL_RES* result;
 		MYSQL_ROW row = NULL;
 		int query_rez;
@@ -221,9 +221,9 @@ bool AccountState::verifAccount(std::string email, std::string password)
 
 		std::string query = "SELECT `Email`,`Password` FROM `users` WHERE `Email` = '" + email + "' AND `Password` = '" + password + "'"; //the query
 
-		query_rez = mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
+		query_rez = mysql_query(database.getConnection(), query.c_str()); //send the query
 
-		result = mysql_store_result(this->accountDataBase->getConnection()); //store the result
+		result = mysql_store_result(database.getConnection()); //store the result
 
 		if (result)
 			row = mysql_fetch_row(result);
@@ -273,7 +273,7 @@ void AccountState::updateButtons()
 			this->wrongAccount.setString("");
 			this->numberOfFailedEntries = 0;
 			//Next state
-			this->states->push(new SearchState(this->window, this->states, this->accountDataBase));
+			this->states->push(new SearchState(this->window, this->states, &database));
 		}
 		else {
 			std::cout << "\nWrong email or password!";
@@ -286,7 +286,7 @@ void AccountState::updateButtons()
 	//Register an account
 	if (this->buttons["REGISTER"]->isPressed()) {
 		//Register state
-		this->states->push(new RegistrationState(this->window, this->states, this->accountDataBase));
+		this->states->push(new RegistrationState(this->window, this->states));
 		this->emailInput = "";
 		this->passwordInput = "";
 		this->passwordAsterisk = "";
@@ -294,7 +294,7 @@ void AccountState::updateButtons()
 
 	//Quit the app
 	if (this->buttons["EXIT"]->isPressed()) {
-		accountDataBase->closeConnection(accountDataBase->getConn());
+		database.closeConnection(database.getConn());
 		this->endState();
 	}
 		
@@ -325,7 +325,7 @@ void AccountState::updateButtons()
 
 	if (this->buttons["FORGOT_PASS"]->isPressed()) {
 		// Forgot pass state
-		this->states->push(new ForgotPassState(this->window, this->states, this->accountDataBase));
+		this->states->push(new ForgotPassState(this->window, this->states));
 		this->emailInput = "";
 		this->passwordInput = "";
 		this->passwordAsterisk = "";

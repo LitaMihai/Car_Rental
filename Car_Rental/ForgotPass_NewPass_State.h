@@ -40,8 +40,6 @@ private:
 	sf::RectangleShape background;
 	sf::Font font;
 
-	DbConnection* accountDataBase;
-
 	std::map<std::string, Button*> buttons;
 
 	bool writeOnPasswordText;
@@ -59,7 +57,7 @@ private:
 
 public:
 	// Constructor - Destructor
-	ForgotPass_NewPass_State(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* email);
+	ForgotPass_NewPass_State(sf::RenderWindow* window, std::stack<State*>* states, std::string* email);
 	virtual ~ForgotPass_NewPass_State();
 
 	// Functions

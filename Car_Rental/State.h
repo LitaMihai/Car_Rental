@@ -12,21 +12,21 @@
 #include <string.h>
 #include <thread>
 #include <chrono>
+#include <map>
 
-#include "Application.h"
-
-#include "SFML/Graphics.hpp"
-#include "SFML/System.hpp"
-#include "SFML/Window.hpp"
-#include "SFML/Audio.hpp"
-#include "SFML/Network.hpp"
 #include "DbConnection.h"
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <SFML/Network.hpp>
+#include <SFML/Window.hpp>
+#include <SFML/System.hpp>
+
 // Global Variables
-	DbConnection database;
-	sf::Font font;
-	sf::Texture backgroundTexture;
-    sf::RectangleShape background;
+static DbConnection database;
+static sf::Font font;
+static sf::Texture backgroundTexture;
+static sf::RectangleShape background;
 
 class State
 {

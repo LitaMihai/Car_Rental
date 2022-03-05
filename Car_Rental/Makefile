@@ -1,16 +1,16 @@
 #Includes
-SFML = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/SFML-2.5.1/include
-MYSQL = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/mysql-Linux/include
-CURL = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/curl-Linux/include
-JSON = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/Json
+SFML = ./Libraries/SFML-2.5.1/include/
+MYSQL = ./Libraries/mysql-Linux/include
+CURL = ./Libraries/curl-Linux/include
+JSON = ./Libraries/Json/
 
 #WorkingDirectory
-WORKINGDIR = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/
+WORKINGDIR = ./
 
 #Libs
-SFML_L = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/SFML-2.5.1/lib
-MYSQL_L = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/mysql-Linux/lib
-CURL_L = /home/mihai/Visual\ Studio\ Code/Git/Car_Rental/Car_Rental/Libraries/curl-Linux/lib
+SFML_L = ./Libraries/SFML-2.5.1/lib
+MYSQL_L = ./Libraries/mysql-Linux/lib
+CURL_L = ./Libraries/curl-Linux/lib
 
 #Others
 CC = g++

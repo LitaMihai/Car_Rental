@@ -202,7 +202,7 @@ bool RegistrationState::verifPasswords(std::string pass1, std::string pass2)
 
 bool RegistrationState::isRegistrated(std::string email)
 {
-	if (this->accountDataBase->isConnected()) {
+	if (database.isConnected()) {
 		MYSQL_RES* result;
 		MYSQL_ROW row = NULL;
 		int query_rez;
@@ -210,9 +210,9 @@ bool RegistrationState::isRegistrated(std::string email)
 
 		std::string query = "SELECT `Email` FROM `users` WHERE `Email` = '" + email + "'"; //the query
 
-		query_rez = mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
+		query_rez = mysql_query(database.getConnection(), query.c_str()); //send the query
 
-		result = mysql_store_result(this->accountDataBase->getConnection()); //store the result
+		result = mysql_store_result(database.getConnection()); //store the result
 
 		if (result)
 			row = mysql_fetch_row(result);
@@ -235,7 +235,7 @@ bool RegistrationState::emailValid(std::string email)
 	return email1.isValid();
 }
 
-RegistrationState::RegistrationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states), accountDataBase(accountDataBase)
+RegistrationState::RegistrationState(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states)
 {
 	this->initVariables();
 	this->initBackground();
@@ -390,7 +390,7 @@ void RegistrationState::updateButtons()
 						this->failedConfirmation.setString("");
 						this->numberOfFailedPasswordConfirmations = 0;
 
-						this->states->push(new EmailVerificationState(this->window, this->states, this->accountDataBase,  &this->emailInput, &this->passwordInput));
+						this->states->push(new EmailVerificationState(this->window, this->states, &this->emailInput, &this->passwordInput));
 					}
 					else {
 						std::cout << "\nPasswords mismatch!";

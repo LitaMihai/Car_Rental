@@ -34,8 +34,6 @@ private:
 	sf::Time text_effect_time;
 	bool show_cursor;
 
-	DbConnection* accountDataBase;
-
 	// Functions
 	void initVariables();
 	void initBackground();
@@ -47,7 +45,7 @@ private:
 
 public:
 	// Constructor - Destructor
-	ForgotPassCodeState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* emailString, int *code);
+	ForgotPassCodeState(sf::RenderWindow* window, std::stack<State*>* states, std::string* emailString, int *code);
 	virtual ~ForgotPassCodeState();
 
 	// Functions

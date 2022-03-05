@@ -110,7 +110,7 @@ bool ForgotPassCodeState::codeVerif(std::string codeInput)
 	return false;
 }
 
-ForgotPassCodeState::ForgotPassCodeState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* emailString, int* code) : State(window, states), accountDataBase(accountDataBase), code(code), emailString(*emailString)
+ForgotPassCodeState::ForgotPassCodeState(sf::RenderWindow* window, std::stack<State*>* states, std::string* emailString, int* code) : State(window, states), code(code), emailString(*emailString)
 {
 	this->initVariables();
 	this->initBackground();
@@ -164,7 +164,7 @@ void ForgotPassCodeState::updateButtons()
 
 	if (this->buttons["CONFIRM"]->isPressed()) {
 		if (codeVerif(this->codeInput)) {
-			this->states->push(new ForgotPass_NewPass_State(this->window, this->states, this->accountDataBase, &this->emailString));
+			this->states->push(new ForgotPass_NewPass_State(this->window, this->states, &this->emailString));
 		}
 		else {
 			this->incorrectCode.setString("The code is not correct!!!");
