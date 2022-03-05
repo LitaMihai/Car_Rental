@@ -1,6 +1,7 @@
 #include "State.h"
 
 void State::initDB(){
+
 	database.declareConnection("localhost", "aplicatie", "ROOT13", "Car_Rental", 3306, NULL, 0);
     database.initConnection();
     if (database.isConnected())

@@ -14,14 +14,6 @@
 #include <chrono>
 #include <map>
 
-#include "DbConnection.h"
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-
 // Global Variables
 static DbConnection database;
 static sf::Font font;

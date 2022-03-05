@@ -91,7 +91,7 @@ void AccountSettings::renderButtons(sf::RenderTarget* target){
 
 void AccountSettings::render(sf::RenderTarget* target){
     target = this->window;
-	
+  
 	target->draw(background);
 
 	this->renderText(target);

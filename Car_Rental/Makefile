@@ -1,4 +1,5 @@
 #Includes
+
 SFML = ./Libraries/SFML-2.5.1/include/
 MYSQL = ./Libraries/mysql-Linux/include
 CURL = ./Libraries/curl-Linux/include
@@ -11,6 +12,7 @@ WORKINGDIR = ./
 SFML_L = ./Libraries/SFML-2.5.1/lib
 MYSQL_L = ./Libraries/mysql-Linux/lib
 CURL_L = ./Libraries/curl-Linux/lib
+
 
 #Others
 CC = g++
