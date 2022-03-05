@@ -4,8 +4,6 @@ void Application::initVariables()
 {
 	this->window = NULL;
 	this->fullscreen = false;
-    this->updateApp = false;
-  
     char* value = nullptr;
 }
 
@@ -51,8 +49,8 @@ void Application::initWindow()
 
 void Application::initStates()
 {
-    // this->states.push(new AccountState(this->window, &this->states, &this->dataBase));
-    this->states.push(new AccountSettings(this->window, &this->states));
+    this->states.push(new AccountState(this->window, &this->states));
+    //this->states.push(new SearchState(this->window, &this->states, &database));
 }
 
 Application::Application()

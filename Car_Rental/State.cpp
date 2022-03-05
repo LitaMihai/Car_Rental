@@ -1,7 +1,8 @@
 #include "State.h"
 
 void State::initDB(){
-	database.declareConnection("remotemysql.com", "KXi0qciACI", "ZuQeO7OlVy", "KXi0qciACI", 3306, NULL, 0);
+
+	database.declareConnection("localhost", "aplicatie", "ROOT13", "Car_Rental", 3306, NULL, 0);
     database.initConnection();
     if (database.isConnected())
         std::cout << "M-am conectat la baza de date!";

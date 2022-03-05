@@ -138,7 +138,7 @@ bool ForgotPass_NewPass_State::verifPasswords(std::string pass1, std::string pas
 
 bool ForgotPass_NewPass_State::changePassword(std::string pass)
 {
-	if (this->accountDataBase->isConnected()) {
+	if (database.isConnected()) {
 		MYSQL_RES* result;
 		MYSQL_ROW row = NULL;
 		int query_rez;
@@ -149,9 +149,9 @@ bool ForgotPass_NewPass_State::changePassword(std::string pass)
 
 		std::string query = "UPDATE `users` SET `Password`='" + pass + "' WHERE `Email` = '" + *this->email + "'"; //the query
 
-		query_rez = mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
+		query_rez = mysql_query(database.getConnection(), query.c_str()); //send the query
 
-		result = mysql_store_result(this->accountDataBase->getConnection()); //store the result
+		result = mysql_store_result(database.getConnection()); //store the result
 
 		if (result)
 			row = mysql_fetch_row(result);
@@ -165,7 +165,7 @@ bool ForgotPass_NewPass_State::changePassword(std::string pass)
 	return false;
 }
 
-ForgotPass_NewPass_State::ForgotPass_NewPass_State(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* email) : State(window, states), accountDataBase(accountDataBase), email(email)
+ForgotPass_NewPass_State::ForgotPass_NewPass_State(sf::RenderWindow* window, std::stack<State*>* states, std::string* email) : State(window, states), email(email)
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 

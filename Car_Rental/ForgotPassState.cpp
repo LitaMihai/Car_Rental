@@ -96,7 +96,7 @@ bool ForgotPassState::emailValid(std::string email)
 
 bool ForgotPassState::isRegistrated(std::string email)
 {
-	if (this->accountDataBase->isConnected()) {
+	if (database.isConnected()) {
 		MYSQL_RES* result;
 		MYSQL_ROW row = NULL;
 		int query_rez;
@@ -104,9 +104,9 @@ bool ForgotPassState::isRegistrated(std::string email)
 
 		std::string query = "SELECT `Email` FROM `users` WHERE `Email` = '" + email + "'"; //the query
 
-		query_rez = mysql_query(this->accountDataBase->getConnection(), query.c_str()); //send the query
+		query_rez = mysql_query(database.getConnection(), query.c_str()); //send the query
 
-		result = mysql_store_result(this->accountDataBase->getConnection()); //store the result
+		result = mysql_store_result(database.getConnection()); //store the result
 
 		if (result)
 			row = mysql_fetch_row(result);
@@ -220,7 +220,7 @@ int ForgotPassState::sendEmail(std::string email)
 	return (int)res;
 }
 
-ForgotPassState::ForgotPassState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase) : State(window, states), accountDataBase(accountDataBase)
+ForgotPassState::ForgotPassState(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states)
 {
 	this->initVariables();
 	this->initBackground();
@@ -282,7 +282,7 @@ void ForgotPassState::updateButtons()
 			}
 
 			// Next State
-			this->states->push(new ForgotPassCodeState(this->window, this->states, this->accountDataBase, &this->emailInput, &this->code));
+			this->states->push(new ForgotPassCodeState(this->window, this->states, &this->emailInput, &this->code));
 		}
 		else {
 			// Email not valid

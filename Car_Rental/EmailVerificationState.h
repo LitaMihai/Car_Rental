@@ -50,8 +50,6 @@ private:
 	sf::Text anEmailWasSent;
 	sf::Text pleaseEnterTheCodeBelow;
 
-	DbConnection* accountDataBase;
-
 	// Functions
 	void initVariables();
 	void initBackground();
@@ -67,7 +65,7 @@ private:
 
 public:
 	// Constructor - Destructor
-	EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, DbConnection* accountDataBase, std::string* emailString, std::string* password);
+	EmailVerificationState(sf::RenderWindow* window, std::stack<State*>* states, std::string* emailString, std::string* password);
 	virtual ~EmailVerificationState();
 
 	// Functions

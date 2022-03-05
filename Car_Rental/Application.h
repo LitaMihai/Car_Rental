@@ -1,12 +1,10 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "State.h"
 #include "AccountState.h"
-#include "RegistrationState.h"
 #include "DbConnection.h"
 
-#include "AccountSettings.h" // TO BE DELETED
+#include "SearchState.h" // TO BE DELETED
 
 class Application{
 
@@ -16,8 +14,6 @@ private:
 	sf::Event sfEvent;
 	sf::ContextSettings windowSettings;
 	bool fullscreen;
-
-	bool updateApp;
 
 	std::stack<State*> states;
 

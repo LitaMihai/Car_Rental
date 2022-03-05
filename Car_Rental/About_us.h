@@ -1,7 +1,6 @@
 #ifndef ABOUT_US_H
 #define ABOUT_US_H
 
-#include "State.h"
 #include "Button.h"
 
 class About_us : public State

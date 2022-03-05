@@ -1,13 +1,5 @@
 #include "AccountSettings.h"
 
-void AccountSettings::initBackground(){
-   
-}
-
-void AccountSettings::initFonts(){
-    
-}
-
 void AccountSettings::initText(){
     this->accountSettings.setFillColor(sf::Color::White);
 	this->accountSettings.setCharacterSize(40);
@@ -46,9 +38,7 @@ void AccountSettings::initButtons(){
 }
 
 AccountSettings::AccountSettings(sf::RenderWindow* window, std::stack<State*>* states) : State(window, states){
-    this->initBackground();
-	this->initFonts();
-    this->initText();
+	this->initText();
 	this->initButtons();
 }
 
@@ -73,7 +63,7 @@ void AccountSettings::updateButtons(){
 		//Change email state
 	}
 
-	if(this->buttons["CHANGE_PASS"]->isPressed()){
+	if(this->buttons["CHANGE_PASSWORD"]->isPressed()){
 		//Change pass state
 	}
 
@@ -101,6 +91,7 @@ void AccountSettings::renderButtons(sf::RenderTarget* target){
 
 void AccountSettings::render(sf::RenderTarget* target){
     target = this->window;
+  
 	target->draw(background);
 
 	this->renderText(target);

@@ -16,8 +16,6 @@ class AccountSettings : public State{
         sf::Event event;
 
         // Functions
-	    void initBackground();
-	    void initFonts();
         void initText();
 	    void initButtons();
 
