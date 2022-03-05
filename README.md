@@ -18,6 +18,4 @@ After that, in project settings, set the 4 directories path (both includes and l
 
 The others libraries are already functionally.
 
-I used remotemysql.com for the remote database.
-
 The application is not the best in terms of memory or running time, but I used various ideas to learn as much as possible.
